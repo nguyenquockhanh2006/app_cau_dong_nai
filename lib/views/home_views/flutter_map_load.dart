@@ -7,7 +7,7 @@ class flutter_map_load extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlutterMap(
       options: MapOptions(
-          center: LatLng(45.5231, -122.6765), zoom: 13.0),
+          center: LatLng(10.952772, 106.807671), zoom: 12.0),
       layers: [
         TileLayerOptions(
           urlTemplate:
