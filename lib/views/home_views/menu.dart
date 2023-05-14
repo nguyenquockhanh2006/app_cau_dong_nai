@@ -1,6 +1,8 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:app_cau_dong_nai/views/home_views/home.dart';
+import 'package:app_cau_dong_nai/views/info_bridge_views/info_bridge_home.dart';
 
 class menu extends StatelessWidget {
   @override
@@ -37,7 +39,10 @@ class menu extends StatelessWidget {
                   margin: EdgeInsets.all(16.0),
                   child: InkWell(
                     onTap: () {
-                      print('nhán bản đồ');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => home()),
+                      );
                     },
                     child: Row(
                       children: [
@@ -61,7 +66,11 @@ class menu extends StatelessWidget {
                   margin: EdgeInsets.all(16.0),
                   child: InkWell(
                     onTap: () {
-                      print('nhán thông tin cầu');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => info_bridge_home()),
+                      );
                     },
                     child: Row(
                       children: [
