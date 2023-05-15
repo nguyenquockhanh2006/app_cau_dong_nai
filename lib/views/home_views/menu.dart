@@ -1,6 +1,13 @@
 import 'dart:ffi';
 
+import 'package:app_cau_dong_nai/services/controllers/bridge_controller.dart';
+import 'package:app_cau_dong_nai/services/models/bridge_model.dart';
 import 'package:flutter/material.dart';
+import 'package:app_cau_dong_nai/views/home_views/home.dart';
+import 'package:app_cau_dong_nai/views/info_bridge_views/info_bridge_home.dart';
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class menu extends StatelessWidget {
   @override
@@ -37,7 +44,10 @@ class menu extends StatelessWidget {
                   margin: EdgeInsets.all(16.0),
                   child: InkWell(
                     onTap: () {
-                      print('nhán bản đồ');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => home()),
+                      );
                     },
                     child: Row(
                       children: [
@@ -61,7 +71,11 @@ class menu extends StatelessWidget {
                   margin: EdgeInsets.all(16.0),
                   child: InkWell(
                     onTap: () {
-                      print('nhán thông tin cầu');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => info_bridge_home()),
+                      );
                     },
                     child: Row(
                       children: [
@@ -84,8 +98,15 @@ class menu extends StatelessWidget {
                 Container(
                   margin: EdgeInsets.all(16.0),
                   child: InkWell(
-                    onTap: () {
-                      print('nhán kiểm tra / sữa chữa');
+                    onTap: () async {
+                      bridge_controller b_r = new bridge_controller();
+
+                      List<bridge_model> bridgeList = await b_r.getApi();
+                      bridgeList.forEach((element) {
+                        print(element.TenCayCau.toString());
+                        print(element.KinhDo.toString());
+                        print(element.ViDo.toString());
+                      });
                     },
                     child: Row(
                       children: [
