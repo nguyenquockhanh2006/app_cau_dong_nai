@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/screens/infoBridgeScreen/detailBridgeScreen.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
 
 import 'homeScreen.dart';
@@ -40,7 +41,9 @@ class menu extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.check),
             title: Text('Thông tin kiểm tra/ sửa chữa'),
-            onTap: () {},
+            onTap: () {
+              
+            },
           ),
         ],
       ),

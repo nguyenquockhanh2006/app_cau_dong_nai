@@ -1,13 +1,23 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
+import 'package:flutter_application_4/services/models/detailBridgeModel.dart';
 import 'package:flutter_application_4/services/models/imageSrc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_application_4/services/models/imageSrc.dart';
+import 'package:flutter_application_4/screens/infoBridgeScreen/detailBridgeScreen.dart';
+
 class infoBridge extends StatelessWidget {
   final bridgeModel bridgeModelTemp;
 
   const infoBridge({Key? key, required this.bridgeModelTemp}) : super(key: key);
+
+  Future<detailBridgeModel> getData(int id) async {
+    detailBridgeController cBC = new detailBridgeController();
+    return await cBC.getApiById(id);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -33,20 +43,8 @@ class infoBridge extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    // Container(
-                    //   height: 109.76,
-                    //   width: 130.61,
-                    //   child: //Image.network(
-                    //     //imageSrc.getSrc()[bridgeModelTemp.BridgeId],
-
-                    //     //height: 109.76,
-                    //     //width: 130.61,
-                    //     //fit: BoxFit.cover,
-                    //   //),
-
-                    // ),
                     Container(
-                      height: 130.61 ,
+                      height: 130.61,
                       width: 109.76,
                       child: CachedNetworkImage(
                         imageUrl: imageSrc.getSrc()[bridgeModelTemp.BridgeId],
@@ -73,8 +71,13 @@ class infoBridge extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () {
-                        // Xử lý sự kiện khi nhấn button
+                      onPressed: ()  {
+                        
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => detailBridgeScreen(dBM: getData(bridgeModelTemp.BridgeId))),
+                        );
                       },
                       style: ButtonStyle(
                         backgroundColor:
