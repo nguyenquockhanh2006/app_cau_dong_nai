@@ -18,5 +18,4 @@ class bridgeController {
       throw Exception('Failed to load bridge data from API');
     }
   }
-  
 }

@@ -6,18 +6,19 @@ import '../../services/models/bridgeModel.dart';
 import '../../services/controllers/bridgeController.dart';
 import '../../services/models/repairModel.dart';
 import '../../services/controllers/bridgeController.dart';
+import '../homeScreen/menu.dart';
 
-class Detail extends StatefulWidget {
+class DetailAndUpdate extends StatefulWidget {
   final bridgeController bC = bridgeController();
   final RepairController repairController = RepairController();
-  final String text;
-  Detail({Key? key, required this.text}) : super(key: key);
+  final int idBridge;
+  DetailAndUpdate({Key? key, required this.idBridge}) : super(key: key);
 
   @override
-  State<Detail> createState() => _DetailState();
+  State<DetailAndUpdate> createState() => _DetailState();
 }
 
-class _DetailState extends State<Detail> {
+class _DetailState extends State<DetailAndUpdate> {
   late Future<List<bridgeModel>> _futureBridgeList;
   late Future<List<RepairModel>> _futureRepairList;
   @override
@@ -28,12 +29,28 @@ class _DetailState extends State<Detail> {
   }
 
   Widget build(BuildContext context) {
+    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            widget.text.toUpperCase(),
+          title: Text('CẦU ĐỒNG NAI'),
+          leading: CircleAvatar(
+            backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
           ),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          navigatorKey.currentState?.push(
+            MaterialPageRoute(builder: (context) => MyNewPage()),
+          );
+        },
+        label: Text('Lưu thay đổi'),
+        icon: Icon(Icons.save_alt),
+        backgroundColor: Colors.blue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+        endDrawer: menu(),
         body: SingleChildScrollView(
           child: FutureBuilder<List<bridgeModel>>(
             future: _futureBridgeList,
@@ -41,10 +58,11 @@ class _DetailState extends State<Detail> {
               if (snapshot.hasData) {
                 List<bridgeModel>? bridgeList = snapshot.data;
                 for (int i = 0; i < bridgeList!.length; i++) {
-                  if (bridgeList[i].TenCayCau.toString() ==
-                      widget.text.toString()) {
+                  if (bridgeList[i].BridgeId ==
+                      widget.idBridge) {
                     return Column(
                       children: [
+                        Text('Chi tiết / cập nhật', style: TextStyle(color: Colors.black54, fontSize: 25,),),
                         Center(
                           child: Container(
                             child: Center(
@@ -215,16 +233,16 @@ class _DetailState extends State<Detail> {
                                     Text(bridgeList[i].NgayKhoiCong),
                                     SizedBox(height: 8),
                                     Text(bridgeList[i].NgayHoanThanh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].Cap),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].LyTrinh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].TaiTrong),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].ChieuDai),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].ChieuRong),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].Cap),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LyTrinh),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].TaiTrong),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].ChieuDai),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].ChieuRong),
                                   ]),
                             ),
                           ]),
@@ -277,21 +295,21 @@ class _DetailState extends State<Detail> {
                               padding: EdgeInsets.all(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children: [
-                                //   Text(bridgeList[i].TenCayCau),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].LoaiCau),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].Cap),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].LyTrinh),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].TaiTrong),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].ChieuDai),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].ChieuRong),
-                                // ]
+                                  children: [
+                                  Text(bridgeList[i].TenCayCau),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].LoaiCau),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].Cap),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].LyTrinh),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].TaiTrong),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].ChieuDai),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].ChieuRong),
+                                ]
                               ),
                             ),
                           ]),
@@ -342,19 +360,19 @@ class _DetailState extends State<Detail> {
                               padding: EdgeInsets.all(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children: [
-                                //   Text(bridgeList[i].TenCayCau),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].LoaiCau),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].Cap),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].LyTrinh),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].TaiTrong),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].ChieuDai),
-                                // ]
+                                  children: [
+                                  Text(bridgeList[i].TenCayCau),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].LoaiCau),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].Cap),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].LyTrinh),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].TaiTrong),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].ChieuDai),
+                                ]
                               ),
                             ),
                           ]),
@@ -405,20 +423,20 @@ class _DetailState extends State<Detail> {
                               padding: EdgeInsets.all(10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                //   children:
-                                //   [
-                                //   Text(bridgeList[i].TenCayCau),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].LoaiCau),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].Cap),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].LyTrinh),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].TaiTrong),
-                                //   SizedBox(height: 8),
-                                //   Text(bridgeList[i].ChieuDai),
-                                // ]
+                                  children:
+                                  [
+                                  Text(bridgeList[i].TenCayCau),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].LoaiCau),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].Cap),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].LyTrinh),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].TaiTrong),
+                                  SizedBox(height: 8),
+                                  Text(bridgeList[i].ChieuDai),
+                                ]
                               ),
                             ),
                           ]),
@@ -474,5 +492,16 @@ class _DetailState extends State<Detail> {
             },
           ),
         ));
+  }
+}
+class MyNewPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('My New Page')),
+      body: Center(
+        child: Text('This is my new page'),
+      ),
+    );
   }
 }

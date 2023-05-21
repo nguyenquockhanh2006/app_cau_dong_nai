@@ -7,8 +7,10 @@ import '../../services/models/detailBridgeModel.dart';
 import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 
 class detailBridgeScreen extends StatefulWidget {
-  final Future<detailBridgeModel> dBM;
-  const detailBridgeScreen({Key? key, required this.dBM}) : super(key: key);
+  //final Future<detailBridgeModel> dBM;
+  final detailBridgeController dBC = detailBridgeController();
+  final int id;
+  detailBridgeScreen({Key? key, required this.id}) : super(key: key);
   @override
   _detailBridgeScreenState createState() => _detailBridgeScreenState();
 }
@@ -21,9 +23,8 @@ class _detailBridgeScreenState extends State<detailBridgeScreen> {
     fetchDetailBridge();
   }
 
-  // Hàm truyền vào Future để đợi kết quả trả về
   Future<void> fetchDetailBridge() async {
-    detailBridgeModel dBM = await widget.dBM;
+    detailBridgeModel dBM = await widget.dBC.getApiById(widget.id);
     setState(() {
       _dBM = dBM;
     });
@@ -49,4 +50,3 @@ class _detailBridgeScreenState extends State<detailBridgeScreen> {
     );
   }
 }
-

@@ -52,4 +52,22 @@ class bridgeModel {
       HinhAnhMatCat: json['HinhAnhMatCat'],
     );
   }
+  Map<String, dynamic> toJson() => {
+        'BridgeId': BridgeId,
+        'TenCayCau': TenCayCau,
+        'LoaiCau': LoaiCau,
+        'Cap': Cap,
+        'LyTrinh': LyTrinh,
+        'DiaDiem': DiaDiem,
+        'TaiTrong': TaiTrong,
+        'KinhDo': KinhDo,
+        'ViDo': ViDo,
+        'ChieuDai': ChieuDai,
+        'ChieuRong': ChieuRong,
+        'NgayKhoiCong': NgayKhoiCong,
+        'NgayHoanThanh': NgayHoanThanh,
+        'HinhAnhCau': HinhAnhCau,
+        'HinhAnhBinhDo': HinhAnhBinhDo,
+        'HinhAnhMatCat': HinhAnhMatCat
+      };
 }

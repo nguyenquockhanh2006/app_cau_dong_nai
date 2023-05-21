@@ -25,67 +25,67 @@ class _MyWidgetState extends State<list_info_bridge> {
   Widget build(BuildContext context) {
     double _containerHeight = 0.0;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Danh sách cầu'),
-      ),
-      body: 
-      Column(
-      children: [
-        Container(
-          margin: EdgeInsets.all(13),
-          child: TextField(
-          decoration: InputDecoration(
-            labelText: 'Tìm kiếm',
-            hintText: 'Nhập...',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(),
-            ),
-            suffixIcon: Icon(Icons.search),
-          ),
+        appBar: AppBar(
+          title: Text('Danh sách cầu'),
         ),
-        ),
-        Container(
-          margin: EdgeInsets.all(5),
-          height: 500,
-          child: FutureBuilder<List<bridgeModel>>(
-        future: _futureBridgeList,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            List<bridgeModel>? bridgeList = snapshot.data;
-            return ListView.builder(
-              itemCount: bridgeList!.length,
-              itemBuilder: (context, index) {
-                return 
-                GestureDetector(
-                  onTap: () =>{
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Detail(text:bridgeList[index].TenCayCau,)),
-                    )
-                  },
-                  child:  Card(
-                  elevation: 5.0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(7.0),
+        body: Column(
+          children: [
+            Container(
+              margin: EdgeInsets.all(13),
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: 'Tìm kiếm',
+                  hintText: 'Nhập...',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(),
                   ),
-                  child: ListTile(
-                    title: Text(bridgeList[index].TenCayCau),
-                    subtitle: Text(bridgeList[index].DiaDiem),
-                  ),
+                  suffixIcon: Icon(Icons.search),
                 ),
-                );
-              },
-            );
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return CircularProgressIndicator();
-        },
-      ),
-        ),
-      ],
-      )
-    );
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(5),
+              height: 500,
+              child: FutureBuilder<List<bridgeModel>>(
+                future: _futureBridgeList,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<bridgeModel>? bridgeList = snapshot.data;
+                    return ListView.builder(
+                      itemCount: bridgeList!.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () => {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Detail(
+                                        text: bridgeList[index].TenCayCau,
+                                      )),
+                            )
+                          },
+                          child: Card(
+                            elevation: 5.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.0),
+                            ),
+                            child: ListTile(
+                              title: Text(bridgeList[index].TenCayCau),
+                              subtitle: Text(bridgeList[index].DiaDiem),
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  return CircularProgressIndicator();
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }
