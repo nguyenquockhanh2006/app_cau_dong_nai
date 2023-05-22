@@ -5,22 +5,19 @@ import 'package:flutter_application_4/screens/homeScreen/listScreen.dart';
 import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 
 class addBridgeScreen extends StatelessWidget {
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
     var index = 300;
     var index2 = index;
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('CẦU ĐỒNG NAI'),
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
-          ),
-        ),
-        endDrawer: menu(),
+    return Scaffold(
+        // appBar: AppBar(
+        //   title: Text('CẦU ĐỒNG NAI'),
+        //   leading: CircleAvatar(
+        //     backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
+        //   ),
+        // ),
+        // endDrawer: menu(),
         body: Column(
           children: [
             Row(
@@ -66,7 +63,6 @@ class addBridgeScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
