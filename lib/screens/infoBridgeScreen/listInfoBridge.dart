@@ -29,6 +29,7 @@ class _MyWidgetState extends State<listInfoBridge> {
     // ignore: unused_label
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       home: Scaffold(
         appBar: AppBar(

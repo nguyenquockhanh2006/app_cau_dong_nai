@@ -16,7 +16,9 @@ class repairHomeScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<repairHomeScreen> {
-  String? dropdownValue;
+  String? selectedEffect;
+  String? selectedNameBridge;
+  List<String> listNameBridge = [];
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   late Future<List<RepairModel>> _futureRepairList;
   late Future<List<bridgeModel>> _futureBridgeList;
@@ -25,13 +27,20 @@ class _MyWidgetState extends State<repairHomeScreen> {
   @override
   void initState() {
     super.initState();
+    fetchName();
+    //setJson();
+  }
+  
+  Future<void> fetchName() async {
     _futureRepairList = widget.rpC.getApi();
     _futureBridgeList = widget.bC.getApi();
+    List<String> temp = await widget.rpC.getBridgeNameApi();
+    listNameBridge = temp;
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    List<String> items = [];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
@@ -51,9 +60,6 @@ class _MyWidgetState extends State<repairHomeScreen> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   List<bridgeModel>? bridgeList = snapshot.data;
-                  for (int i = 0; i < bridgeList!.length; i++) {
-                    items.add(bridgeList[i].TenCayCau);
-                  }
                   return Column(
                     children: [
                       //bộ lọc
@@ -68,23 +74,21 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                 child: Text('Cây cầu'),
                               ),
                               DropdownButton<String>(
-                                
-                                items: items.map<DropdownMenuItem<String>>(
+                                items: listNameBridge.map<DropdownMenuItem<String>>(
                                     (String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value),
                                   );
                                 }).toList(),
-                                value: dropdownValue,
+                                value: selectedNameBridge,
                                 onChanged: (String? newValue) {
                                   setState(
                                     () => {
-                                      dropdownValue = newValue,
+                                      selectedNameBridge = newValue,
                                     },
                                   );
                                 },
-                                
                               )
                             ],
                           ),
@@ -96,10 +100,10 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                   child: Text('Trạng thái'),
                                 ),
                                 DropdownButton<String>(
-                                  value: dropdownValue,
+                                  value: selectedEffect,
                                   onChanged: (String? newValue) {
                                     setState(() {
-                                      dropdownValue = newValue;
+                                      selectedEffect = newValue;
                                     });
                                   },
                                   items: <String>[
