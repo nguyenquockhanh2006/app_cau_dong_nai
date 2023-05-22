@@ -4,6 +4,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../services/controllers/bridgeController.dart';
 import '../../services/models/bridgeModel.dart';
+import 'package:flutter_application_4/screens/infoBridgeScreen/addBridgeScreen.dart';
 
 class listInfoBridge extends StatefulWidget {
   final bridgeController bC = bridgeController();
@@ -163,10 +164,10 @@ class _MyWidgetState extends State<listInfoBridge> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
+        onPressed: () => {
           navigatorKey.currentState?.push(
-            MaterialPageRoute(builder: (context) => MyNewPage()),
-          );
+            MaterialPageRoute(builder: (context) => addBridgeScreen()),
+          ),
         },
         label: Text('Thêm cầu'),
         icon: Icon(Icons.add),
@@ -179,14 +180,4 @@ class _MyWidgetState extends State<listInfoBridge> {
   }
 }
 
-class MyNewPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('My New Page')),
-      body: Center(
-        child: Text('This is my new page'),
-      ),
-    );
-  }
-}
+
