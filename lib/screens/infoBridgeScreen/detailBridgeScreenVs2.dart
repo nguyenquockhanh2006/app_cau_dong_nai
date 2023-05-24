@@ -31,12 +31,12 @@ class _DetailState extends State<DetailAndUpdate> {
   Widget build(BuildContext context) {
     final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
-        appBar: AppBar(
-          title: Text('CẦU ĐỒNG NAI'),
-          leading: CircleAvatar(
-            backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
-          ),
-        ),
+        // appBar: AppBar(
+        //   title: Text('CẦU ĐỒNG NAI'),
+        //   leading: CircleAvatar(
+        //     backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
+        //   ),
+        // ),
         floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           navigatorKey.currentState?.push(
@@ -50,7 +50,7 @@ class _DetailState extends State<DetailAndUpdate> {
           borderRadius: BorderRadius.circular(10.0),
         ),
       ),
-        endDrawer: menu(),
+        // endDrawer: menu(),
         body: SingleChildScrollView(
           child: FutureBuilder<List<bridgeModel>>(
             future: _futureBridgeList,

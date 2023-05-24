@@ -26,7 +26,7 @@ class infoBridge extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              width: 147,
+              width: MediaQuery.of(context).size.width * 1.25 / 3,
               height: 190,
               padding: const EdgeInsets.all(0.5),
               child: SingleChildScrollView(
@@ -42,11 +42,11 @@ class infoBridge extends StatelessWidget {
                     ),
                     Container(
                       height: 109.76,
-                      width: 130.61,
+                      width: MediaQuery.of(context).size.width * 1.25 / 3,
                       child: Image.network(
                         imageSrc.getSrc()[bridgeModelTemp.BridgeId],
                         height: 109.76,
-                        width: 130.61,
+                        width: MediaQuery.of(context).size.width * 1.25 / 3,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -90,6 +90,7 @@ class infoBridge extends StatelessWidget {
               ),
             ),
             Container(
+              width: MediaQuery.of(context).size.width * 1.68 / 3,
               height: 190,
               padding: const EdgeInsets.fromLTRB(3, 15, 2, 0),
               child: Column(
@@ -113,7 +114,9 @@ class infoBridge extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    width: 150,
+                                    width: MediaQuery.of(context).size.width *
+                                        1.1/
+                                        3,
                                     child: Text(
                                       bridgeModelTemp.DiaDiem,
                                       maxLines: 4,
@@ -132,7 +135,9 @@ class infoBridge extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    width: 150,
+                                    width: MediaQuery.of(context).size.width *
+                                        1.1 /
+                                        3,
                                     child: Text(
                                       bridgeModelTemp.LyTrinh,
                                       maxLines: 4,
@@ -151,7 +156,9 @@ class infoBridge extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                    width: 150,
+                                    width: MediaQuery.of(context).size.width *
+                                        1.1 /
+                                        3,
                                     child: Text(
                                       bridgeModelTemp.LoaiCau,
                                       maxLines: 1,

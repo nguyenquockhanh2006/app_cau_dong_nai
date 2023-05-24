@@ -56,8 +56,8 @@ class _DetailState extends State<Detail> {
                       child: Center(
                         child: Image.network(
                         imageSrc.getSrc()[bridgeList[i].BridgeId],
-                        height: 109.76,
-                        width: 130.61,
+                        height: 180,
+                        width: MediaQuery.of(context).size.width * 3.8/4,
                         fit: BoxFit.cover,
                       ),
                       ),

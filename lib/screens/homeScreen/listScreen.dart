@@ -3,6 +3,7 @@ import 'package:flutter_application_4/screens/homeScreen/detailScreen.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../services/models/bridgeModel.dart';
+import '../../services/models/imageSrc.dart';
 import '../../services/controllers/bridgeController.dart';
 
 class list_info_bridge extends StatefulWidget {
@@ -66,15 +67,59 @@ class _MyWidgetState extends State<list_info_bridge> {
                             )
                           },
                           child: Card(
-                            elevation: 5.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7.0),
-                            ),
-                            child: ListTile(
-                              title: Text(bridgeList[index].TenCayCau),
-                              subtitle: Text(bridgeList[index].DiaDiem),
-                            ),
-                          ),
+                              elevation: 5.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(7.0),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.fromLTRB(7,0,0,0),
+                                    height: MediaQuery.of(context).size.width *
+                                        1 /
+                                        4,
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        4,
+                                    child: Image.network(
+                                      imageSrc
+                                          .getSrc()[bridgeList[index].BridgeId],
+                                      height: MediaQuery.of(context).size.width *
+                                        1 /
+                                        4,
+                                      width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        4,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        2.75 /
+                                        4,
+                                      padding: EdgeInsets.all(10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          bridgeList[index].TenCayCau,
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          bridgeList[index].DiaDiem,
+                                          style: TextStyle(
+                                            fontSize: 17,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )),
                         );
                       },
                     );

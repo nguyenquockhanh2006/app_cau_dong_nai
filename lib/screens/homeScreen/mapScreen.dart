@@ -70,6 +70,7 @@ class _MyMapState extends State<flutter_map_load> {
                           // ),
                           child: Image.network(
                             imageSrc.getSrc()[bridge.BridgeId],
+                            width: MediaQuery.of(context).size.width,
                             height: 180,
                             fit: BoxFit.cover,
                           ),
@@ -77,7 +78,39 @@ class _MyMapState extends State<flutter_map_load> {
                         Container(
                           margin:
                               EdgeInsets.only(right: 10, left: 10, bottom: 7),
-                          child: Text(bridge.DiaDiem),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: MediaQuery.of(context).size.width* 0.7 / 4,
+                                child: Text('Địa điểm:',style: TextStyle(fontWeight: FontWeight.bold,), ),
+                              
+                              ),
+                              Container(
+                                 width: MediaQuery.of(context).size.width* 3 / 4,
+                                child: Text(bridge.DiaDiem),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin:
+                              EdgeInsets.only(right: 10, left: 10, bottom: 7),
+                          child: Row(
+                            children: [
+                              Text('Chiều dài: ', style: TextStyle(fontWeight: FontWeight.bold,),),
+                              Text(bridge.ChieuDai),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin:
+                              EdgeInsets.only(right: 10, left: 10, bottom: 7),
+                          child: Row(
+                            children: [
+                              Text('Chiều rộng: ', style: TextStyle(fontWeight: FontWeight.bold,),),
+                              Text(bridge.ChieuRong),
+                            ],
+                          ),
                         ),
                         Container(
                             width: 400,
@@ -116,7 +149,9 @@ class _MyMapState extends State<flutter_map_load> {
                                       Icons.close,
                                       color: Color(0xffe5383b),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () => {
+                                      Navigator.of(context).pop("Done"),
+                                    },
                                     label: Text(
                                       'Đóng',
                                       style:

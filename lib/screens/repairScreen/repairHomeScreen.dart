@@ -28,9 +28,8 @@ class _MyWidgetState extends State<repairHomeScreen> {
   void initState() {
     super.initState();
     fetchName();
-    //setJson();
   }
-  
+
   Future<void> fetchName() async {
     _futureRepairList = widget.rpC.getApi();
     _futureBridgeList = widget.bC.getApi();
@@ -41,13 +40,14 @@ class _MyWidgetState extends State<repairHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var repairModel = RepairModel;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('CẦU ĐỒNG NAI'),
-          leading: CircleAvatar(
+          title: const Text('CẦU ĐỒNG NAI'),
+          leading: const CircleAvatar(
             backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
           ),
         ),
@@ -62,7 +62,6 @@ class _MyWidgetState extends State<repairHomeScreen> {
                   List<bridgeModel>? bridgeList = snapshot.data;
                   return Column(
                     children: [
-                      //bộ lọc
                       Container(
                         margin: EdgeInsets.all(7),
                         padding: EdgeInsets.all(7),
@@ -74,8 +73,9 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                 child: Text('Cây cầu'),
                               ),
                               DropdownButton<String>(
-                                items: listNameBridge.map<DropdownMenuItem<String>>(
-                                    (String value) {
+                                items: listNameBridge
+                                    .map<DropdownMenuItem<String>>(
+                                        (String value) {
                                   return DropdownMenuItem<String>(
                                     value: value,
                                     child: Text(value),
@@ -134,11 +134,9 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                         width: 170,
                                         margin:
                                             EdgeInsets.only(right: 5, top: 7),
-                                        // height: 35,
                                         child: Row(
                                           children: [
                                             Container(
-                                              // height: 35,
                                               width: 100,
                                               child: Text(
                                                   '${selectedDate.day.toString()}/${selectedDate.month.toString()}/ ${selectedDate.year.toString()}'),
@@ -161,9 +159,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                               child: Icon(Icons.calendar_today,
                                                   color: Colors.black),
                                               style: ElevatedButton.styleFrom(
-                                                // độ lớn của nút
-                                                primary: Colors
-                                                    .white, // màu nền của nút
+                                                primary: Colors.white,
                                               ),
                                             ),
                                           ],
@@ -178,18 +174,15 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                         width: 170,
                                         margin: EdgeInsets.only(top: 7),
                                         padding: EdgeInsets.all(5),
-                                        // height: 35,
                                         child: Row(
                                           children: [
                                             Container(
-                                              // height: 35,
                                               width: 100,
                                               child: Text(
                                                   '${selectedDate2.day.toString()}/${selectedDate2.month.toString()}/ ${selectedDate2.year.toString()}'),
                                             ),
                                             ElevatedButton(
                                               onPressed: () async {
-                                                // Future<void> _selectDate(BuildContext context) async {
                                                 final DateTime? picked =
                                                     await showDatePicker(
                                                   context: context,
@@ -206,14 +199,11 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                                         picked.day);
                                                   });
                                                 }
-                                                // }
                                               },
                                               child: Icon(Icons.calendar_today,
                                                   color: Colors.black),
                                               style: ElevatedButton.styleFrom(
-                                                // độ lớn của nút
-                                                primary: Colors
-                                                    .white, // màu nền của nút
+                                                primary: Colors.white,
                                               ),
                                             ),
                                           ],
@@ -230,7 +220,6 @@ class _MyWidgetState extends State<repairHomeScreen> {
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 7),
-                            // padding: EdgeInsets.only(left: 30,right: 30),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -271,83 +260,68 @@ class _MyWidgetState extends State<repairHomeScreen> {
                 return CircularProgressIndicator();
               },
             )),
-            Table(
-              border: TableBorder.all(), // Có hoặc không viền
-              children: [
-                TableRow(
-                  decoration:
-                      BoxDecoration(color: Color.fromARGB(255, 194, 188, 188)),
-                  children: [
-                    TableCell(
-                      child: Text(
-                        'Tên cây cầu',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    TableCell(
-                      child: Text(
-                        'Ngày kiểm tra',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    // TableCell(child: Text('Loại hư hỏng')),
-                    TableCell(
-                      child: Text(
-                        'Trạng thái',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ),
-                    TableCell(
-                      child: Text(''),
-                    ),
-                    TableCell(
-                      child: Text(''),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            FutureBuilder<List<RepairModel>>(
-              future: _futureRepairList,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List<RepairModel>? bridgeList = snapshot.data;
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: bridgeList!.length,
-                      itemBuilder: (context, index) {
-                        return Table(
-                          border: TableBorder.all(),
+            Container(
+              padding: EdgeInsets.all(7),
+              child: FutureBuilder<List<RepairModel>>(
+                future: _futureRepairList,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Table(
+                      border: TableBorder.all(),
+                      children: [
+                        TableRow(
+                          decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 194, 188, 188)),
                           children: [
-                            TableRow(
-                              children: [
-                                TableCell(
-                                    child: Text(bridgeList[index].TenCayCau)),
-                                TableCell(
-                                    child: Text(bridgeList[index].NgayKiemTra)),
-                                // TableCell(
-                                //     child: Text(bridgeList[index].LoaiHuHong)),
-                                TableCell(
-                                    child: Text(bridgeList[index].TrangThai)),
-                                TableCell(
-                                  child: TextButton(
-                                      onPressed: () => {},
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.warning_amber_rounded,
+                            TableCell(
+                              child: Text(
+                                'Tên cây cầu',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            TableCell(
+                              child: Text(
+                                'Ngày kiểm tra',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            TableCell(
+                              child: Text(
+                                'Trạng thái',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ),
+                            TableCell(
+                              child: Text(''),
+                            ),
+                            TableCell(
+                              child: Text(''),
+                            ),
+                          ],
+                        ),
+                        ...snapshot.data!.map((repair) => TableRow(children: [
+                              TableCell(child: Text(repair.TenCayCau)),
+                              TableCell(child: Text(repair.NgayKiemTra)),
+                              TableCell(child: Text(repair.TrangThai)),
+                              TableCell(
+                                child: TextButton(
+                                    onPressed: () => {},
+                                    child: Row(
+                                      children: [
+                                        Icon(
+                                          Icons.warning_amber_rounded,
+                                          color: Colors.blue[400],
+                                        ),
+                                        Text(
+                                          'Chi tiết',
+                                          style: TextStyle(
                                             color: Colors.blue[400],
                                           ),
-                                          Text(
-                                            'Chi tiết',
-                                            style: TextStyle(
-                                              color: Colors.blue[400],
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                                TableCell(
+                                        ),
+                                      ],
+                                    )),
+                              ),
+                              TableCell(
                                   child: TextButton(
                                       onPressed: () => {},
                                       child: Row(
@@ -363,23 +337,17 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                             ),
                                           ),
                                         ],
-                                      )),
-                                ),
-                              ],
-                            )
-                          ],
-                        );
-                      },
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-                // Hiển thị tiêu đề khi đang chờ Future hoàn thành
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
+                                      ))),
+                            ]))
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error'));
+                  } else {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                },
+              ),
             ),
           ],
         ),

@@ -1,3 +1,6 @@
+import 'package:flutter/src/widgets/table.dart';
+import 'package:flutter/widgets.dart';
+
 class RepairModel {
   final int BridgeId;
   final int RepairHistoryId;
@@ -54,5 +57,21 @@ class RepairModel {
           ? json['KhoangCachDamChinh'].toString()
           : "",
     );
+  }
+
+  // static map(TableRow Function(dynamic _futureRepairList) param0) {
+
+  // }
+  static List<TableRow> map(List<RepairModel> repairModels) {
+    return repairModels.map((repairModel) =>
+      TableRow(
+        children: [
+          TableCell(child: Text(repairModel.TenCayCau)),
+          TableCell(child: Text(repairModel.TrangThai)),
+          TableCell(child: Text(repairModel.HinhAnhCau)),
+          TableCell(child: Text(repairModel.NgaySuaChua)),
+        ]
+      )
+    ).toList();
   }
 }

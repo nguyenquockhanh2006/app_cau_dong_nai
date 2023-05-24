@@ -46,7 +46,7 @@ class _MyWidgetState extends State<listInfoBridge> {
               Row(
                 children: [
                   Container(
-                    width: 350,
+                    width: MediaQuery.of(context).size.width * 3/4,
                     margin: EdgeInsets.all(13),
                     child: TextField(
                       decoration: InputDecoration(
