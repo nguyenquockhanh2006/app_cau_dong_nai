@@ -15,10 +15,10 @@
 12-->C:\Users\thien\OneDrive\Desktop\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:5:9-42
 13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 13-->[androidx.core:core:1.6.0] C:\Users\thien\.gradle\caches\transforms-3\4ca28c4a71705f8a687c69dda140a277\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
-14        android:icon="@mipmap/ic_launcher"
-14-->C:\Users\thien\OneDrive\Desktop\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:6:9-43
-15        android:label="flutter_application_4" >
-15-->C:\Users\thien\OneDrive\Desktop\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:4:9-46
+14        android:icon="@mipmap/launcher_icon"
+14-->C:\Users\thien\OneDrive\Desktop\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:6:9-45
+15        android:label="Cầu Đồng Nai" >
+15-->C:\Users\thien\OneDrive\Desktop\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:4:9-37
 16        <activity
 16-->C:\Users\thien\OneDrive\Desktop\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:7:9-27:20
 17            android:name="com.example.flutter_application_4.MainActivity"

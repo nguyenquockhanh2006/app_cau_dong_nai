@@ -68,6 +68,14 @@
         "source": "com.example.flutter_application_4.app-core-1.6.0-1:/layout-v21/notification_action.xml"
     },
     {
+        "merged": "com.example.flutter_application_4.app-merged_res-11:/mipmap-xhdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_application_4.app-main-4:/mipmap-xhdpi/launcher_icon.png"
+    },
+    {
+        "merged": "com.example.flutter_application_4.app-merged_res-11:/mipmap-hdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_application_4.app-main-4:/mipmap-hdpi/launcher_icon.png"
+    },
+    {
         "merged": "com.example.flutter_application_4.app-merged_res-11:/layout_notification_template_part_time.xml.flat",
         "source": "com.example.flutter_application_4.app-core-1.6.0-1:/layout/notification_template_part_time.xml"
     },
@@ -108,8 +116,16 @@
         "source": "com.example.flutter_application_4.app-core-1.6.0-1:/drawable-mdpi-v4/notification_bg_normal.9.png"
     },
     {
+        "merged": "com.example.flutter_application_4.app-merged_res-11:/mipmap-xxhdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_application_4.app-main-4:/mipmap-xxhdpi/launcher_icon.png"
+    },
+    {
         "merged": "com.example.flutter_application_4.app-merged_res-11:/drawable-hdpi-v4_notify_panel_notification_icon_bg.png.flat",
         "source": "com.example.flutter_application_4.app-core-1.6.0-1:/drawable-hdpi-v4/notify_panel_notification_icon_bg.png"
+    },
+    {
+        "merged": "com.example.flutter_application_4.app-merged_res-11:/mipmap-mdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_application_4.app-main-4:/mipmap-mdpi/launcher_icon.png"
     },
     {
         "merged": "com.example.flutter_application_4.app-merged_res-11:/mipmap-mdpi_ic_launcher.png.flat",
@@ -150,5 +166,9 @@
     {
         "merged": "com.example.flutter_application_4.app-merged_res-11:/drawable-mdpi-v4_notification_bg_low_pressed.9.png.flat",
         "source": "com.example.flutter_application_4.app-core-1.6.0-1:/drawable-mdpi-v4/notification_bg_low_pressed.9.png"
+    },
+    {
+        "merged": "com.example.flutter_application_4.app-merged_res-11:/mipmap-xxxhdpi_launcher_icon.png.flat",
+        "source": "com.example.flutter_application_4.app-main-4:/mipmap-xxxhdpi/launcher_icon.png"
     }
 ]
