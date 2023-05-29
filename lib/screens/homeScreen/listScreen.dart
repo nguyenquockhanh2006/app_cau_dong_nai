@@ -3,7 +3,6 @@ import 'package:flutter_application_4/screens/homeScreen/detailScreen.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../../services/models/bridgeModel.dart';
-import '../../services/models/imageSrc.dart';
 import '../../services/controllers/bridgeController.dart';
 
 class list_info_bridge extends StatefulWidget {
@@ -30,8 +29,10 @@ class _MyWidgetState extends State<list_info_bridge> {
           title: Text('Danh sách cầu'),
         ),
         body: Column(
+          
           children: [
             Container(
+              height: MediaQuery.of(context).size.height * 0.5/10,
               margin: EdgeInsets.all(13),
               child: TextField(
                 decoration: InputDecoration(
@@ -47,7 +48,7 @@ class _MyWidgetState extends State<list_info_bridge> {
             ),
             Container(
               margin: EdgeInsets.all(5),
-              height: 500,
+              height: MediaQuery.of(context).size.height * 8/10,
               child: FutureBuilder<List<bridgeModel>>(
                 future: _futureBridgeList,
                 builder: (context, snapshot) {
@@ -74,7 +75,7 @@ class _MyWidgetState extends State<list_info_bridge> {
                               child: Row(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(7,0,0,0),
+                                    padding: EdgeInsets.fromLTRB(7, 0, 0, 0),
                                     height: MediaQuery.of(context).size.width *
                                         1 /
                                         4,
@@ -82,14 +83,17 @@ class _MyWidgetState extends State<list_info_bridge> {
                                         1 /
                                         4,
                                     child: Image.network(
-                                      imageSrc
-                                          .getSrc()[bridgeList[index].BridgeId],
-                                      height: MediaQuery.of(context).size.width *
-                                        1 /
-                                        4,
+                                      bridgeList[index].HinhAnhCau != ""
+                                          ? 'http://171.244.8.103:9003/' +
+                                              bridgeList[index].HinhAnhCau
+                                          : 'http://171.244.8.103:9003//placeholder.jpg',
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              1 /
+                                              4,
                                       width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        4,
+                                          1 /
+                                          4,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -97,7 +101,7 @@ class _MyWidgetState extends State<list_info_bridge> {
                                     width: MediaQuery.of(context).size.width *
                                         2.75 /
                                         4,
-                                      padding: EdgeInsets.all(10),
+                                    padding: EdgeInsets.all(10),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,

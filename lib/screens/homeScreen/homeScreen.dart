@@ -10,18 +10,14 @@ class home extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: navigatorKey,
-      //Có thể config style bằng theme
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      //   useMaterial3: true,
-      // ),
       home: Scaffold(
         appBar: AppBar(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.blue,
             title: const Text('CẦU ĐỒNG NAI'),
-            toolbarHeight: 60, // Thay đổi kích thước của appBar
+            toolbarHeight: 60,
             leading: Image.asset("lib/assets/images/Logo_Dong_Nai.png")),
         endDrawer: menu(),
-        //Nếu chỉ muốn thay kích thước thôi thì nên sử dụng "SizedBox"
         body: const SizedBox(
           child: flutter_map_load(),
         ),

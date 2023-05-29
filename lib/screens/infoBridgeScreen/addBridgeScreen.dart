@@ -1,17 +1,145 @@
+//addBridgeScreen
+// import 'dart:html';
+import 'package:flutter_application_4/services/controllers/bridgeController.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 class addBridgeScreen extends StatefulWidget {
   const addBridgeScreen({super.key});
-
   @override
   State<addBridgeScreen> createState() => _addBridgeState();
 }
-
 class _addBridgeState extends State<addBridgeScreen> {
+  final bridgeController bC = bridgeController();
   final MapController mapController = MapController();
+  final TextEditingController _controllerlat = TextEditingController();
+  final TextEditingController _controllerlng = TextEditingController();
+  final TextEditingController _ngaykhoicong = TextEditingController();
+  final TextEditingController _ngayhoanthanh = TextEditingController();
+  DateTime NKhoiCong = DateTime.now();
+  DateTime NHoanThanh = DateTime.now();
+  // biến kết quả thêm trả về của hàm postApi
+  int result = 0;
+  // hình ảnh
+  String anhCayCau = "";
+  String anhMatCat = "";
+  String anhBinhDo = "";
+  // thông tin chung
+  String tenCayCau = "Cau Text";
+  String loaiCau = "";
+  String cap = "";
+  String lyTrinh = "";
+  String taiTrong = "";
+  String chieuDai = "";
+  String chieuRong = "";
+  String diaDiem = "";
+  double kinhDo = 10.96701421956938;
+  double viDo = 10.96701421956938;
+  // thông tin thi công
+  String ngayKhoiCong = "0001-01-01";
+  String ngayHoanThanh = "0001-01-01";
+  // ignore: avoid_init_to_null
+  int? chiPhiXayDung = null;
+  String chuDauTu = "";
+  String donViThietKe = "";
+  String donViThiCong = "";
+  String donViGiamSat = "";
+  // cấu tạo cầu
+  int soNhip = 0;
+  int soMo = 0;
+  int soTru = 0;
+  int soDamNgang = 0;
+  int soDamChinh = 0;
+  int soLanCan = 0;
+  int soDaiPhanCach = 0;
+  // vật liệu cầu
+  String vlDamChinh = "";
+  String vlDamNgang = "";
+  String vlBanMatCau = "";
+  String vlLanCan = "";
+  String vlMo = "";
+  String vlTru = "";
+  // kích thước cầu
+  double chieuDaiNhip = 0.0;
+  double beRongXeChay = 0.0;
+  double khoangCachDamChinh = 0.0;
+  double khoangCachDamNgang = 0.0;
+  double chieuCaoBanMatCau = 0.0;
+  double beRongLanCan = 0.0;
+
+  // File? _image;
+  // final picker = ImagePicker();
+  // // Future<void> _getImage() async {
+  // //   final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  // //   if (pickedFile != null) {
+  // //     setState(() {
+  // //       _image = File(pickedFile.path);
+  // //     });
+  // //   }
+  // // }
   @override
+  void initState() {
+    super.initState();
+    _controllerlat.text = '';
+    _controllerlng.text = '';
+  }
+
+  // hàm thêm
+
+  void addBridge() async {
+    result = await bC.postMyAPI(
+        anhCayCau,
+        anhMatCat,
+        anhBinhDo,
+        tenCayCau,
+        loaiCau,
+        cap,
+        lyTrinh,
+        taiTrong,
+        chieuDai,
+        chieuRong,
+        diaDiem,
+        kinhDo,
+        viDo,
+        ngayKhoiCong,
+        ngayHoanThanh,
+        chiPhiXayDung,
+        chuDauTu,
+        donViThietKe,
+        donViThiCong,
+        donViGiamSat,
+        soNhip,
+        soMo,
+        soTru,
+        soDamNgang,
+        soDamChinh,
+        soLanCan,
+        soDaiPhanCach,
+        vlDamChinh,
+        vlDamNgang,
+        vlBanMatCau,
+        vlLanCan,
+        vlMo,
+        vlTru,
+        chieuDaiNhip,
+        beRongXeChay,
+        khoangCachDamChinh,
+        khoangCachDamNgang,
+        chieuCaoBanMatCau,
+        beRongLanCan);
+
+    if (result == 200) {
+      print('thành công');
+    } else {
+      print('thất bại');
+    }
+  }
+
+  //
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +157,9 @@ class _addBridgeState extends State<addBridgeScreen> {
                   TextButton.icon(
                     label: Text('Thêm'),
                     icon: Icon(Icons.add),
-                    onPressed: () {},
+                    onPressed: () => {
+                      addBridge(),
+                    },
                     style: TextButton.styleFrom(
                         backgroundColor: Color(0xff7cb518),
                         foregroundColor: Colors.white,
@@ -68,13 +198,10 @@ class _addBridgeState extends State<addBridgeScreen> {
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-
-                  // margin: EdgeInsets.only(top: 7, left: 7,right: 7),
                   width: 320,
                   height: 45,
                   decoration: BoxDecoration(
                     color: Colors.blue,
-                    // borderRadius: BorderRadius.circular(7),
                   ),
                 ),
                 Container(
@@ -417,6 +544,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                           width: 260,
                           margin: EdgeInsets.all(7),
                           child: TextField(
+                            controller: _controllerlat,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(
                                   top: 0, bottom: 0, left: 5, right: 5),
@@ -441,10 +569,10 @@ class _addBridgeState extends State<addBridgeScreen> {
                           width: 260,
                           margin: EdgeInsets.all(7),
                           child: TextField(
+                            controller: _controllerlng,
                             decoration: InputDecoration(
                               contentPadding: EdgeInsets.only(
                                   top: 0, bottom: 0, left: 5, right: 5),
-                              // labelText: 'Tên cầu',
                               hintText: 'Nhập ...',
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(7),
@@ -461,7 +589,16 @@ class _addBridgeState extends State<addBridgeScreen> {
                       child: FlutterMap(
                         mapController: mapController,
                         options: MapOptions(
-                            center: LatLng(10.952772, 106.807671), zoom: 7),
+                            onTap: (LatLng? tapPosition) {
+                              if (tapPosition != null) {
+                                final lat = tapPosition.latitude;
+                                final lng = tapPosition.latitude;
+                                _controllerlat.text = lat.toString();
+                                _controllerlng.text = lat.toString();
+                              }
+                            },
+                            center: LatLng(10.952772, 106.807671),
+                            zoom: 7),
                         layers: [
                           TileLayerOptions(
                             urlTemplate:
@@ -523,19 +660,45 @@ class _addBridgeState extends State<addBridgeScreen> {
                             child: Text('Ngày khởi công'),
                           ),
                           Container(
-                            width: 210,
+                            width: 145,
                             margin: EdgeInsets.all(7),
                             child: TextField(
+                              controller: _ngaykhoicong,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                     top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
                                 hintText: 'Nhập ...',
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(7),
                                   borderSide: BorderSide(),
                                 ),
                               ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              // Future<void> _selectDate(BuildContext context) async {
+                              final DateTime? picked = await showDatePicker(
+                                context: context,
+                                initialDate: NKhoiCong,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2101),
+                              );
+                              if (picked != null && picked != NKhoiCong) {
+                                setState(() {
+                                  NKhoiCong = DateTime(
+                                      picked.year, picked.month, picked.day);
+                                  _ngaykhoicong.text =
+                                      ('${NKhoiCong.day.toString()}/${NKhoiCong.month.toString()}/${NKhoiCong.year.toString()}');
+                                });
+                              }
+                              // }
+                            },
+                            child:
+                                Icon(Icons.calendar_today, color: Colors.black),
+                            style: ElevatedButton.styleFrom(
+                              // độ lớn của nút
+                              primary: Colors.white, // màu nền của nút
                             ),
                           ),
                         ],
@@ -550,9 +713,10 @@ class _addBridgeState extends State<addBridgeScreen> {
                             child: Text('Ngày hoàn thành'),
                           ),
                           Container(
-                            width: 210,
+                            width: 145,
                             margin: EdgeInsets.all(7),
                             child: TextField(
+                              controller: _ngayhoanthanh,
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.only(
                                     top: 0, bottom: 0, left: 5, right: 5),
@@ -563,6 +727,32 @@ class _addBridgeState extends State<addBridgeScreen> {
                                   borderSide: BorderSide(),
                                 ),
                               ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () async {
+                              // Future<void> _selectDate(BuildContext context) async {
+                              final DateTime? picked = await showDatePicker(
+                                context: context,
+                                initialDate: NHoanThanh,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2101),
+                              );
+                              if (picked != null && picked != NKhoiCong) {
+                                setState(() {
+                                  NHoanThanh = DateTime(
+                                      picked.year, picked.month, picked.day);
+                                  _ngayhoanthanh.text =
+                                      ('${NHoanThanh.day.toString()}/${NHoanThanh.month.toString()}/${NHoanThanh.year.toString()}');
+                                });
+                              }
+                              // }
+                            },
+                            child:
+                                Icon(Icons.calendar_today, color: Colors.black),
+                            style: ElevatedButton.styleFrom(
+                              // độ lớn của nút
+                              primary: Colors.white, // màu nền của nút
                             ),
                           ),
                         ],

@@ -31,12 +31,10 @@ class _DetailState extends State<DetailAndUpdate> {
   Widget build(BuildContext context) {
     final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
-        // appBar: AppBar(
-        //   title: Text('CẦU ĐỒNG NAI'),
-        //   leading: CircleAvatar(
-        //     backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
-        //   ),
-        // ),
+        appBar: AppBar(
+          title: Text('Chi tiết / cập nhật'),
+          
+        ),
         floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           navigatorKey.currentState?.push(
@@ -62,7 +60,7 @@ class _DetailState extends State<DetailAndUpdate> {
                       widget.idBridge) {
                     return Column(
                       children: [
-                        Text('Chi tiết / cập nhật', style: TextStyle(color: Colors.black54, fontSize: 25,),),
+                        
                         Center(
                           child: Container(
                             child: Center(

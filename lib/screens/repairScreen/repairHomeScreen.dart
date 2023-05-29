@@ -46,11 +46,11 @@ class _MyWidgetState extends State<repairHomeScreen> {
       navigatorKey: navigatorKey,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('CẦU ĐỒNG NAI'),
-          leading: const CircleAvatar(
-            backgroundImage: NetworkImage('https://i.imgur.com/vHZ2Ewl.png'),
-          ),
-        ),
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.blue,
+            title: const Text('CẦU ĐỒNG NAI'),
+            toolbarHeight: 60,
+            leading: Image.asset("lib/assets/images/Logo_Dong_Nai.png")),
         endDrawer: menu(),
         body: Column(
           children: [
