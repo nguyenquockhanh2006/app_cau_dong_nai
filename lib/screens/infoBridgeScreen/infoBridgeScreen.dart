@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/addBridgeScreen.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/listInfoBridge.dart';
+import 'package:flutter_application_4/screens/infoBridgeScreen/test.dart';
 
 
 class infoBridgeScreen extends StatelessWidget {
@@ -25,6 +26,7 @@ class infoBridgeScreen extends StatelessWidget {
           onPressed: () => {
             navigatorKey.currentState?.push(
               MaterialPageRoute(builder: (context) => addBridgeScreen()),
+              //MaterialPageRoute(builder: (context) => test()),
             ),
           },
           label: Text('Thêm cầu'),
@@ -34,6 +36,7 @@ class infoBridgeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
+        
       ),
     );
   }
