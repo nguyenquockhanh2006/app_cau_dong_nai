@@ -31,7 +31,7 @@ class _addBridgeState extends State<addBridgeScreen> {
   DateTime NHoanThanh = DateTime.now();
   // biến kết quả thêm trả về của hàm postApi
   int result = 0;
-  // controller và biến data cầu --> 
+  // controller và biến data cầu -->
   // hình ảnh
   String anhCayCau = "";
   String anhMatCat = "";
@@ -64,7 +64,8 @@ class _addBridgeState extends State<addBridgeScreen> {
   //final TextEditingController _controllerNgayHoanThanh = TextEditingController(); --> controllerNgayHoanThanh
   // ignore: avoid_init_to_null
   int? chiPhiXayDung = null;
-  final TextEditingController _controllerChiPhiXayDung = TextEditingController();
+  final TextEditingController _controllerChiPhiXayDung =
+      TextEditingController();
   String chuDauTu = "";
   final TextEditingController _controllerChuDauTu = TextEditingController();
   String donViThietKe = "";
@@ -87,7 +88,8 @@ class _addBridgeState extends State<addBridgeScreen> {
   int soLanCan = 0;
   final TextEditingController _controllerSoLanCan = TextEditingController();
   int soDaiPhanCach = 0;
-  final TextEditingController _controllerSoDaiPhanCach = TextEditingController();
+  final TextEditingController _controllerSoDaiPhanCach =
+      TextEditingController();
   // vật liệu cầu
   String vlDamChinh = "";
   final TextEditingController _controllerVlDamChinh = TextEditingController();
@@ -107,11 +109,14 @@ class _addBridgeState extends State<addBridgeScreen> {
   double beRongXeChay = 0.0;
   final TextEditingController _controllerBeRongXeChay = TextEditingController();
   double khoangCachDamChinh = 0.0;
-  final TextEditingController _controllerKhoangCachDamChinh = TextEditingController();
+  final TextEditingController _controllerKhoangCachDamChinh =
+      TextEditingController();
   double khoangCachDamNgang = 0.0;
-  final TextEditingController _controllerKhoangCachDamNgang = TextEditingController();
+  final TextEditingController _controllerKhoangCachDamNgang =
+      TextEditingController();
   double chieuCaoBanMatCau = 0.0;
-  final TextEditingController _controllerChieuCaoBanMatCau = TextEditingController();
+  final TextEditingController _controllerChieuCaoBanMatCau =
+      TextEditingController();
   double beRongLanCan = 0.0;
   final TextEditingController _controllerBeRongLanCan = TextEditingController();
   // ảnh ban đầu của cầu
@@ -269,7 +274,46 @@ class _addBridgeState extends State<addBridgeScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                //
+                //
+                //
+                _controllerTenCayCau.text = "";
+                _controllerLoaiCau.text = "";
+                _controllerCap.text = "";
+                _controllerLyTrinh.text = "";
+                _controllerTaiTrong.text = "";
+                _controllerChieuDai.text = "";
+                _controllerChieuRong.text = "";
+                _controllerDiaDiem.text = "";
+                _controllerChiPhiXayDung.text = "";
+                _controllerChuDauTu.text = "";
+                _controllerDonViThietKe.text = "";
+                _controllerDonViThiCong.text = "";
+                _controllerDonViGiamSat.text = "";
+                _controllerSoNhip.text = "";
+                _controllerSoMo.text = "";
+                _controllerSoTru.text = "";
+                _controllerSoDamNgang.text = "";
+                _controllerSoDamChinh.text = "";
+                _controllerSoLanCan.text = "";
+                _controllerSoDaiPhanCach.text = "";
+                _controllerVlDamChinh.text = "";
+                _controllerVlDamNgang.text = "";
+                _controllerVlBanMatCau.text = "";
+                _controllerVlLanCan.text = "";
+                _controllerVlMo.text = "";
+                _controllerVlTru.text = "";
+                _controllerChieuDaiNhip.text = "";
+                _controllerBeRongXeChay.text = "";
+                _controllerKhoangCachDamChinh.text = "";
+                _controllerKhoangCachDamNgang.text = "";
+                _controllerChieuCaoBanMatCau.text = "";
+                _controllerBeRongLanCan.text = "";
+                //
+                //
+                //
+              },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
