@@ -5,7 +5,6 @@ import 'package:flutter_application_4/screens/infoBridgeScreen/addBridgeScreen.d
 import 'package:flutter_application_4/screens/infoBridgeScreen/listInfoBridge.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/test.dart';
 
-
 class infoBridgeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -36,7 +35,6 @@ class infoBridgeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
-        
       ),
     );
   }

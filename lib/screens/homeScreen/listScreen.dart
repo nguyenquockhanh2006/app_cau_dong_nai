@@ -29,10 +29,9 @@ class _MyWidgetState extends State<list_info_bridge> {
           title: Text('Danh sách cầu'),
         ),
         body: Column(
-          
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.5/10,
+              height: MediaQuery.of(context).size.height * 0.5 / 10,
               margin: EdgeInsets.all(13),
               child: TextField(
                 decoration: InputDecoration(
@@ -48,7 +47,7 @@ class _MyWidgetState extends State<list_info_bridge> {
             ),
             Container(
               margin: EdgeInsets.all(5),
-              height: MediaQuery.of(context).size.height * 8/10,
+              height: MediaQuery.of(context).size.height * 8 / 10,
               child: FutureBuilder<List<bridgeModel>>(
                 future: _futureBridgeList,
                 builder: (context, snapshot) {

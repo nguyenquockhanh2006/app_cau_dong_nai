@@ -33,21 +33,20 @@ class _DetailState extends State<DetailAndUpdate> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Chi tiết / cập nhật'),
-          
         ),
         floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          navigatorKey.currentState?.push(
-            MaterialPageRoute(builder: (context) => MyNewPage()),
-          );
-        },
-        label: Text('Lưu thay đổi'),
-        icon: Icon(Icons.save_alt),
-        backgroundColor: Colors.blue,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          onPressed: () {
+            navigatorKey.currentState?.push(
+              MaterialPageRoute(builder: (context) => MyNewPage()),
+            );
+          },
+          label: Text('Lưu thay đổi'),
+          icon: Icon(Icons.save_alt),
+          backgroundColor: Colors.blue,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
         ),
-      ),
         // endDrawer: menu(),
         body: SingleChildScrollView(
           child: FutureBuilder<List<bridgeModel>>(
@@ -56,11 +55,9 @@ class _DetailState extends State<DetailAndUpdate> {
               if (snapshot.hasData) {
                 List<bridgeModel>? bridgeList = snapshot.data;
                 for (int i = 0; i < bridgeList!.length; i++) {
-                  if (bridgeList[i].BridgeId ==
-                      widget.idBridge) {
+                  if (bridgeList[i].BridgeId == widget.idBridge) {
                     return Column(
                       children: [
-                        
                         Center(
                           child: Container(
                             child: Center(
@@ -78,54 +75,305 @@ class _DetailState extends State<DetailAndUpdate> {
                           ),
                         ),
                         Container(
+                          width: MediaQuery.of(context).size.width - 14,
                           margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                             color: Color(0xFFE9ECEF),
                             borderRadius: BorderRadius.circular(7),
                           ),
-                          child: Row(children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Tên cây cầu'),
-                                    SizedBox(height: 8),
-                                    Text('Loại cầu'),
-                                    SizedBox(height: 8),
-                                    Text('Cấp'),
-                                    SizedBox(height: 8),
-                                    Text('Lý trình'),
-                                    SizedBox(height: 8),
-                                    Text('Tải trọng'),
-                                    SizedBox(height: 8),
-                                    Text('Chiều dài cầu (m)'),
-                                    SizedBox(height: 8),
-                                    Text('Chiều rộng cầu (m)'),
-                                  ]),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuDai),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuRong),
-                                  ]),
-                            ),
-                          ]),
+                          child: //tu day
+                              Container(
+                            padding: EdgeInsets.all(10),
+                            margin: EdgeInsets.only(left: 5),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // noi dung thông tin chung
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Tên cây cầu'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   tenCayCau = newValue;
+                                              // });
+                                              // print('tên cầu: ' + tenCayCau);
+                                            },
+                                            //controller: _controllerTenCayCau,
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              hintText: 'Nhập tên cầu...',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Loại cầu'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   tenCayCau = newValue;
+                                              // });
+                                              // print('tên cầu: ' + tenCayCau);
+                                            },
+                                            //controller: _controllerTenCayCau,
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              hintText: 'Nhập loại cầu...',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Cấp'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            //controller: _controllerCap,
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   cap = newValue;
+                                              // });
+                                              // print('Cấp :' + cap);
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              // labelText: 'Tên cầu',
+                                              hintText: 'Nhập cấp...',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Lý trình'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context).size.width - 180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            //controller: _controllerLyTrinh,
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   lyTrinh = newValue;
+                                              // });
+                                              // print('Lý trình: ' + lyTrinh);
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              // labelText: 'Tên cầu',
+                                              hintText: 'Nhập lý trình...',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Tải trọng'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            //controller: _controllerTaiTrong,
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   taiTrong = newValue;
+                                              // });
+                                              // print('Tải trọng: ' + taiTrong);
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              // labelText: 'Tên cầu',
+                                              hintText: 'Nhập tải trọng...',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Chiều dài cầu (m)'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            //controller: _controllerChieuDai,
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   chieuDai = newValue;
+                                              // });
+                                              // print('Chiều dài: ' + chieuDai);
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              // labelText: 'Tên cầu',
+                                              hintText: 'Nhập chiều dài',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 120,
+                                          child: Text('Chiều rộng cầu (m)'),
+                                        ),
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
+                                          margin: EdgeInsets.all(7),
+                                          child: TextField(
+                                            //controller: _controllerChieuRong,
+                                            onChanged: (newValue) {
+                                              // setState(() {
+                                              //   chieuRong = newValue;
+                                              // });
+                                              // print('Chiều rộng: ' + chieuRong);
+                                            },
+                                            decoration: InputDecoration(
+                                              contentPadding: EdgeInsets.only(
+                                                  top: 0,
+                                                  bottom: 0,
+                                                  left: 5,
+                                                  right: 5),
+                                              // labelText: 'Tên cầu',
+                                              hintText: 'Nhập chiều rộng...',
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(7),
+                                                borderSide: BorderSide(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  // hết nội dung thông tin chung
+                                ]),
+                          ),
                         ),
                         Center(
                           child: Container(
@@ -292,23 +540,22 @@ class _DetailState extends State<DetailAndUpdate> {
                             Container(
                               padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                  Text(bridgeList[i].TenCayCau),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].LoaiCau),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].Cap),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].LyTrinh),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].TaiTrong),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].ChieuDai),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].ChieuRong),
-                                ]
-                              ),
+                                    Text(bridgeList[i].TenCayCau),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LoaiCau),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].Cap),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LyTrinh),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].TaiTrong),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].ChieuDai),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].ChieuRong),
+                                  ]),
                             ),
                           ]),
                         ),
@@ -357,21 +604,20 @@ class _DetailState extends State<DetailAndUpdate> {
                             Container(
                               padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                  Text(bridgeList[i].TenCayCau),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].LoaiCau),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].Cap),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].LyTrinh),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].TaiTrong),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].ChieuDai),
-                                ]
-                              ),
+                                    Text(bridgeList[i].TenCayCau),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LoaiCau),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].Cap),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LyTrinh),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].TaiTrong),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].ChieuDai),
+                                  ]),
                             ),
                           ]),
                         ),
@@ -420,22 +666,20 @@ class _DetailState extends State<DetailAndUpdate> {
                             Container(
                               padding: EdgeInsets.all(10),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                  children:
-                                  [
-                                  Text(bridgeList[i].TenCayCau),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].LoaiCau),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].Cap),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].LyTrinh),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].TaiTrong),
-                                  SizedBox(height: 8),
-                                  Text(bridgeList[i].ChieuDai),
-                                ]
-                              ),
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(bridgeList[i].TenCayCau),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LoaiCau),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].Cap),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].LyTrinh),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].TaiTrong),
+                                    SizedBox(height: 8),
+                                    Text(bridgeList[i].ChieuDai),
+                                  ]),
                             ),
                           ]),
                         ),
@@ -492,6 +736,7 @@ class _DetailState extends State<DetailAndUpdate> {
         ));
   }
 }
+
 class MyNewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

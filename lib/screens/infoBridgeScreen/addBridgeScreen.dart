@@ -12,6 +12,8 @@ import 'dart:core';
 import 'package:meta/meta.dart';
 import 'package:flutter/services.dart';
 
+import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
+
 class addBridgeScreen extends StatefulWidget {
   const addBridgeScreen({super.key});
   @override
@@ -245,6 +247,11 @@ class _addBridgeState extends State<addBridgeScreen> {
             child: TextButton(
               onPressed: () {
                 addBridge();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => new infoBridgeScreen()),
+                );
               },
               style: TextButton.styleFrom(
                 backgroundColor: Color(0xff7cb518),
@@ -348,9 +355,6 @@ class _addBridgeState extends State<addBridgeScreen> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          //
-
-          // Container(child: Text('h'),)
           Container(
             padding: EdgeInsets.all(7),
             child: Column(
@@ -876,7 +880,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 kinhDo = double.parse(_controllerlat.text);
                                 print('Kinh độ: ' + kinhDo.toString());
                                 // set vĩ độ
-                                _controllerlng.text = lat.toString();
+                                _controllerlng.text = lng.toString();
                                 // -> viDo
                                 viDo = double.parse(_controllerlng.text);
                                 print('Vĩ độ: ' + viDo.toString());
