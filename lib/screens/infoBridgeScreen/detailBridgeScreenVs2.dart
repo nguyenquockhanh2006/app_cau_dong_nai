@@ -7,6 +7,8 @@ import 'package:flutter_application_4/services/controllers/detailBridgeControlle
 import 'package:flutter_application_4/services/controllers/imageController.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
 import 'package:flutter_application_4/services/models/detailBridgeModel.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../services/models/bridgeModel.dart';
 import '../../services/controllers/bridgeController.dart';
@@ -26,6 +28,7 @@ class DetailAndUpdate extends StatefulWidget {
 
 class _DetailState extends State<DetailAndUpdate> {
   imageController iC = imageController();
+  final MapController mapController = MapController();
   late Future<List<detailBridgeModel>> _futureBridgeList;
   //late Future<List<RepairModel>> _futureRepairList;
 //
@@ -50,9 +53,11 @@ class _DetailState extends State<DetailAndUpdate> {
   String diaDiem = "";
   final TextEditingController _controllerDiaDiem = TextEditingController();
   double kinhDo = 10.96701421956938;
-  //final TextEditingController _controllerKinhDo = TextEditingController(); --> controllerlat
+  final TextEditingController _controllerKinhDo =
+      TextEditingController(); // --> controllerlat
   double viDo = 10.96701421956938;
-  //final TextEditingController _controllerViDo = TextEditingController(); --> controllerlng
+  final TextEditingController _controllerViDo =
+      TextEditingController(); //--> controllerlng
   // thông tin thi công
   String ngayKhoiCong = "0001-01-01";
   //final TextEditingController _controllerNgayKhoiCong = TextEditingController(); --> controllerNgayKhoiCong
@@ -178,6 +183,13 @@ class _DetailState extends State<DetailAndUpdate> {
     _controllerLoaiCau.text = detaiTemp.loaiCau as String;
     _controllerCap.text = detaiTemp.cap as String;
     _controllerLyTrinh.text = detaiTemp.lyTrinh as String;
+    _controllerChieuDai.text = detaiTemp.chieuDai as String;
+    _controllerChieuRong.text = detaiTemp.chieuRong as String;
+    _controllerDiaDiem.text = detaiTemp.diaDiem as String;
+    double kinhDo = detaiTemp.kinhDo as double;
+    double viDo = detaiTemp.viDo as double;
+    _controllerKinhDo.text = kinhDo.toString();
+    _controllerViDo.text = viDo.toString();
     int chiPhi = detaiTemp.chiPhiXayDung as int;
     _controllerChiPhiXayDung.text = chiPhi.toString();
   }
@@ -316,8 +328,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                               // });
                                               // print('tên cầu: ' + tenCayCau);
                                             },
-                                            controller:
-                                                _controllerLoaiCau,
+                                            controller: _controllerLoaiCau,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.only(
                                                   top: 0,
@@ -434,7 +445,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                               180,
                                           margin: EdgeInsets.all(7),
                                           child: TextField(
-                                            //controller: _controllerTaiTrong,
+                                            controller: _controllerTaiTrong,
                                             onChanged: (newValue) {
                                               // setState(() {
                                               //   taiTrong = newValue;
@@ -448,7 +459,8 @@ class _DetailState extends State<DetailAndUpdate> {
                                                   left: 5,
                                                   right: 5),
                                               // labelText: 'Tên cầu',
-                                              hintText: 'Nhập tải trọng...',
+                                              hintText:
+                                                  _controllerTaiTrong.text,
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -475,7 +487,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                               180,
                                           margin: EdgeInsets.all(7),
                                           child: TextField(
-                                            //controller: _controllerChieuDai,
+                                            controller: _controllerChieuDai,
                                             onChanged: (newValue) {
                                               // setState(() {
                                               //   chieuDai = newValue;
@@ -489,7 +501,8 @@ class _DetailState extends State<DetailAndUpdate> {
                                                   left: 5,
                                                   right: 5),
                                               // labelText: 'Tên cầu',
-                                              hintText: 'Nhập chiều dài',
+                                              hintText:
+                                                  _controllerChieuDai.text,
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -516,7 +529,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                               180,
                                           margin: EdgeInsets.all(7),
                                           child: TextField(
-                                            //controller: _controllerChieuRong,
+                                            controller: _controllerChieuRong,
                                             onChanged: (newValue) {
                                               // setState(() {
                                               //   chieuRong = newValue;
@@ -530,7 +543,8 @@ class _DetailState extends State<DetailAndUpdate> {
                                                   left: 5,
                                                   right: 5),
                                               // labelText: 'Tên cầu',
-                                              hintText: 'Nhập chiều rộng...',
+                                              hintText:
+                                                  _controllerChieuRong.text,
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -568,35 +582,165 @@ class _DetailState extends State<DetailAndUpdate> {
                             color: Color(0xFFE9ECEF),
                             borderRadius: BorderRadius.circular(7),
                           ),
-                          child: Row(children: [
+                          child: Column(children: [
                             Container(
-                              width: 80,
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Địa điểm'),
-                                    SizedBox(height: 8),
-                                    Text('Kinh độ'),
-                                    SizedBox(height: 8),
-                                    Text('Vĩ độ'),
-                                  ]),
+                              child: Row(children: [
+                                const SizedBox(
+                                  width: 70,
+                                  child: Text('Địa điểm'),
+                                ),
+                                Container(
+                                  width: 260,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerDiaDiem,
+                                    // onChanged: (newValue) {
+                                    //   setState(() {
+                                    //     diaDiem = newValue;
+                                    //   });
+                                    //   print('Địa điểm: $diaDiem');
+                                    // },
+
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: _controllerDiaDiem.text,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
                             ),
                             Container(
-                              width: 270,
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(bridgeList[i].diaDiem as String,
-                                        softWrap: true),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].kinhDo.toString()),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].viDo.toString()),
-                                  ]),
+                              child: Row(children: [
+                                const SizedBox(
+                                  width: 70,
+                                  child: Text('Kinh độ'),
+                                ),
+                                Container(
+                                  width: 260,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    enabled: false,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        if (newValue.trim() == "") {
+                                          kinhDo = 0.00;
+                                        } else {
+                                          kinhDo = double.parse(newValue);
+                                        }
+                                      });
+                                      // print('Kinh độ: $kinhDo');
+                                    },
+                                    controller: _controllerKinhDo,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: _controllerKinhDo.text,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
                             ),
+                            Container(
+                              child: Row(children: [
+                                const SizedBox(
+                                  width: 70,
+                                  child: Text('Vĩ độ'),
+                                ),
+                                Container(
+                                  width: 260,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    enabled: false,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        if (newValue.trim() == "") {
+                                          viDo = 0.0;
+                                        } else {
+                                          viDo = double.parse(newValue);
+                                        }
+                                      });
+                                      // print('Vĩ độ: $viDo');
+                                    },
+                                    controller: _controllerViDo,
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      hintText: _controllerViDo.text,
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                            ),
+                            Container(
+                              height: 200,
+                              margin: const EdgeInsets.all(5),
+                              child: FlutterMap(
+                                mapController: mapController,
+                                options: MapOptions(
+                                    onTap: (LatLng? tapPosition) {
+                                      if (tapPosition != null) {
+                                        final lat = tapPosition.latitude;
+                                        final lng = tapPosition.latitude;
+                                        // set kinh độ
+                                        _controllerKinhDo.text = lat.toString();
+                                        // -> kinhDo
+                                        kinhDo = double.parse(
+                                            _controllerKinhDo.text);
+                                        print('Kinh độ: $kinhDo');
+                                        // set vĩ độ
+                                        _controllerViDo.text = lng.toString();
+                                        // -> viDo
+                                        viDo =
+                                            double.parse(_controllerViDo.text);
+                                        print('Vĩ độ: $viDo');
+                                      }
+                                    },
+                                    center: LatLng(10.952772, 106.807671),
+                                    zoom: 7),
+                                layers: [
+                                  TileLayerOptions(
+                                    urlTemplate:
+                                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                    subdomains: ['a', 'b', 'c'],
+                                  ),
+                                  MarkerLayerOptions(markers: [
+                                    Marker(
+                                      width: 80.0,
+                                      height: 80.0,
+                                      point: LatLng(
+                                          double.parse(_controllerKinhDo.text),
+                                          double.parse(_controllerViDo.text)),
+                                      builder: (ctx) => Container(
+                                        child: IconButton(
+                                            icon: Image.network(
+                                              'https://i.imgur.com/x94d3tp.png',
+                                              width: 50,
+                                              height: 50,
+                                            ),
+                                            color: Colors.red,
+                                            iconSize: 30.0,
+                                            onPressed: () {}),
+                                      ),
+                                    ),
+                                  ])
+                                ],
+                              ),
+                            )
                           ]),
                         ),
                         Center(
