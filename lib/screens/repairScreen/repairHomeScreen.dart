@@ -11,6 +11,8 @@ import 'package:flutter_application_4/services/models/repairModel.dart';
 class repairHomeScreen extends StatefulWidget {
   final RepairController rpC = RepairController();
   final bridgeController bC = bridgeController();
+
+  repairHomeScreen({super.key});
   @override
   _MyWidgetState createState() => _MyWidgetState();
 }
@@ -51,7 +53,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
             title: const Text('CẦU ĐỒNG NAI'),
             toolbarHeight: 60,
             leading: Image.asset("lib/assets/images/Logo_Dong_Nai.png")),
-        endDrawer: menu(),
+        endDrawer: const menu(),
         body: Column(
           children: [
             Container(
@@ -63,12 +65,15 @@ class _MyWidgetState extends State<repairHomeScreen> {
                   return Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.all(7),
-                        padding: EdgeInsets.all(7),
+                        margin: const EdgeInsets.all(7),
+                        padding: const EdgeInsets.all(7),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7),
+                            border: Border.all(color: const Color(0xFFadb5bd))),
                         child: Column(children: [
                           Row(
                             children: [
-                              Container(
+                              const SizedBox(
                                 width: 90,
                                 child: Text('Cây cầu'),
                               ),
@@ -84,10 +89,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                 value: selectedNameBridge,
                                 onChanged: (String? newValue) {
                                   setState(
-                                    () => {
-                                      selectedNameBridge = newValue,
-                                    },
-                                  );
+                                    () => selectedNameBridge = newValue,);
                                 },
                               )
                             ],
@@ -95,7 +97,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
                           Container(
                             child: Row(
                               children: [
-                                Container(
+                                const SizedBox(
                                   width: 90,
                                   child: Text('Trạng thái'),
                                 ),
@@ -125,18 +127,23 @@ class _MyWidgetState extends State<repairHomeScreen> {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  SizedBox(height: 8),
-                                  Text('Thời giam kiểm tra'),
+                                  const SizedBox(height: 8),
+                                  const Text('Thời giam kiểm tra'),
                                   Row(
                                     children: [
                                       Container(
-                                        padding: EdgeInsets.all(5),
+                                        padding: const EdgeInsets.all(5),
                                         width: 170,
                                         margin:
-                                            EdgeInsets.only(right: 5, top: 7),
+                                            const EdgeInsets.only(right: 5, top: 7),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            border: Border.all(
+                                                color: const Color(0xFFadb5bd))),
                                         child: Row(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 100,
                                               child: Text(
                                                   '${selectedDate.day.toString()}/${selectedDate.month.toString()}/ ${selectedDate.year.toString()}'),
@@ -151,32 +158,33 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                                   lastDate: DateTime(2100),
                                                 );
                                                 if (pickedDate != null &&
-                                                    pickedDate != selectedDate)
+                                                    pickedDate != selectedDate) {
                                                   setState(() {
                                                     selectedDate = pickedDate;
                                                   });
+                                                }
                                               },
-                                              child: Icon(Icons.calendar_today,
-                                                  color: Colors.black),
                                               style: ElevatedButton.styleFrom(
-                                                primary: Colors.white,
+                                                backgroundColor: Colors.white,
                                               ),
+                                              child: const Icon(Icons.calendar_today,
+                                                  color: Colors.black),
                                             ),
                                           ],
                                         ),
+                                      ),
+                                      Container(
+                                        width: 170,
+                                        margin: const EdgeInsets.only(top: 7),
+                                        padding: const EdgeInsets.all(5),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(7),
                                             border: Border.all(
-                                                color: Color(0xFFadb5bd))),
-                                      ),
-                                      Container(
-                                        width: 170,
-                                        margin: EdgeInsets.only(top: 7),
-                                        padding: EdgeInsets.all(5),
+                                                color: const Color(0xFFadb5bd))),
                                         child: Row(
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: 100,
                                               child: Text(
                                                   '${selectedDate2.day.toString()}/${selectedDate2.month.toString()}/ ${selectedDate2.year.toString()}'),
@@ -200,68 +208,60 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                                   });
                                                 }
                                               },
-                                              child: Icon(Icons.calendar_today,
-                                                  color: Colors.black),
                                               style: ElevatedButton.styleFrom(
-                                                primary: Colors.white,
+                                                backgroundColor: Colors.white,
                                               ),
+                                              child: const Icon(Icons.calendar_today,
+                                                  color: Colors.black),
                                             ),
                                           ],
                                         ),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            border: Border.all(
-                                                color: Color(0xFFadb5bd))),
                                       ),
                                     ],
                                   ),
                                 ]),
                           ),
                           Container(
-                            margin: EdgeInsets.only(top: 7),
+                            margin: const EdgeInsets.only(top: 7),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 TextButton.icon(
                                   onPressed: () {},
-                                  label: Text('Làm mới'),
-                                  icon: Icon(Icons.restart_alt),
+                                  label: const Text('Làm mới'),
+                                  icon: const Icon(Icons.restart_alt),
                                   style: TextButton.styleFrom(
-                                      backgroundColor: Color(0xff29bf12),
+                                      backgroundColor: const Color(0xff29bf12),
                                       foregroundColor: Colors.white,
                                       elevation: 2,
-                                      padding: EdgeInsets.all(5)),
+                                      padding: const EdgeInsets.all(5)),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 TextButton.icon(
                                   onPressed: () {},
-                                  label: Text('Áp dụng'),
-                                  icon: Icon(Icons.search),
+                                  label: const Text('Áp dụng'),
+                                  icon: const Icon(Icons.search),
                                   style: TextButton.styleFrom(
                                       backgroundColor: Colors.blue,
                                       foregroundColor: Colors.white,
                                       elevation: 2,
-                                      padding: EdgeInsets.all(5)),
+                                      padding: const EdgeInsets.all(5)),
                                 )
                               ],
                             ),
                           )
                         ]),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(7),
-                            border: Border.all(color: Color(0xFFadb5bd))),
                       ),
                     ],
                   );
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 }
-                return CircularProgressIndicator();
+                return const CircularProgressIndicator();
               },
             )),
             Container(
-              padding: EdgeInsets.all(7),
+              padding: const EdgeInsets.all(7),
               child: FutureBuilder<List<RepairModel>>(
                 future: _futureRepairList,
                 builder: (context, snapshot) {
@@ -269,7 +269,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
                     return Table(
                       border: TableBorder.all(),
                       children: [
-                        TableRow(
+                        const TableRow(
                           decoration: BoxDecoration(
                               color: Color.fromARGB(255, 194, 188, 188)),
                           children: [
@@ -342,9 +342,9 @@ class _MyWidgetState extends State<repairHomeScreen> {
                       ],
                     );
                   } else if (snapshot.hasError) {
-                    return Center(child: Text('Error'));
+                    return const Center(child: Text('Error'));
                   } else {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                 },
               ),

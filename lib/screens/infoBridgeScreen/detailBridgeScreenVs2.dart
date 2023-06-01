@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
+import 'package:flutter_application_4/services/controllers/imageController.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
+import 'package:flutter_application_4/services/models/detailBridgeModel.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../services/models/bridgeModel.dart';
 import '../../services/controllers/bridgeController.dart';
 import '../../services/models/repairModel.dart';
@@ -9,7 +15,7 @@ import '../../services/controllers/bridgeController.dart';
 import '../homeScreen/menu.dart';
 
 class DetailAndUpdate extends StatefulWidget {
-  final bridgeController bC = bridgeController();
+  final detailBridgeController dBC = detailBridgeController();
   final RepairController repairController = RepairController();
   final int idBridge;
   DetailAndUpdate({Key? key, required this.idBridge}) : super(key: key);
@@ -19,15 +25,173 @@ class DetailAndUpdate extends StatefulWidget {
 }
 
 class _DetailState extends State<DetailAndUpdate> {
-  late Future<List<bridgeModel>> _futureBridgeList;
-  late Future<List<RepairModel>> _futureRepairList;
+  imageController iC = imageController();
+  late Future<List<detailBridgeModel>> _futureBridgeList;
+  //late Future<List<RepairModel>> _futureRepairList;
+//
+  String anhCayCau = "";
+  String anhMatCat = "";
+  String anhBinhDo = "";
+  // thông tin chung
+  String tenCayCau = "Cau Text";
+  final TextEditingController _controllerTenCayCau = TextEditingController();
+  String loaiCau = "";
+  final TextEditingController _controllerLoaiCau = TextEditingController();
+  String cap = "";
+  final TextEditingController _controllerCap = TextEditingController();
+  String lyTrinh = "";
+  final TextEditingController _controllerLyTrinh = TextEditingController();
+  String taiTrong = "";
+  final TextEditingController _controllerTaiTrong = TextEditingController();
+  String chieuDai = "";
+  final TextEditingController _controllerChieuDai = TextEditingController();
+  String chieuRong = "";
+  final TextEditingController _controllerChieuRong = TextEditingController();
+  String diaDiem = "";
+  final TextEditingController _controllerDiaDiem = TextEditingController();
+  double kinhDo = 10.96701421956938;
+  //final TextEditingController _controllerKinhDo = TextEditingController(); --> controllerlat
+  double viDo = 10.96701421956938;
+  //final TextEditingController _controllerViDo = TextEditingController(); --> controllerlng
+  // thông tin thi công
+  String ngayKhoiCong = "0001-01-01";
+  //final TextEditingController _controllerNgayKhoiCong = TextEditingController(); --> controllerNgayKhoiCong
+  String ngayHoanThanh = "0001-01-01";
+  //final TextEditingController _controllerNgayHoanThanh = TextEditingController(); --> controllerNgayHoanThanh
+  // ignore: avoid_init_to_null
+  int? chiPhiXayDung = null;
+  final TextEditingController _controllerChiPhiXayDung =
+      TextEditingController();
+  String chuDauTu = "";
+  final TextEditingController _controllerChuDauTu = TextEditingController();
+  String donViThietKe = "";
+  final TextEditingController _controllerDonViThietKe = TextEditingController();
+  String donViThiCong = "";
+  final TextEditingController _controllerDonViThiCong = TextEditingController();
+  String donViGiamSat = "";
+  final TextEditingController _controllerDonViGiamSat = TextEditingController();
+  // cấu tạo cầu
+  int soNhip = 0;
+  final TextEditingController _controllerSoNhip = TextEditingController();
+  int soMo = 0;
+  final TextEditingController _controllerSoMo = TextEditingController();
+  int soTru = 0;
+  final TextEditingController _controllerSoTru = TextEditingController();
+  int soDamNgang = 0;
+  final TextEditingController _controllerSoDamNgang = TextEditingController();
+  int soDamChinh = 0;
+  final TextEditingController _controllerSoDamChinh = TextEditingController();
+  int soLanCan = 0;
+  final TextEditingController _controllerSoLanCan = TextEditingController();
+  int soDaiPhanCach = 0;
+  final TextEditingController _controllerSoDaiPhanCach =
+      TextEditingController();
+  // vật liệu cầu
+  String vlDamChinh = "";
+  final TextEditingController _controllerVlDamChinh = TextEditingController();
+  String vlDamNgang = "";
+  final TextEditingController _controllerVlDamNgang = TextEditingController();
+  String vlBanMatCau = "";
+  final TextEditingController _controllerVlBanMatCau = TextEditingController();
+  String vlLanCan = "";
+  final TextEditingController _controllerVlLanCan = TextEditingController();
+  String vlMo = "";
+  final TextEditingController _controllerVlMo = TextEditingController();
+  String vlTru = "";
+  final TextEditingController _controllerVlTru = TextEditingController();
+  // kích thước cầu
+  double chieuDaiNhip = 0.0;
+  final TextEditingController _controllerChieuDaiNhip = TextEditingController();
+  double beRongXeChay = 0.0;
+  final TextEditingController _controllerBeRongXeChay = TextEditingController();
+  double khoangCachDamChinh = 0.0;
+  final TextEditingController _controllerKhoangCachDamChinh =
+      TextEditingController();
+  double khoangCachDamNgang = 0.0;
+  final TextEditingController _controllerKhoangCachDamNgang =
+      TextEditingController();
+  double chieuCaoBanMatCau = 0.0;
+  final TextEditingController _controllerChieuCaoBanMatCau =
+      TextEditingController();
+  double beRongLanCan = 0.0;
+  final TextEditingController _controllerBeRongLanCan = TextEditingController();
+  // ảnh ban đầu của cầu
+  String? _hinhAnhCauSrc = 'https://i.imgur.com/bkB4dqc.png';
+  String? _hinhAnhMatCatSrc = 'https://i.imgur.com/bkB4dqc.png';
+  String? _hinhAnhBinhDoSrc = 'https://i.imgur.com/bkB4dqc.png';
+  // - > File
+  File? _imageFile;
+  File? _imageFileMatCat;
+  File? _imageFileBinhDo;
+  //
+
+  Future<void> _pickImage(ImageSource source) async {
+    // ignore: deprecated_member_use
+    final pickedFile = await ImagePicker().getImage(source: source);
+    if (pickedFile != null) {
+      final srcTemp = await iC.postImage(File(pickedFile.path));
+      setState(() {
+        _imageFile = File(pickedFile.path);
+        _hinhAnhCauSrc = srcTemp;
+        print('Hình ảnh cầu SRC: ' + _hinhAnhCauSrc.toString());
+        // kiểm tra kết quả trả về
+        anhCayCau = _hinhAnhCauSrc.toString();
+      });
+    }
+  }
+
+  //
+  Future<void> _pickImageMatCat(ImageSource source) async {
+    // ignore: deprecated_member_use
+    final pickedFile = await ImagePicker().getImage(source: source);
+    if (pickedFile != null) {
+      final srcTemp = await iC.postImage(File(pickedFile.path));
+      setState(() {
+        _imageFileMatCat = File(pickedFile.path);
+        _hinhAnhMatCatSrc = srcTemp;
+        print('Hình ảnh mặt cắt SRC: ' + _hinhAnhMatCatSrc.toString());
+        // kiểm tra kết quả trả về
+        anhMatCat = _hinhAnhMatCatSrc.toString();
+      });
+    }
+  }
+
+  //
+  Future<void> _pickImageBinhDo(ImageSource source) async {
+    // ignore: deprecated_member_use
+    final pickedFile = await ImagePicker().getImage(source: source);
+    if (pickedFile != null) {
+      final srcTemp = await iC.postImage(File(pickedFile.path));
+      setState(() {
+        _imageFileBinhDo = File(pickedFile.path);
+        _hinhAnhBinhDoSrc = srcTemp;
+        print('Hình ảnh bình đồ SRC: ' + _hinhAnhBinhDoSrc.toString());
+        // kiểm tra kết quả trả về
+        anhBinhDo = _hinhAnhBinhDoSrc.toString();
+      });
+    }
+  }
+
+//
+  void setDataController(detailBridgeModel detaiTemp) {
+    _controllerTenCayCau.text = detaiTemp.tenCayCau as String;
+    _controllerLoaiCau.text = detaiTemp.loaiCau as String;
+    _controllerCap.text = detaiTemp.cap as String;
+    _controllerLyTrinh.text = detaiTemp.lyTrinh as String;
+    int chiPhi = detaiTemp.chiPhiXayDung as int;
+    _controllerChiPhiXayDung.text = chiPhi.toString();
+  }
+
+//
   @override
   void initState() {
     super.initState();
-    _futureBridgeList = widget.bC.getApi();
-    _futureRepairList = widget.repairController.getApi();
+    _futureBridgeList = widget.dBC.getApi() as Future<List<detailBridgeModel>>;
+    //_futureRepairList = widget.repairController.getApi();
   }
 
+  void setDataStart(detailBridgeModel temp) {}
+  @override
   Widget build(BuildContext context) {
     final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
@@ -49,13 +213,14 @@ class _DetailState extends State<DetailAndUpdate> {
         ),
         // endDrawer: menu(),
         body: SingleChildScrollView(
-          child: FutureBuilder<List<bridgeModel>>(
+          child: FutureBuilder<List<detailBridgeModel>>(
             future: _futureBridgeList,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<bridgeModel>? bridgeList = snapshot.data;
+                List<detailBridgeModel>? bridgeList = snapshot.data;
                 for (int i = 0; i < bridgeList!.length; i++) {
-                  if (bridgeList[i].BridgeId == widget.idBridge) {
+                  if (bridgeList[i].bridgeId == widget.idBridge) {
+                    setDataController(bridgeList[i]);
                     return Column(
                       children: [
                         Center(
@@ -110,14 +275,15 @@ class _DetailState extends State<DetailAndUpdate> {
                                               // });
                                               // print('tên cầu: ' + tenCayCau);
                                             },
-                                            //controller: _controllerTenCayCau,
+                                            controller: _controllerTenCayCau,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.only(
                                                   top: 0,
                                                   bottom: 0,
                                                   left: 5,
                                                   right: 5),
-                                              hintText: 'Nhập tên cầu...',
+                                              hintText:
+                                                  _controllerTenCayCau.text,
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -150,14 +316,16 @@ class _DetailState extends State<DetailAndUpdate> {
                                               // });
                                               // print('tên cầu: ' + tenCayCau);
                                             },
-                                            //controller: _controllerTenCayCau,
+                                            controller:
+                                                _controllerLoaiCau,
                                             decoration: InputDecoration(
                                               contentPadding: EdgeInsets.only(
                                                   top: 0,
                                                   bottom: 0,
                                                   left: 5,
                                                   right: 5),
-                                              hintText: 'Nhập loại cầu...',
+                                              hintText: _controllerLoaiCau
+                                                  .text, //'Nhập loại cầu...',
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -184,7 +352,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                               180,
                                           margin: EdgeInsets.all(7),
                                           child: TextField(
-                                            //controller: _controllerCap,
+                                            controller: _controllerCap,
                                             onChanged: (newValue) {
                                               // setState(() {
                                               //   cap = newValue;
@@ -198,7 +366,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                                   left: 5,
                                                   right: 5),
                                               // labelText: 'Tên cầu',
-                                              hintText: 'Nhập cấp...',
+                                              hintText: _controllerCap.text,
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -219,10 +387,13 @@ class _DetailState extends State<DetailAndUpdate> {
                                           child: Text('Lý trình'),
                                         ),
                                         Container(
-                                          width: MediaQuery.of(context).size.width - 180,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              180,
                                           margin: EdgeInsets.all(7),
                                           child: TextField(
-                                            //controller: _controllerLyTrinh,
+                                            controller: _controllerLyTrinh,
                                             onChanged: (newValue) {
                                               // setState(() {
                                               //   lyTrinh = newValue;
@@ -236,7 +407,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                                   left: 5,
                                                   right: 5),
                                               // labelText: 'Tên cầu',
-                                              hintText: 'Nhập lý trình...',
+                                              hintText: _controllerLyTrinh.text,
                                               border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(7),
@@ -418,11 +589,12 @@ class _DetailState extends State<DetailAndUpdate> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(bridgeList[i].DiaDiem, softWrap: true),
+                                    Text(bridgeList[i].diaDiem as String,
+                                        softWrap: true),
                                     SizedBox(height: 8),
-                                    Text(bridgeList[i].KinhDo.toString()),
+                                    Text(bridgeList[i].kinhDo.toString()),
                                     SizedBox(height: 8),
-                                    Text(bridgeList[i].ViDo.toString()),
+                                    Text(bridgeList[i].viDo.toString()),
                                   ]),
                             ),
                           ]),
@@ -476,19 +648,19 @@ class _DetailState extends State<DetailAndUpdate> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(bridgeList[i].NgayKhoiCong),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].NgayHoanThanh),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuDai),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuRong),
+                                    // Text(bridgeList[i].ngayKhoiCong),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].ngayHoanThanh),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].cap),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].lyTrinh),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].taiTrong),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].chieuDai),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].chieuRong),
                                   ]),
                             ),
                           ]),
@@ -542,19 +714,20 @@ class _DetailState extends State<DetailAndUpdate> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuDai),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuRong),
+                                    Text(
+                                        bridgeList[i].chiPhiXayDung.toString()),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].loaiCau),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].cap),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].lyTrinh),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].taiTrong),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].chieuDai),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].chieuRong),
                                   ]),
                             ),
                           ]),
@@ -606,17 +779,17 @@ class _DetailState extends State<DetailAndUpdate> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuDai),
+                                    // Text(bridgeList[i].tenCayCau),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].loaiCau),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].cap),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].lyTrinh),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].taiTrong),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].chieuRong),
                                   ]),
                             ),
                           ]),
@@ -650,17 +823,17 @@ class _DetailState extends State<DetailAndUpdate> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('Chiều dài nhịp'),
-                                    SizedBox(height: 8),
-                                    Text('Bề rộng xe chạy (m)'),
-                                    SizedBox(height: 8),
-                                    Text('Khoảng cách dầm chính (m)'),
-                                    SizedBox(height: 8),
-                                    Text('Khoảng cách dầm ngang (m)'),
-                                    SizedBox(height: 8),
-                                    Text('Bề rộng lề bộ hành (m)'),
-                                    SizedBox(height: 8),
-                                    Text('Bề rộng lan can (m)'),
+                                    // Text('Chiều dài nhịp'),
+                                    // SizedBox(height: 8),
+                                    // Text('Bề rộng xe chạy (m)'),
+                                    // SizedBox(height: 8),
+                                    // Text('Khoảng cách dầm chính (m)'),
+                                    // SizedBox(height: 8),
+                                    // Text('Khoảng cách dầm ngang (m)'),
+                                    // SizedBox(height: 8),
+                                    // Text('Bề rộng lề bộ hành (m)'),
+                                    // SizedBox(height: 8),
+                                    // Text('Bề rộng lan can (m)'),
                                   ]),
                             ),
                             Container(
@@ -668,17 +841,17 @@ class _DetailState extends State<DetailAndUpdate> {
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
-                                    Text(bridgeList[i].ChieuDai),
+                                    // Text(bridgeList[i].tenCayCau),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].loaiCau),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].cap),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].lyTrinh),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].taiTrong),
+                                    // SizedBox(height: 8),
+                                    // Text(bridgeList[i].chieuDai),
                                   ]),
                             ),
                           ]),

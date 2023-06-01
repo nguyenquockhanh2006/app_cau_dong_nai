@@ -5,6 +5,8 @@ import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 
 class home extends StatelessWidget {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  home({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +19,7 @@ class home extends StatelessWidget {
             title: const Text('CẦU ĐỒNG NAI'),
             toolbarHeight: 60,
             leading: Image.asset("lib/assets/images/Logo_Dong_Nai.png")),
-        endDrawer: menu(),
+        endDrawer: const menu(),
         body: const SizedBox(
           child: flutter_map_load(),
         ),
@@ -36,11 +38,13 @@ class home extends StatelessWidget {
 }
 
 class MyNewPage extends StatelessWidget {
+  const MyNewPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('My New Page')),
-      body: Center(
+      appBar: AppBar(title: const Text('My New Page')),
+      body: const Center(
         child: Text('This is my new page'),
       ),
     );

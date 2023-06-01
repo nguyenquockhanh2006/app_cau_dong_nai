@@ -4,21 +4,23 @@ import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.
 import 'homeScreen.dart';
 
 class menu extends StatelessWidget {
+  const menu({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Text('app cầu đồng nai'),
+          const DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
+            child: Text('app cầu đồng nai'),
           ),
           ListTile(
-            leading: Icon(Icons.map),
-            title: Text('Bản đồ'),
+            leading: const Icon(Icons.map),
+            title: const Text('Bản đồ'),
             onTap: () {
               Navigator.push(
                 context,
@@ -27,18 +29,18 @@ class menu extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text('Thông tin cầu'),
+            leading: const Icon(Icons.info),
+            title: const Text('Thông tin cầu'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => infoBridgeScreen()),
+                MaterialPageRoute(builder: (context) => const infoBridgeScreen()),
               );
             },
           ),
           ListTile(
-            leading: Icon(Icons.check),
-            title: Text('Thông tin kiểm tra/ sửa chữa'),
+            leading: const Icon(Icons.check),
+            title: const Text('Thông tin kiểm tra/ sửa chữa'),
             onTap: () {
               Navigator.push(
                 context,

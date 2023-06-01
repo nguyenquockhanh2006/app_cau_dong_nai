@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/services/controllers/bridgeController.dart';
 import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
@@ -20,7 +19,7 @@ class _infoBridgeState extends State<infoBridge> {
   bool _isDeleted = false;
 
   Future<detailBridgeModel> getData(int id) async {
-    detailBridgeController cBC = new detailBridgeController();
+    detailBridgeController cBC = detailBridgeController();
     return await cBC.getApiById(id);
   }
 
@@ -29,9 +28,9 @@ class _infoBridgeState extends State<infoBridge> {
     final bridgeModel bridgeModelTemp = widget.bridgeModelTemp;
     final bridgeController bC = bridgeController();
     return _isDeleted
-        ? SizedBox.shrink()
+        ? const SizedBox.shrink()
         : Card(
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 190,
               child: Row(
@@ -47,18 +46,17 @@ class _infoBridgeState extends State<infoBridge> {
                         children: [
                           Text(
                             bridgeModelTemp.TenCayCau,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: 120,
                             width: MediaQuery.of(context).size.width * 1.25 / 3,
                             child: Image.network(
                               bridgeModelTemp.HinhAnhCau != ""
-                                  ? 'http://171.244.8.103:9003/' +
-                                      bridgeModelTemp.HinhAnhCau
+                                  ? 'http://171.244.8.103:9003/${bridgeModelTemp.HinhAnhCau}'
                                   : 'http://171.244.8.103:9003//placeholder.jpg',
                               height: 109.76,
                               width:
@@ -66,7 +64,7 @@ class _infoBridgeState extends State<infoBridge> {
                               fit: BoxFit.cover,
                             ),
                           ),
-                          Divider(),
+                          const Divider(),
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -75,7 +73,7 @@ class _infoBridgeState extends State<infoBridge> {
                                       builder: (context) => DetailAndUpdate(
                                           idBridge: bridgeModelTemp.BridgeId)));
                             },
-                            child: Text(
+                            child: const Text(
                               "CHI TIẾT / CẬP NHẬT",
                               style: TextStyle(
                                 fontSize: 11,
@@ -90,18 +88,17 @@ class _infoBridgeState extends State<infoBridge> {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Thông báo'),
-                                    content: Text('Bạn muốn xóa ' +
-                                        bridgeModelTemp.TenCayCau),
+                                    title: const Text('Thông báo'),
+                                    content: Text('Bạn muốn xóa ${bridgeModelTemp.TenCayCau}'),
                                     actions: [
                                       TextButton(
-                                        child: Text('Huỷ bỏ'),
+                                        child: const Text('Huỷ bỏ'),
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                         },
                                       ),
                                       TextButton(
-                                        child: Text('Xác nhận xóa'),
+                                        child: const Text('Xác nhận xóa'),
                                         onPressed: () {
                                           // Xử lý khi người dùng chọn xác nhận
                                           bC.deleteRecord(
@@ -118,7 +115,7 @@ class _infoBridgeState extends State<infoBridge> {
                               );
                               //
                             },
-                            child: Text(
+                            child: const Text(
                               "XÓA CÂY CẦU",
                               style: TextStyle(
                                 fontSize: 11,
@@ -136,7 +133,7 @@ class _infoBridgeState extends State<infoBridge> {
                     padding: const EdgeInsets.fromLTRB(3, 15, 2, 0),
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: 125,
                           child: SingleChildScrollView(
                             child: Column(
@@ -149,13 +146,13 @@ class _infoBridgeState extends State<infoBridge> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Địa điểm: ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -173,13 +170,13 @@ class _infoBridgeState extends State<infoBridge> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Lí trình: ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -197,13 +194,13 @@ class _infoBridgeState extends State<infoBridge> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Loại cầu: ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
@@ -221,7 +218,7 @@ class _infoBridgeState extends State<infoBridge> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Chiều dài(m): ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -234,7 +231,7 @@ class _infoBridgeState extends State<infoBridge> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
+                                        const Text(
                                           "Chiều rộng(m): ",
                                           style: TextStyle(
                                             fontWeight: FontWeight.bold,
@@ -255,7 +252,7 @@ class _infoBridgeState extends State<infoBridge> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 "",
                                 style: TextStyle(
                                   fontSize: 10,
@@ -264,7 +261,7 @@ class _infoBridgeState extends State<infoBridge> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Ngày khởi công: ",
                                     style: TextStyle(
                                       color: Color.fromARGB(255, 37, 152, 247),
@@ -277,7 +274,7 @@ class _infoBridgeState extends State<infoBridge> {
                               Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     "Ngày hoàn thành: ",
                                     style: TextStyle(
                                       color: Color.fromRGBO(134, 200, 141, 1),

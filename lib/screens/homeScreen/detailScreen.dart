@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
 import '../../services/models/bridgeModel.dart';
 import '../../services/controllers/bridgeController.dart';
 import '../../services/models/repairModel.dart';
-import '../../services/controllers/bridgeController.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -22,14 +19,15 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   late Future<List<bridgeModel>> _futureBridgeList;
-  late Future<List<RepairModel>> _futureRepairList;
+  //late Future<List<RepairModel>> _futureRepairList;
   @override
   void initState() {
     super.initState();
     _futureBridgeList = widget.bC.getApi();
-    _futureRepairList = widget.repairController.getApi();
+   // _futureRepairList = widget.repairController.getApi();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -49,14 +47,13 @@ class _DetailState extends State<Detail> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
+                        SizedBox(
                           height: 200,
                           width: MediaQuery.of(context).size.width,
                           child: Center(
                             child: Image.network(
                               bridgeList[i].HinhAnhCau != ""
-                                  ? 'http://171.244.8.103:9003/' +
-                                      bridgeList[i].HinhAnhCau
+                                  ? 'http://171.244.8.103:9003/${bridgeList[i].HinhAnhCau}'
                                   : 'http://171.244.8.103:9003//placeholder.jpg',
                               height: 180,
                               width:
@@ -66,7 +63,14 @@ class _DetailState extends State<Detail> {
                           ),
                         ),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 210,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.info,
@@ -77,28 +81,21 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 210,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: Color(0xFFadb5bd))),
+                              border: Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 5),
+                              child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Tên cây cầu'),
@@ -117,29 +114,36 @@ class _DetailState extends State<Detail> {
                                   ]),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuDai),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuRong),
                                   ]),
                             ),
                           ]),
                         ),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 210,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.location_on,
@@ -150,32 +154,25 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 210,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
                             margin:
-                                EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                                const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(7),
                                   bottomLeft: Radius.circular(7),
                                   bottomRight: Radius.circular(7),
                                 ),
-                                border: Border.all(color: Color(0xFFadb5bd))),
+                                border: Border.all(color: const Color(0xFFadb5bd))),
                             child: Column(
                               children: [
                                 Row(children: [
                                   Container(
                                     width: 80,
-                                    padding: EdgeInsets.all(10),
-                                    margin: EdgeInsets.only(left: 5),
-                                    child: Column(
+                                    padding: const EdgeInsets.all(10),
+                                    margin: const EdgeInsets.only(left: 5),
+                                    child: const Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
@@ -188,23 +185,23 @@ class _DetailState extends State<Detail> {
                                   ),
                                   Container(
                                     width: 270,
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(bridgeList[i].DiaDiem,
                                               softWrap: true),
-                                          SizedBox(height: 8),
+                                          const SizedBox(height: 8),
                                           Text(bridgeList[i].KinhDo.toString()),
-                                          SizedBox(height: 8),
+                                          const SizedBox(height: 8),
                                           Text(bridgeList[i].ViDo.toString()),
                                         ]),
                                   ),
                                 ]),
                                 Container(
                                   height: 200,
-                                  margin: EdgeInsets.all(5),
+                                  margin: const EdgeInsets.all(5),
                                   child: FlutterMap(
                                     options: MapOptions(
                                         center: LatLng(bridgeList[i].KinhDo,
@@ -220,7 +217,7 @@ class _DetailState extends State<Detail> {
                                         Marker(
                                           point: LatLng(bridgeList[i].KinhDo,
                                               bridgeList[i].ViDo),
-                                          builder: (ctx) => Icon(
+                                          builder: (ctx) => const Icon(
                                             Icons.location_on,
                                             color: Colors.blue,
                                             size: 50.0,
@@ -233,7 +230,14 @@ class _DetailState extends State<Detail> {
                               ],
                             )),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 210,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.construction,
@@ -244,28 +248,21 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 210,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: Color(0xFFadb5bd))),
+                              border: Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 5),
+                              child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Ngày khởi công'),
@@ -284,29 +281,36 @@ class _DetailState extends State<Detail> {
                                   ]),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(bridgeList[i].NgayKhoiCong),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].NgayHoanThanh),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuDai),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuRong),
                                   ]),
                             ),
                           ]),
                         ),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 210,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.build,
@@ -317,28 +321,21 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 210,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: Color(0xFFadb5bd))),
+                              border: Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 5),
+                              child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Số nhịp'),
@@ -357,29 +354,36 @@ class _DetailState extends State<Detail> {
                                   ]),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuDai),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuRong),
                                   ]),
                             ),
                           ]),
                         ),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 210,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.store,
@@ -390,28 +394,21 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 210,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: Color(0xFFadb5bd))),
+                              border: Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 5),
+                              child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Dầm chính'),
@@ -428,27 +425,34 @@ class _DetailState extends State<Detail> {
                                   ]),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuDai),
                                   ]),
                             ),
                           ]),
                         ),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 215,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.rule,
@@ -459,28 +463,21 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 215,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: Color(0xFFadb5bd))),
+                              border: Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 5),
+                              child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Chiều dài nhịp'),
@@ -497,27 +494,34 @@ class _DetailState extends State<Detail> {
                                   ]),
                             ),
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(bridgeList[i].TenCayCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LoaiCau),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].Cap),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].LyTrinh),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].TaiTrong),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Text(bridgeList[i].ChieuDai),
                                   ]),
                             ),
                           ]),
                         ),
                         Container(
-                          child: Center(
+                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          width: 245,
+                          height: 45,
+                          decoration: const BoxDecoration(
+                            color: Color(0Xfffb8500),
+                            // borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: const Center(
                               child: ListTile(
                             leading: Icon(
                               Icons.edit,
@@ -528,28 +532,21 @@ class _DetailState extends State<Detail> {
                               style: TextStyle(color: Colors.white),
                             ),
                           )),
-                          margin: EdgeInsets.only(top: 7, left: 7, right: 7),
-                          width: 245,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            color: Color(0Xfffb8500),
-                            // borderRadius: BorderRadius.circular(7),
-                          ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: Color(0xFFadb5bd))),
+                              border: Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
+                              padding: const EdgeInsets.all(10),
+                              margin: const EdgeInsets.only(left: 5),
+                              child: const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Ngày kiểm tra'),
@@ -564,15 +561,15 @@ class _DetailState extends State<Detail> {
                           ]),
                         ),
                         Container(
-                          margin: EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 10),
                           child: Center(
                               child: Container(
                                   width: 300,
                                   decoration: BoxDecoration(
                                       border: Border.all(
-                                          color: Color(0xff38b000), width: 1.5),
+                                          color: const Color(0xff38b000), width: 1.5),
                                       borderRadius: BorderRadius.circular(8)),
-                                  child: ListTile(
+                                  child: const ListTile(
                                     leading: Icon(
                                       Icons.add,
                                       color: Color(0xff38b000),
@@ -592,7 +589,7 @@ class _DetailState extends State<Detail> {
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             },
           ),
         ));

@@ -1,44 +1,44 @@
 class detailBridgeModel {
-  final int bridgeId;
-  final String tenCayCau;
-  final String loaiCau;
-  final String cap;
-  final String lyTrinh;
-  final String diaDiem;
-  final String taiTrong;
-  final double kinhDo;
-  final double viDo;
-  final String chieuDai;
-  final String chieuRong;
-  final String hinhAnhCau;
-  final String hinhAnhBinhDo;
-  final String hinhAnhMatCat;
-  final int soNhip;
-  final int soMo;
-  final int soTru;
-  final int soDamChinh;
-  final int soDamNgang;
-  final int soLanCan;
-  final int soDaiPhanCach;
-  final String damChinh;
-  final String damNgang;
-  final String banMatCau;
-  final String lanCan;
-  final String mo;
-  final String tru;
-  final String ngayKhoiCong;
-  final String ngayHoanThanh;
-  final String chuDauTu;
-  final String donViThietKe;
-  final String donViThiCong;
-  final String donViGiamSat;
-  final double chiPhiXayDung;
-  final double chieuDaiNhip;
-  final double beRongXeChay;
-  final double khoangCachDamChinh;
-  final double khoanCachDamNgang;
-  final double chieuCaoBanMatCau;
-  final double beRongLanCan;
+   int? bridgeId;
+   String? tenCayCau;
+   String? loaiCau;
+   String? cap;
+   String? lyTrinh;
+   String? diaDiem;
+   String? taiTrong;
+   double? kinhDo;
+   double? viDo;
+   String? chieuDai;
+   String? chieuRong;
+   String? hinhAnhCau;
+   String? hinhAnhBinhDo;
+   String? hinhAnhMatCat;
+   int? soNhip;
+   int? soMo;
+   int? soTru;
+   int? soDamChinh;
+   int? soDamNgang;
+   int? soLanCan;
+   int? soDaiPhanCach;
+   String? damChinh;
+   String? damNgang;
+   String? banMatCau;
+   String? lanCan;
+   String? mo;
+   String? tru;
+   String? ngayKhoiCong;
+   String? ngayHoanThanh;
+   String? chuDauTu;
+   String? donViThietKe;
+   String? donViThiCong;
+   String? donViGiamSat;
+   int? chiPhiXayDung;
+   double? chieuDaiNhip;
+   double? beRongXeChay;
+   double? khoangCachDamChinh;
+   double? khoanCachDamNgang;
+   double? chieuCaoBanMatCau;
+   double? beRongLanCan;
   detailBridgeModel({
     required this.bridgeId,
     required this.tenCayCau,
@@ -116,7 +116,7 @@ class detailBridgeModel {
       donViThietKe: json['DonViThietKe'],
       donViThiCong: json['DonViThiCong'],
       donViGiamSat: json['DonViGiamSat'],
-      chiPhiXayDung: json['ChiPhiXayDung'] != null ? double.tryParse(json['ChiPhiXayDung'].toString()) ?? 0 : 0,
+      chiPhiXayDung: json['ChiPhiXayDung'] != null ? int.tryParse(json['ChiPhiXayDung'].toString()) ?? 0 : 0,
       chieuDaiNhip: json['ChieuDaiNhip'] != null ? double.tryParse(json['ChieuDaiNhip'].toString()) ?? 0 : 0,
       beRongXeChay: json['BeRongXeChay'] != null ? double.tryParse(json['BeRongXeChay'].toString()) ?? 0 : 0,
       khoangCachDamChinh: json['KhoangCachDamChinh'] != null ? double.tryParse(json['KhoangCachDamChinh'].toString()) ?? 0 : 0,

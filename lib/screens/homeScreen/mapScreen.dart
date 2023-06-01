@@ -25,14 +25,14 @@ class _MyMapState extends State<flutter_map_load> {
   }
 
   Future<void> setJson() async {
-    jsonController j_c = new jsonController();
-    j_c.writeFileJson();
+    jsonController jC = jsonController();
+    jC.writeFileJson();
   }
 
   Future<void> fetchData() async {
-    bridgeController b_c = new bridgeController();
-    List<bridgeModel> list_bridge_model = await b_c.getApi();
-    list_bridge_model.forEach((bridge) {
+    bridgeController bC = bridgeController();
+    List<bridgeModel> listBridgeModel = await bC.getApi();
+    for (var bridge in listBridgeModel) {
       markers.add(
         Marker(
           width: 80.0,
@@ -54,21 +54,20 @@ class _MyMapState extends State<flutter_map_load> {
                     return Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 15, bottom: 7),
+                          margin: const EdgeInsets.only(top: 15, bottom: 7),
                           child: Text(
                             bridge.TenCayCau.toUpperCase(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.bold),
                           ),
                         ),
                         Container(
                           margin:
-                              EdgeInsets.only(right: 10, left: 10, bottom: 7),
+                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
                           height: 180,
                           child: Image.network(
                             bridge.HinhAnhCau != ""
-                                ? 'http://171.244.8.103:9003/' +
-                                    bridge.HinhAnhCau
+                                ? 'http://171.244.8.103:9003/${bridge.HinhAnhCau}'
                                 : 'http://171.244.8.103:9003//placeholder.jpg',
                             width: MediaQuery.of(context).size.width,
                             height: 180,
@@ -77,20 +76,20 @@ class _MyMapState extends State<flutter_map_load> {
                         ),
                         Container(
                           margin:
-                              EdgeInsets.only(right: 10, left: 10, bottom: 7),
+                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width:
                                     MediaQuery.of(context).size.width * 0.7 / 4,
-                                child: Text(
+                                child: const Text(
                                   'Địa điểm:',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                              Container(
+                              SizedBox(
                                 width:
                                     MediaQuery.of(context).size.width * 3 / 4,
                                 child: Text(bridge.DiaDiem),
@@ -100,10 +99,10 @@ class _MyMapState extends State<flutter_map_load> {
                         ),
                         Container(
                           margin:
-                              EdgeInsets.only(right: 10, left: 10, bottom: 7),
+                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
                           child: Row(
                             children: [
-                              Text(
+                              const Text(
                                 'Chiều dài: ',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -115,10 +114,10 @@ class _MyMapState extends State<flutter_map_load> {
                         ),
                         Container(
                           margin:
-                              EdgeInsets.only(right: 10, left: 10, bottom: 7),
+                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
                           child: Row(
                             children: [
-                              Text(
+                              const Text(
                                 'Chiều rộng: ',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
@@ -130,14 +129,14 @@ class _MyMapState extends State<flutter_map_load> {
                         ),
                         Container(
                             width: 400,
-                            margin: EdgeInsets.all(7),
+                            margin: const EdgeInsets.all(7),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
                                   height: 35,
                                   width: 180,
-                                  padding: EdgeInsets.only(left: 30, right: 10),
+                                  padding: const EdgeInsets.only(left: 30, right: 10),
                                   child: TextButton.icon(
                                     onPressed: () {
                                       Navigator.push(
@@ -148,8 +147,8 @@ class _MyMapState extends State<flutter_map_load> {
                                                 )),
                                       );
                                     },
-                                    icon: Icon(Icons.info),
-                                    label: Text('Chi tiết'),
+                                    icon: const Icon(Icons.info),
+                                    label: const Text('Chi tiết'),
                                     style: TextButton.styleFrom(
                                         foregroundColor: Colors.white,
                                         elevation: 2,
@@ -159,23 +158,23 @@ class _MyMapState extends State<flutter_map_load> {
                                 Container(
                                   height: 35,
                                   width: 180,
-                                  padding: EdgeInsets.only(left: 10, right: 30),
+                                  padding: const EdgeInsets.only(left: 10, right: 30),
                                   child: OutlinedButton.icon(
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.close,
                                       color: Color(0xffe5383b),
                                     ),
                                     onPressed: () => {
                                       Navigator.of(context).pop("Done"),
                                     },
-                                    label: Text(
+                                    label: const Text(
                                       'Đóng',
                                       style:
                                           TextStyle(color: Color(0xffe5383b)),
                                     ),
                                     style: OutlinedButton.styleFrom(
                                       side:
-                                          BorderSide(color: Color(0xffe5383b)),
+                                          const BorderSide(color: Color(0xffe5383b)),
                                     ),
                                   ),
                                 ),
@@ -190,7 +189,7 @@ class _MyMapState extends State<flutter_map_load> {
           ),
         ),
       );
-    });
+    }
     setState(() {});
   }
 

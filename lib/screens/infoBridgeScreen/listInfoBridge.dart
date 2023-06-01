@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeCard.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
 import '../../services/controllers/bridgeController.dart';
 import '../../services/models/bridgeModel.dart';
 
 class listInfoBridge extends StatefulWidget {
   final bridgeController bC = bridgeController();
+
+  listInfoBridge({super.key});
 
   @override
   _MyWidgetState createState() => _MyWidgetState();
@@ -39,16 +39,16 @@ class _MyWidgetState extends State<listInfoBridge> {
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 3 / 4,
-                  margin: EdgeInsets.all(13),
+                  margin: const EdgeInsets.all(13),
                   child: TextField(
                     decoration: InputDecoration(
                       labelText: 'Tìm kiếm',
                       hintText: 'Nhập...',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(),
+                        borderSide: const BorderSide(),
                       ),
-                      suffixIcon: Icon(Icons.search),
+                      suffixIcon: const Icon(Icons.search),
                     ),
                   ),
                 ),
@@ -58,15 +58,15 @@ class _MyWidgetState extends State<listInfoBridge> {
                       context: context,
                       builder: (BuildContext context) {
                         return SimpleDialog(
-                          title: Text('Lọc danh sách'),
+                          title: const Text('Lọc danh sách'),
                           children: [
-                            Divider(
+                            const Divider(
                               thickness: 1.0,
                               color: Colors.grey,
                             ),
-                            Text('Loại cầu'),
+                            const Text('Loại cầu'),
                             Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 children: [
                                   Row(
@@ -79,7 +79,7 @@ class _MyWidgetState extends State<listInfoBridge> {
                                           });
                                         },
                                       ),
-                                      Text('Chưa xác định'),
+                                      const Text('Chưa xác định'),
                                     ],
                                   ),
                                   Row(
@@ -92,24 +92,24 @@ class _MyWidgetState extends State<listInfoBridge> {
                                           });
                                         },
                                       ),
-                                      Text('Bê tông cốt thép dự ứng lực'),
+                                      const Text('Bê tông cốt thép dự ứng lực'),
                                     ],
                                   ),
                                 ],
                               ),
                             ),
-                            Text('Thời gian khởi công'),
-                            Padding(
+                            const Text('Thời gian khởi công'),
+                            const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Column(children: []),
                             ),
-                            Text('Thời gian hoàn thành'),
-                            Padding(
+                            const Text('Thời gian hoàn thành'),
+                            const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Column(children: []),
                             ),
-                            Text('Thời gian xây dựng'),
-                            Padding(
+                            const Text('Thời gian xây dựng'),
+                            const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Column(children: []),
                             ),
@@ -117,14 +117,14 @@ class _MyWidgetState extends State<listInfoBridge> {
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Lọc'),
+                              child: const Text('Lọc'),
                             )
                           ],
                         );
                       },
                     ),
                   },
-                  icon: Icon(Icons.tornado_rounded),
+                  icon: const Icon(Icons.tornado_rounded),
                 ),
               ],
             ),
@@ -148,7 +148,7 @@ class _MyWidgetState extends State<listInfoBridge> {
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 },

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/screens/homeScreen/detailScreen.dart';
-import 'package:flutter_map/flutter_map.dart';
-import 'package:latlong2/latlong.dart';
 import '../../services/models/bridgeModel.dart';
 import '../../services/controllers/bridgeController.dart';
 
 class list_info_bridge extends StatefulWidget {
   final bridgeController bC = bridgeController();
+
+  list_info_bridge({super.key});
 
   @override
   _MyWidgetState createState() => _MyWidgetState();
@@ -23,30 +23,30 @@ class _MyWidgetState extends State<list_info_bridge> {
 
   @override
   Widget build(BuildContext context) {
-    double _containerHeight = 0.0;
+    double containerHeight = 0.0;
     return Scaffold(
         appBar: AppBar(
-          title: Text('Danh sách cầu'),
+          title: const Text('Danh sách cầu'),
         ),
         body: Column(
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.5 / 10,
-              margin: EdgeInsets.all(13),
+              margin: const EdgeInsets.all(13),
               child: TextField(
                 decoration: InputDecoration(
                   labelText: 'Tìm kiếm',
                   hintText: 'Nhập...',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    borderSide: BorderSide(),
+                    borderSide: const BorderSide(),
                   ),
-                  suffixIcon: Icon(Icons.search),
+                  suffixIcon: const Icon(Icons.search),
                 ),
               ),
             ),
             Container(
-              margin: EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
               height: MediaQuery.of(context).size.height * 8 / 10,
               child: FutureBuilder<List<bridgeModel>>(
                 future: _futureBridgeList,
@@ -74,7 +74,7 @@ class _MyWidgetState extends State<list_info_bridge> {
                               child: Row(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.fromLTRB(7, 0, 0, 0),
+                                    padding: const EdgeInsets.fromLTRB(7, 0, 0, 0),
                                     height: MediaQuery.of(context).size.width *
                                         1 /
                                         4,
@@ -83,8 +83,7 @@ class _MyWidgetState extends State<list_info_bridge> {
                                         4,
                                     child: Image.network(
                                       bridgeList[index].HinhAnhCau != ""
-                                          ? 'http://171.244.8.103:9003/' +
-                                              bridgeList[index].HinhAnhCau
+                                          ? 'http://171.244.8.103:9003/${bridgeList[index].HinhAnhCau}'
                                           : 'http://171.244.8.103:9003//placeholder.jpg',
                                       height:
                                           MediaQuery.of(context).size.width *
@@ -100,20 +99,20 @@ class _MyWidgetState extends State<list_info_bridge> {
                                     width: MediaQuery.of(context).size.width *
                                         2.75 /
                                         4,
-                                    padding: EdgeInsets.all(10),
+                                    padding: const EdgeInsets.all(10),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                           bridgeList[index].TenCayCau,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           bridgeList[index].DiaDiem,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             fontSize: 17,
                                             color: Colors.grey,
                                           ),
@@ -129,7 +128,7 @@ class _MyWidgetState extends State<list_info_bridge> {
                   } else if (snapshot.hasError) {
                     return Text("${snapshot.error}");
                   }
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 },
               ),
             ),
