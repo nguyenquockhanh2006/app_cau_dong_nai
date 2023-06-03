@@ -34,7 +34,7 @@ class menu extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const infoBridgeScreen()),
+                MaterialPageRoute(builder: (context) =>  infoBridgeScreen()),
               );
             },
           ),

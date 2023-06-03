@@ -1,44 +1,44 @@
 class detailBridgeModel {
-   int? bridgeId;
-   String? tenCayCau;
-   String? loaiCau;
-   String? cap;
-   String? lyTrinh;
-   String? diaDiem;
-   String? taiTrong;
-   double? kinhDo;
-   double? viDo;
-   String? chieuDai;
-   String? chieuRong;
-   String? hinhAnhCau;
-   String? hinhAnhBinhDo;
-   String? hinhAnhMatCat;
-   int? soNhip;
-   int? soMo;
-   int? soTru;
-   int? soDamChinh;
-   int? soDamNgang;
-   int? soLanCan;
-   int? soDaiPhanCach;
-   String? damChinh;
-   String? damNgang;
-   String? banMatCau;
-   String? lanCan;
-   String? mo;
-   String? tru;
-   String? ngayKhoiCong;
-   String? ngayHoanThanh;
-   String? chuDauTu;
-   String? donViThietKe;
-   String? donViThiCong;
-   String? donViGiamSat;
-   int? chiPhiXayDung;
-   double? chieuDaiNhip;
-   double? beRongXeChay;
-   double? khoangCachDamChinh;
-   double? khoanCachDamNgang;
-   double? chieuCaoBanMatCau;
-   double? beRongLanCan;
+  int? bridgeId;
+  String? tenCayCau;
+  String? loaiCau;
+  String? cap;
+  String? lyTrinh;
+  String? diaDiem;
+  String? taiTrong;
+  double? kinhDo;
+  double? viDo;
+  String? chieuDai;
+  String? chieuRong;
+  String? hinhAnhCau;
+  String? hinhAnhBinhDo;
+  String? hinhAnhMatCat;
+  int? soNhip;
+  int? soMo;
+  int? soTru;
+  int? soDamChinh;
+  int? soDamNgang;
+  int? soLanCan;
+  int? soDaiPhanCach;
+  String? damChinh;
+  String? damNgang;
+  String? banMatCau;
+  String? lanCan;
+  String? mo;
+  String? tru;
+  String? ngayKhoiCong;
+  String? ngayHoanThanh;
+  String? chuDauTu;
+  String? donViThietKe;
+  String? donViThiCong;
+  String? donViGiamSat;
+  int? chiPhiXayDung;
+  double? chieuDaiNhip;
+  double? beRongXeChay;
+  double? khoangCachDamChinh;
+  double? khoanCachDamNgang;
+  double? chieuCaoBanMatCau;
+  double? beRongLanCan;
   detailBridgeModel({
     required this.bridgeId,
     required this.tenCayCau,
@@ -84,45 +84,94 @@ class detailBridgeModel {
   factory detailBridgeModel.fromJson(Map<String, dynamic> json) {
     return detailBridgeModel(
       bridgeId: json['BridgeId'],
-      tenCayCau: json['TenCayCau'],
-      loaiCau: json['LoaiCau'],
-      cap: json['Cap'],
-      lyTrinh: json['LyTrinh'],
-      diaDiem: json['DiaDiem'],
-      taiTrong: json['TaiTrong'],
-      kinhDo: json['KinhDo'],
-      viDo: json['ViDo'],
-      chieuDai: json['ChieuDai'],
-      chieuRong: json['ChieuRong'],
-      hinhAnhCau: json['HinhAnhCau'],
-      hinhAnhBinhDo: json['HinhAnhBinhDo'],
-      hinhAnhMatCat: json['HinhAnhMatCat'],
-      soNhip: json['SoNhip'],
-      soMo: json['SoMo'],
-      soTru: json['SoTru'],
-      soDamChinh: json['SoDamChinh'],
-      soDamNgang: json['SoDamNgang'],
-      soLanCan: json['SoLanCan'],
-      soDaiPhanCach: json['SoDaiPhanCach'],
-      damChinh: json['DamChinh'],
-      damNgang: json['DamNgang'],
-      banMatCau: json['BanMatCau'],
-      lanCan: json['LanCan'],
-      mo: json['Mo'],
-      tru: json['Tru'],
-      ngayKhoiCong: json['NgayKhoiCong'],
-      ngayHoanThanh: json['NgayHoanThanh'],
-      chuDauTu: json['ChuDauTu'],
-      donViThietKe: json['DonViThietKe'],
-      donViThiCong: json['DonViThiCong'],
-      donViGiamSat: json['DonViGiamSat'],
-      chiPhiXayDung: json['ChiPhiXayDung'] != null ? int.tryParse(json['ChiPhiXayDung'].toString()) ?? 0 : 0,
-      chieuDaiNhip: json['ChieuDaiNhip'] != null ? double.tryParse(json['ChieuDaiNhip'].toString()) ?? 0 : 0,
-      beRongXeChay: json['BeRongXeChay'] != null ? double.tryParse(json['BeRongXeChay'].toString()) ?? 0 : 0,
-      khoangCachDamChinh: json['KhoangCachDamChinh'] != null ? double.tryParse(json['KhoangCachDamChinh'].toString()) ?? 0 : 0,
-      khoanCachDamNgang: json['KhoanCachDamNgang'] != null ? double.tryParse(json['KhoanCachDamNgang'].toString()) ?? 0 : 0,
-      chieuCaoBanMatCau: json['ChieuCaoBanMatCau'] != null ? double.tryParse(json['ChieuCaoBanMatCau'].toString()) ?? 0 : 0,
-      beRongLanCan: json['BeRongLanCan'] != null ? double.tryParse(json['BeRongLanCan'].toString()) ?? 0 : 0,
+      tenCayCau:
+          json['TenCayCau'] != null ? json['TenCayCau'].toString() : 'null',
+      loaiCau: json['LoaiCau'] != null ? json['LoaiCau'].toString() : 'null',
+      cap: json['Cap'] != null ? json['Cap'].toString() : 'null',
+      lyTrinh: json['LyTrinh'] != '' ? json['LyTrinh'].toString() : 'null',
+      diaDiem: json['DiaDiem'] != '' ? json['DiaDiem'].toString() : 'null',
+      taiTrong: json['TaiTrong'] != '' ? json['TaiTrong'].toString() : 'null',
+      kinhDo: json['KinhDo'] != null
+          ? double.parse(json['KinhDo'].toString())
+          : 0.0,
+      viDo: json['ViDo'] != null ? double.parse(json['ViDo'].toString()) : 0.0,
+      chieuDai: json['ChieuDai'] != null ? json['ChieuDai'].toString() : 'null',
+      chieuRong:
+          json['ChieuRong'] != null ? json['ChieuRong'].toString() : 'null',
+      hinhAnhCau:
+          json['HinhAnhCau'] != null ? json['HinhAnhCau'].toString() : 'null',
+      hinhAnhBinhDo: json['HinhAnhBinhDo'] != null
+          ? json['HinhAnhBinhDo'].toString()
+          : 'null',
+      hinhAnhMatCat: json['HinhAnhMatCat'] != null
+          ? json['HinhAnhMatCat'].toString()
+          : 'null',
+      soNhip: json['SoNhip'] != null ? int.parse(json['SoNhip'].toString()) : 0,
+      soMo: json['SoMo'] != null ? int.parse(json['SoMo'].toString()) : 0,
+      soTru: json['SoTru'] != null ? int.parse(json['SoTru'].toString()) : 0,
+      soDamChinh: json['SoDamChinh'] != null
+          ? int.parse(json['SoDamChinh'].toString())
+          : 0,
+      soDamNgang: json['SoDamNgang'] != null
+          ? int.parse(json['SoDamNgang'].toString())
+          : 0,
+      soLanCan:
+          json['SoLanCan'] != null ? int.parse(json['SoLanCan'].toString()) : 0,
+      soDaiPhanCach: json['SoDaiPhanCach'] != null
+          ? int.parse(json['SoDaiPhanCach'].toString())
+          : 0,
+      damChinh: json['DamChinh'] != null ? json['DamChinh'].toString() : 'null',
+      damNgang: json['DamNgang'] != null ? json['DamNgang'].toString() : 'null',
+      banMatCau:
+          json['BanMatCau'] != null ? json['BanMatCau'].toString() : 'null',
+      lanCan: json['LanCan'] != null ? json['LanCan'].toString() : 'null',
+      mo: json['Mo'] != null ? json['Mo'].toString() : 'null',
+      tru: json['Tru'] != null ? json['Tru'].toString() : 'null',
+
+      ngayKhoiCong: json['NgayKhoiCong'] != null
+          ? json['NgayKhoiCong'].toString()
+          : 'null',
+      ngayHoanThanh: json['NgayHoanThanh'] != null
+          ? json['NgayHoanThanh'].toString()
+          : 'null',
+      //
+      chuDauTu: json['ChuDauTu'] != null ? json['ChuDauTu'].toString() : 'null',
+
+      donViThietKe: json['DonViThietKe'] != null
+          ? json['DonViThietKe'].toString()
+          : 'null',
+
+      donViThiCong: json['DonViThiCong'] != null
+          ? json['DonViThiCong'].toString()
+          : 'null',
+
+      donViGiamSat: json['DonViGiamSat'] != null
+          ? json['DonViGiamSat'].toString()
+          : 'null',
+      //
+      chiPhiXayDung: json['ChiPhiXayDung'] != null
+          ? int.tryParse(json['ChiPhiXayDung'].toString())
+          : 0,
+      chieuDaiNhip: json['ChieuDaiNhip'] != null
+          ? double.tryParse(json['ChieuDaiNhip'].toString())
+          : 0.0,
+      beRongXeChay: json['BeRongXeChay'] != null
+          ? double.tryParse(json['BeRongXeChay'].toString())
+          : 0.0,
+      khoangCachDamChinh: json['KhoangCachDamChinh'] != null
+          ? double.tryParse(json['KhoangCachDamChinh'].toString())
+          : 0.0,
+      khoanCachDamNgang: json['KhoanCachDamNgang'] != null
+          ? double.tryParse(json['KhoanCachDamNgang'].toString())
+          : 0.0,
+      chieuCaoBanMatCau: json['ChieuCaoBanMatCau'] != null
+          ? double.tryParse(json['ChieuCaoBanMatCau'].toString())
+          : 0.0,
+      beRongLanCan: json['BeRongLanCan'] != null
+          ? double.tryParse(json['BeRongLanCan'].toString())
+          : 0.0,
     );
   }
+
+  get vlDamChinh => null;
 }

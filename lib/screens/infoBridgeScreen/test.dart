@@ -45,3 +45,43 @@ class _MyHomePageState extends State<test> {
     );
   }
 }
+//
+// showDialog(
+//                             context: context,
+//                             builder: (BuildContext context) {
+//                               return AlertDialog(
+//                                 title: const Text('Thông báo'),
+//                                 content: Text(
+//                                     'cập nhật ${_controllerTenCayCau.text} thành công', style: TextStyle(color: Colors.green,), ),
+//                                 actions: [
+//                                   TextButton(
+//                                     child: const Text('Đóng'),
+//                                     onPressed: () {
+//                                       Navigator.of(context).pop();
+//                                     },
+//                                   ),
+                                  
+//                                 ],
+//                               );
+//                             },
+//                           );
+// @override
+// Widget build(BuildContext context) {
+//   return Scaffold(
+//     appBar: AppBar(),
+//     body: WillPopScope(
+//       child: Center(
+//         child: RaisedButton(
+//           child: Text('Go back'),
+//           onPressed: () {
+//             Navigator.pop(context); // hoặc xử lý hành động tại đây
+//           },
+//         ),
+//       ),
+//       onWillPop: () async {
+//         // xử lý hành động khi ấn nút back
+//         return true;
+//       },
+//     ),
+//   );
+// }

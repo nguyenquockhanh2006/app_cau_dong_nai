@@ -3,9 +3,14 @@ import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/addBridgeScreen.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/listInfoBridge.dart';
 
-class infoBridgeScreen extends StatelessWidget {
+class infoBridgeScreen extends StatefulWidget {
   const infoBridgeScreen({super.key});
 
+  @override
+  State<infoBridgeScreen> createState() => _infoBridgeScreen();
+}
+
+class _infoBridgeScreen extends State<infoBridgeScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

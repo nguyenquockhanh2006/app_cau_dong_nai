@@ -225,6 +225,12 @@ class _addBridgeState extends State<addBridgeScreen> {
         beRongLanCan);
     if (result == 200) {
       print('thành công');
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => infoBridgeScreen()),
+        );
+      });
     } else {
       print('thất bại');
     }
@@ -243,16 +249,44 @@ class _addBridgeState extends State<addBridgeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextButton(
               onPressed: () {
-                addBridge();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const infoBridgeScreen()),
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('Thông báo'),
+                      content: Text(
+                          'Bạn cập nhật lại thông tin của   ${_controllerTenCayCau.text}'),
+                      actions: [
+                        TextButton(
+                          child: const Text('Huỷ bỏ'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Xác nhận cập nhật'),
+                          onPressed: () {
+                            // Xử lý khi người dùng chọn xác nhận
+                            addBridge();
+                            if (result == 200) {
+                              print('thành công!');
+
+                              Navigator.of(context).pop();
+                            } else {
+                              print('thất bại!');
+                              Navigator.of(context).pop();
+                            }
+                          },
+                        ),
+                      ],
+                    );
+                  },
                 );
               },
               style: TextButton.styleFrom(
                 backgroundColor: const Color(0xff7cb518),
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -279,8 +313,6 @@ class _addBridgeState extends State<addBridgeScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: TextButton(
               onPressed: () {
-                //
-                //
                 //
                 _controllerTenCayCau.text = "";
                 _controllerLoaiCau.text = "";
@@ -315,12 +347,11 @@ class _addBridgeState extends State<addBridgeScreen> {
                 _controllerChieuCaoBanMatCau.text = "";
                 _controllerBeRongLanCan.text = "";
                 //
-                //
-                //
               },
               style: TextButton.styleFrom(
                 backgroundColor: Colors.blue,
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
@@ -881,7 +912,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                               }
                             },
                             center: LatLng(10.952772, 106.807671),
-                            zoom: 7),
+                            zoom: 14),
                         layers: [
                           TileLayerOptions(
                             urlTemplate:
@@ -990,8 +1021,8 @@ class _addBridgeState extends State<addBridgeScreen> {
                               // độ lớn của nút
                               backgroundColor: Colors.white, // màu nền của nút
                             ),
-                            child:
-                                const Icon(Icons.calendar_today, color: Colors.black),
+                            child: const Icon(Icons.calendar_today,
+                                color: Colors.black),
                           ),
                         ],
                       ),
@@ -1053,8 +1084,8 @@ class _addBridgeState extends State<addBridgeScreen> {
                               // độ lớn của nút
                               backgroundColor: Colors.white, // màu nền của nút
                             ),
-                            child:
-                                const Icon(Icons.calendar_today, color: Colors.black),
+                            child: const Icon(Icons.calendar_today,
+                                color: Colors.black),
                           ),
                         ],
                       ),
@@ -1684,8 +1715,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     setState(() {
                                       vlBanMatCau = newValue;
                                     });
-                                    print(
-                                        'Vật liệu bán mặt cầu: $vlBanMatCau');
+                                    print('Vật liệu bán mặt cầu: $vlBanMatCau');
                                   },
                                   decoration: InputDecoration(
                                     contentPadding: const EdgeInsets.only(
@@ -1945,7 +1975,8 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     khoangCachDamChinh = double.parse(newValue);
                                   }
                                 });
-                                print('Khoảng cách dầm chính: $khoangCachDamChinh');
+                                print(
+                                    'Khoảng cách dầm chính: $khoangCachDamChinh');
                               },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.only(
@@ -1987,7 +2018,8 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     khoangCachDamNgang = double.parse(newValue);
                                   }
                                 });
-                                print('Khoảng cách dầm ngang: $khoangCachDamNgang');
+                                print(
+                                    'Khoảng cách dầm ngang: $khoangCachDamNgang');
                               },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.only(
@@ -2029,7 +2061,8 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     chieuCaoBanMatCau = double.parse(newValue);
                                   }
                                 });
-                                print('Chiều cao bán mặt cầu: $chieuCaoBanMatCau');
+                                print(
+                                    'Chiều cao bán mặt cầu: $chieuCaoBanMatCau');
                               },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.only(

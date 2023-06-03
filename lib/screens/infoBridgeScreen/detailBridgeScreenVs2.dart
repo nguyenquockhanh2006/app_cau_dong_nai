@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
 import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
 import 'package:flutter_application_4/services/controllers/imageController.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
@@ -29,101 +31,69 @@ class DetailAndUpdate extends StatefulWidget {
 class _DetailState extends State<DetailAndUpdate> {
   imageController iC = imageController();
   final MapController mapController = MapController();
-  late Future<List<detailBridgeModel>> _futureBridgeList;
-  //late Future<List<RepairModel>> _futureRepairList;
-//
-  String anhCayCau = "";
-  String anhMatCat = "";
-  String anhBinhDo = "";
+  late Future<detailBridgeModel> _futureBridgeList;
+  // biến kết quả thêm trả về của hàm putApi
+  int? result;
+  // late Future<List<RepairModel>> _futureRepairList;
+  DateTime NKhoiCong = DateTime.now();
+  DateTime NHoanThanh = DateTime.now();
+  String? anhCayCau = "";
+  String? anhMatCat = "";
+  String? anhBinhDo = "";
   // thông tin chung
-  String tenCayCau = "Cau Text";
   final TextEditingController _controllerTenCayCau = TextEditingController();
-  String loaiCau = "";
   final TextEditingController _controllerLoaiCau = TextEditingController();
-  String cap = "";
   final TextEditingController _controllerCap = TextEditingController();
-  String lyTrinh = "";
   final TextEditingController _controllerLyTrinh = TextEditingController();
-  String taiTrong = "";
   final TextEditingController _controllerTaiTrong = TextEditingController();
-  String chieuDai = "";
   final TextEditingController _controllerChieuDai = TextEditingController();
-  String chieuRong = "";
   final TextEditingController _controllerChieuRong = TextEditingController();
-  String diaDiem = "";
   final TextEditingController _controllerDiaDiem = TextEditingController();
-  double kinhDo = 10.96701421956938;
-  final TextEditingController _controllerKinhDo =
-      TextEditingController(); // --> controllerlat
-  double viDo = 10.96701421956938;
-  final TextEditingController _controllerViDo =
-      TextEditingController(); //--> controllerlng
+  final TextEditingController _controllerKinhDo = TextEditingController();
+  final TextEditingController _controllerViDo = TextEditingController();
   // thông tin thi công
-  String ngayKhoiCong = "0001-01-01";
-  //final TextEditingController _controllerNgayKhoiCong = TextEditingController(); --> controllerNgayKhoiCong
-  String ngayHoanThanh = "0001-01-01";
-  //final TextEditingController _controllerNgayHoanThanh = TextEditingController(); --> controllerNgayHoanThanh
-  // ignore: avoid_init_to_null
+  final TextEditingController _controllerNgayKhoiCong = TextEditingController();
+  final TextEditingController _controllerNgayHoanThanh =
+      TextEditingController();
+  String ngayKhoiCong = '';
+  String ngayHoanThanh = '';
   int? chiPhiXayDung = null;
   final TextEditingController _controllerChiPhiXayDung =
       TextEditingController();
-  String chuDauTu = "";
   final TextEditingController _controllerChuDauTu = TextEditingController();
-  String donViThietKe = "";
   final TextEditingController _controllerDonViThietKe = TextEditingController();
-  String donViThiCong = "";
   final TextEditingController _controllerDonViThiCong = TextEditingController();
-  String donViGiamSat = "";
   final TextEditingController _controllerDonViGiamSat = TextEditingController();
   // cấu tạo cầu
-  int soNhip = 0;
   final TextEditingController _controllerSoNhip = TextEditingController();
-  int soMo = 0;
   final TextEditingController _controllerSoMo = TextEditingController();
-  int soTru = 0;
   final TextEditingController _controllerSoTru = TextEditingController();
-  int soDamNgang = 0;
   final TextEditingController _controllerSoDamNgang = TextEditingController();
-  int soDamChinh = 0;
   final TextEditingController _controllerSoDamChinh = TextEditingController();
-  int soLanCan = 0;
   final TextEditingController _controllerSoLanCan = TextEditingController();
-  int soDaiPhanCach = 0;
   final TextEditingController _controllerSoDaiPhanCach =
       TextEditingController();
   // vật liệu cầu
-  String vlDamChinh = "";
   final TextEditingController _controllerVlDamChinh = TextEditingController();
-  String vlDamNgang = "";
   final TextEditingController _controllerVlDamNgang = TextEditingController();
-  String vlBanMatCau = "";
   final TextEditingController _controllerVlBanMatCau = TextEditingController();
-  String vlLanCan = "";
   final TextEditingController _controllerVlLanCan = TextEditingController();
-  String vlMo = "";
   final TextEditingController _controllerVlMo = TextEditingController();
-  String vlTru = "";
   final TextEditingController _controllerVlTru = TextEditingController();
   // kích thước cầu
-  double chieuDaiNhip = 0.0;
   final TextEditingController _controllerChieuDaiNhip = TextEditingController();
-  double beRongXeChay = 0.0;
   final TextEditingController _controllerBeRongXeChay = TextEditingController();
-  double khoangCachDamChinh = 0.0;
   final TextEditingController _controllerKhoangCachDamChinh =
       TextEditingController();
-  double khoangCachDamNgang = 0.0;
   final TextEditingController _controllerKhoangCachDamNgang =
       TextEditingController();
-  double chieuCaoBanMatCau = 0.0;
   final TextEditingController _controllerChieuCaoBanMatCau =
       TextEditingController();
-  double beRongLanCan = 0.0;
   final TextEditingController _controllerBeRongLanCan = TextEditingController();
   // ảnh ban đầu của cầu
-  String? _hinhAnhCauSrc = 'https://i.imgur.com/bkB4dqc.png';
-  String? _hinhAnhMatCatSrc = 'https://i.imgur.com/bkB4dqc.png';
-  String? _hinhAnhBinhDoSrc = 'https://i.imgur.com/bkB4dqc.png';
+  String? _hinhAnhCauSrc;
+  String? _hinhAnhMatCatSrc;
+  String? _hinhAnhBinhDoSrc;
   // - > File
   File? _imageFile;
   File? _imageFileMatCat;
@@ -138,9 +108,10 @@ class _DetailState extends State<DetailAndUpdate> {
       setState(() {
         _imageFile = File(pickedFile.path);
         _hinhAnhCauSrc = srcTemp;
-        print('Hình ảnh cầu SRC: ' + _hinhAnhCauSrc.toString());
+
         // kiểm tra kết quả trả về
         anhCayCau = _hinhAnhCauSrc.toString();
+        print('Hình ảnh cầu SRC: ' + anhCayCau.toString());
       });
     }
   }
@@ -154,9 +125,10 @@ class _DetailState extends State<DetailAndUpdate> {
       setState(() {
         _imageFileMatCat = File(pickedFile.path);
         _hinhAnhMatCatSrc = srcTemp;
-        print('Hình ảnh mặt cắt SRC: ' + _hinhAnhMatCatSrc.toString());
+
         // kiểm tra kết quả trả về
         anhMatCat = _hinhAnhMatCatSrc.toString();
+        print('Hình ảnh mặt cắt SRC: ' + anhMatCat.toString());
       });
     }
   }
@@ -170,15 +142,109 @@ class _DetailState extends State<DetailAndUpdate> {
       setState(() {
         _imageFileBinhDo = File(pickedFile.path);
         _hinhAnhBinhDoSrc = srcTemp;
-        print('Hình ảnh bình đồ SRC: ' + _hinhAnhBinhDoSrc.toString());
+
         // kiểm tra kết quả trả về
         anhBinhDo = _hinhAnhBinhDoSrc.toString();
+        print('Hình ảnh bình đồ SRC: ' + anhBinhDo.toString());
       });
+    }
+  }
+
+  //
+  void PutBridge() async {
+    double KD = double.parse(_controllerKinhDo.text);
+    double VD = double.parse(_controllerViDo.text);
+    int SN = int.parse(_controllerSoNhip.text);
+    int SM = int.parse(_controllerSoMo.text);
+    int ST = int.parse(_controllerSoTru.text);
+    int SDN = int.parse(_controllerSoDamNgang.text);
+    int SDC = int.parse(_controllerSoDamChinh.text);
+    int SLC = int.parse(_controllerSoLanCan.text);
+    int SDPC = int.parse(_controllerSoDaiPhanCach.text);
+    double CDN = double.parse(_controllerChieuDaiNhip.text);
+    double BRXC = double.parse(_controllerBeRongXeChay.text);
+    double KCDC = double.parse(_controllerKhoangCachDamChinh.text);
+    double KCDN = double.parse(_controllerKhoangCachDamNgang.text);
+    double CCBMC = double.parse(_controllerChieuCaoBanMatCau.text);
+    double BRLC = double.parse(_controllerBeRongLanCan.text);
+    String anhCau, anhCat, anhBinh;
+
+    if (anhCayCau as String == "") {
+      anhCau = _hinhAnhCauSrc as String;
+    } else {
+      anhCau = anhCayCau as String;
+    }
+
+    if (anhMatCat as String == "") {
+      anhCat = _hinhAnhMatCatSrc as String;
+    } else {
+      anhCat = anhMatCat as String;
+    }
+
+    if (anhBinhDo as String == "") {
+      anhBinh = _hinhAnhBinhDoSrc as String;
+    } else {
+      anhBinh = anhBinhDo as String;
+    }
+
+    result = await widget.dBC.putApi(
+        widget.idBridge,
+        anhCau,
+        anhCat,
+        anhBinh,
+        _controllerTenCayCau.text,
+        _controllerLoaiCau.text,
+        _controllerCap.text,
+        _controllerLyTrinh.text,
+        _controllerTaiTrong.text,
+        _controllerChieuDai.text,
+        _controllerChieuRong.text,
+        _controllerDiaDiem.text,
+        KD,
+        VD,
+        ngayKhoiCong,
+        ngayHoanThanh,
+        null,
+        _controllerChuDauTu.text,
+        _controllerDonViThietKe.text,
+        _controllerDonViThiCong.text,
+        _controllerDonViGiamSat.text,
+        SN,
+        SM,
+        ST,
+        SDN,
+        SDC,
+        SLC,
+        SDPC,
+        _controllerVlDamChinh.text,
+        _controllerVlDamNgang.text,
+        _controllerVlBanMatCau.text,
+        _controllerVlLanCan.text,
+        _controllerVlMo.text,
+        _controllerVlTru.text,
+        CDN,
+        BRXC,
+        KCDC,
+        KCDN,
+        CCBMC,
+        BRLC);
+    if (result == 200) {
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) =>  infoBridgeScreen()),
+        );
+      });
+    } else {
+      print('thất bại');
     }
   }
 
 //
   void setDataController(detailBridgeModel detaiTemp) {
+    _hinhAnhCauSrc = detaiTemp.hinhAnhCau as String;
+    _hinhAnhBinhDoSrc = detaiTemp.hinhAnhBinhDo as String;
+    _hinhAnhMatCatSrc = detaiTemp.hinhAnhMatCat as String;
     _controllerTenCayCau.text = detaiTemp.tenCayCau as String;
     _controllerLoaiCau.text = detaiTemp.loaiCau as String;
     _controllerCap.text = detaiTemp.cap as String;
@@ -190,15 +256,56 @@ class _DetailState extends State<DetailAndUpdate> {
     double viDo = detaiTemp.viDo as double;
     _controllerKinhDo.text = kinhDo.toString();
     _controllerViDo.text = viDo.toString();
-    int chiPhi = detaiTemp.chiPhiXayDung as int;
-    _controllerChiPhiXayDung.text = chiPhi.toString();
+    chiPhiXayDung = detaiTemp.chiPhiXayDung as int;
+    _controllerChiPhiXayDung.text = chiPhiXayDung.toString();
+    _controllerNgayKhoiCong.text = detaiTemp.ngayKhoiCong as String;
+    _controllerNgayHoanThanh.text = detaiTemp.ngayHoanThanh as String;
+    chiPhiXayDung = detaiTemp.chiPhiXayDung;
+    _controllerChuDauTu.text = detaiTemp.chuDauTu as String;
+    _controllerDonViThietKe.text = detaiTemp.donViThietKe as String;
+    _controllerDonViThiCong.text = detaiTemp.donViThiCong as String;
+    _controllerDonViGiamSat.text = detaiTemp.donViGiamSat as String;
+    int soNhip = detaiTemp.soNhip as int;
+    _controllerSoNhip.text = soNhip.toString();
+    int soMo = detaiTemp.soMo as int;
+    _controllerSoMo.text = soMo.toString();
+    int soTru = detaiTemp.soTru as int;
+    _controllerSoTru.text = soTru.toString();
+    int soDamNgang = detaiTemp.soDamNgang as int;
+    _controllerSoDamNgang.text = soDamNgang.toString();
+    int soDamChinh = detaiTemp.soDamChinh as int;
+    _controllerSoDamChinh.text = soDamChinh.toString();
+    int soLanCan = detaiTemp.soLanCan as int;
+    _controllerSoLanCan.text = soLanCan.toString();
+    int soDaiPhanCach = detaiTemp.soDaiPhanCach as int;
+    _controllerSoDaiPhanCach.text = soDaiPhanCach.toString();
+    _controllerVlDamChinh.text = detaiTemp.damChinh as String;
+    _controllerVlDamNgang.text = detaiTemp.damNgang as String;
+    _controllerVlBanMatCau.text = detaiTemp.banMatCau as String;
+    _controllerVlLanCan.text = detaiTemp.lanCan as String;
+    _controllerVlMo.text = detaiTemp.mo as String;
+    _controllerVlTru.text = detaiTemp.tru as String;
+    double chieuDaiNhip = detaiTemp.chieuDaiNhip as double;
+    double beRongXeChay = detaiTemp.beRongXeChay as double;
+    double khoangCachDamChinh = detaiTemp.khoangCachDamChinh as double;
+    double khoanCachDamNgang = detaiTemp.khoanCachDamNgang as double;
+    double chieuCaoBanMatCau = detaiTemp.chieuCaoBanMatCau as double;
+    double BeRongLanCan = detaiTemp.beRongLanCan as double;
+    _controllerChieuDaiNhip.text = chieuDaiNhip.toString();
+    _controllerBeRongXeChay.text = beRongXeChay.toString();
+    _controllerKhoangCachDamChinh.text = khoangCachDamChinh.toString();
+    _controllerKhoangCachDamNgang.text = khoanCachDamNgang.toString();
+    _controllerChieuCaoBanMatCau.text = chieuCaoBanMatCau.toString();
+    _controllerBeRongLanCan.text = BeRongLanCan.toString();
   }
 
 //
   @override
   void initState() {
     super.initState();
-    _futureBridgeList = widget.dBC.getApi() as Future<List<detailBridgeModel>>;
+    _futureBridgeList =
+        widget.dBC.getApiById(widget.idBridge) as Future<detailBridgeModel>;
+
     //_futureRepairList = widget.repairController.getApi();
   }
 
@@ -212,8 +319,39 @@ class _DetailState extends State<DetailAndUpdate> {
         ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            navigatorKey.currentState?.push(
-              MaterialPageRoute(builder: (context) => MyNewPage()),
+            //PutBridge
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text('Thông báo'),
+                  content: Text(
+                      'Bạn cập nhật lại thông tin của   ${_controllerTenCayCau.text}'),
+                  actions: [
+                    TextButton(
+                      child: const Text('Huỷ bỏ'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Xác nhận cập nhật'),
+                      onPressed: () {
+                        // Xử lý khi người dùng chọn xác nhận
+                        PutBridge();
+                        if (result == 200) {
+                          print('thành công!');
+
+                          Navigator.of(context).pop();
+                        } else {
+                          print('thất bại!');
+                          Navigator.of(context).pop();
+                        }
+                      },
+                    ),
+                  ],
+                );
+              },
             );
           },
           label: Text('Lưu thay đổi'),
@@ -225,824 +363,1865 @@ class _DetailState extends State<DetailAndUpdate> {
         ),
         // endDrawer: menu(),
         body: SingleChildScrollView(
-          child: FutureBuilder<List<detailBridgeModel>>(
+          child: FutureBuilder<detailBridgeModel>(
             future: _futureBridgeList,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<detailBridgeModel>? bridgeList = snapshot.data;
-                for (int i = 0; i < bridgeList!.length; i++) {
-                  if (bridgeList[i].bridgeId == widget.idBridge) {
-                    setDataController(bridgeList[i]);
-                    return Column(
-                      children: [
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'THÔNG TIN CẦU',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width - 14,
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: //tu day
-                              Container(
-                            padding: EdgeInsets.all(10),
-                            margin: EdgeInsets.only(left: 5),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  // noi dung thông tin chung
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Tên cây cầu'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   tenCayCau = newValue;
-                                              // });
-                                              // print('tên cầu: ' + tenCayCau);
-                                            },
-                                            controller: _controllerTenCayCau,
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              hintText:
-                                                  _controllerTenCayCau.text,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Loại cầu'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   tenCayCau = newValue;
-                                              // });
-                                              // print('tên cầu: ' + tenCayCau);
-                                            },
-                                            controller: _controllerLoaiCau,
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              hintText: _controllerLoaiCau
-                                                  .text, //'Nhập loại cầu...',
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Cấp'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            controller: _controllerCap,
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   cap = newValue;
-                                              // });
-                                              // print('Cấp :' + cap);
-                                            },
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              // labelText: 'Tên cầu',
-                                              hintText: _controllerCap.text,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Lý trình'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            controller: _controllerLyTrinh,
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   lyTrinh = newValue;
-                                              // });
-                                              // print('Lý trình: ' + lyTrinh);
-                                            },
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              // labelText: 'Tên cầu',
-                                              hintText: _controllerLyTrinh.text,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Tải trọng'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            controller: _controllerTaiTrong,
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   taiTrong = newValue;
-                                              // });
-                                              // print('Tải trọng: ' + taiTrong);
-                                            },
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              // labelText: 'Tên cầu',
-                                              hintText:
-                                                  _controllerTaiTrong.text,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Chiều dài cầu (m)'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            controller: _controllerChieuDai,
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   chieuDai = newValue;
-                                              // });
-                                              // print('Chiều dài: ' + chieuDai);
-                                            },
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              // labelText: 'Tên cầu',
-                                              hintText:
-                                                  _controllerChieuDai.text,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 120,
-                                          child: Text('Chiều rộng cầu (m)'),
-                                        ),
-                                        Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              180,
-                                          margin: EdgeInsets.all(7),
-                                          child: TextField(
-                                            controller: _controllerChieuRong,
-                                            onChanged: (newValue) {
-                                              // setState(() {
-                                              //   chieuRong = newValue;
-                                              // });
-                                              // print('Chiều rộng: ' + chieuRong);
-                                            },
-                                            decoration: InputDecoration(
-                                              contentPadding: EdgeInsets.only(
-                                                  top: 0,
-                                                  bottom: 0,
-                                                  left: 5,
-                                                  right: 5),
-                                              // labelText: 'Tên cầu',
-                                              hintText:
-                                                  _controllerChieuRong.text,
-                                              border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(7),
-                                                borderSide: BorderSide(),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  // hết nội dung thông tin chung
-                                ]),
-                          ),
-                        ),
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'VỊ TRÍ CẦU',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Column(children: [
-                            Container(
-                              child: Row(children: [
-                                const SizedBox(
-                                  width: 70,
-                                  child: Text('Địa điểm'),
-                                ),
-                                Container(
-                                  width: 260,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerDiaDiem,
-                                    // onChanged: (newValue) {
-                                    //   setState(() {
-                                    //     diaDiem = newValue;
-                                    //   });
-                                    //   print('Địa điểm: $diaDiem');
-                                    // },
+                detailBridgeModel? bridgeList = snapshot.data;
+                if (bridgeList!.bridgeId == widget.idBridge) {
+                  setDataController(bridgeList);
 
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: _controllerDiaDiem.text,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
-                                      ),
-                                    ),
-                                  ),
+                  return Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(7),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 320,
+                              height: 45,
+                              decoration: const BoxDecoration(
+                                color: Colors.blue,
+                              ),
+                              child: const ListTile(
+                                leading: Icon(
+                                  Icons.image,
+                                  color: Colors.white,
                                 ),
-                              ]),
+                                title: Text(
+                                  'HÌNH ẢNH/ BÌNH ĐỒ/ MẶT CẮT',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ),
                             Container(
-                              child: Row(children: [
-                                const SizedBox(
-                                  width: 70,
-                                  child: Text('Kinh độ'),
-                                ),
+                              padding: const EdgeInsets.all(7),
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(
+                                    topRight: Radius.circular(7),
+                                    bottomLeft: Radius.circular(7),
+                                    bottomRight: Radius.circular(7),
+                                  ),
+                                  border: Border.all(
+                                      color: const Color(0xFFadb5bd))),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(children: [
+                                        const Text('Hình ảnh cầu'),
+                                        Image(
+                                            height: 150,
+                                            width: 320,
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(_imageFile ==
+                                                    null
+                                                ? _hinhAnhCauSrc == ""
+                                                    ? 'http://171.244.8.103:9003//placeholder.jpg'
+                                                    : 'http://171.244.8.103:9003/$_hinhAnhCauSrc'
+                                                : 'http://171.244.8.103:9003/$anhCayCau')),
+                                        TextButton(
+                                            onPressed: () => {
+                                                  _pickImage(
+                                                      ImageSource.gallery),
+                                                },
+                                            child: const Text('Chọn hình')),
+                                      ]),
+                                    ),
+                                    Container(
+                                      child: Column(children: [
+                                        const Text('Ảnh bình đồ'),
+                                        Image(
+                                            height: 150,
+                                            width: 320,
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(_imageFileBinhDo ==
+                                                    null
+                                                ? _hinhAnhBinhDoSrc == ""
+                                                    ? 'http://171.244.8.103:9003//placeholder.jpg'
+                                                    : 'http://171.244.8.103:9003/$_hinhAnhBinhDoSrc'
+                                                : 'http://171.244.8.103:9003/$anhBinhDo')),
+                                        TextButton(
+                                            onPressed: () => {
+                                                  _pickImageBinhDo(
+                                                      ImageSource.gallery),
+                                                },
+                                            child: const Text('Chọn hình')),
+                                      ]),
+                                    ),
+                                    Container(
+                                      child: Column(children: [
+                                        const Text('Ảnh mặt cắt'),
+                                        Image(
+                                            height: 150,
+                                            width: 320,
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(_imageFileMatCat ==
+                                                    null
+                                                ? _hinhAnhMatCatSrc == ""
+                                                    ? 'http://171.244.8.103:9003//placeholder.jpg'
+                                                    : 'http://171.244.8.103:9003/$_hinhAnhMatCatSrc'
+                                                : 'http://171.244.8.103:9003/$anhMatCat')),
+                                        TextButton(
+                                            onPressed: () => {
+                                                  _pickImageMatCat(
+                                                      ImageSource.gallery),
+                                                },
+                                            child: const Text('Chọn hình')),
+                                      ]),
+                                    )
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'THÔNG TIN CẦU',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          margin: EdgeInsets.only(top: 7),
+                          width: 180,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width - 14,
+                        margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9ECEF),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: //tu day
+                            Container(
+                          padding: EdgeInsets.all(10),
+                          margin: EdgeInsets.only(left: 5),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // noi dung thông tin chung
                                 Container(
-                                  width: 260,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    enabled: false,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        if (newValue.trim() == "") {
-                                          kinhDo = 0.00;
-                                        } else {
-                                          kinhDo = double.parse(newValue);
-                                        }
-                                      });
-                                      // print('Kinh độ: $kinhDo');
-                                    },
-                                    controller: _controllerKinhDo,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: _controllerKinhDo.text,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Tên cây cầu'),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                            ),
-                            Container(
-                              child: Row(children: [
-                                const SizedBox(
-                                  width: 70,
-                                  child: Text('Vĩ độ'),
-                                ),
-                                Container(
-                                  width: 260,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    enabled: false,
-                                    onChanged: (newValue) {
-                                      setState(() {
-                                        if (newValue.trim() == "") {
-                                          viDo = 0.0;
-                                        } else {
-                                          viDo = double.parse(newValue);
-                                        }
-                                      });
-                                      // print('Vĩ độ: $viDo');
-                                    },
-                                    controller: _controllerViDo,
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      hintText: _controllerViDo.text,
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ]),
-                            ),
-                            Container(
-                              height: 200,
-                              margin: const EdgeInsets.all(5),
-                              child: FlutterMap(
-                                mapController: mapController,
-                                options: MapOptions(
-                                    onTap: (LatLng? tapPosition) {
-                                      if (tapPosition != null) {
-                                        final lat = tapPosition.latitude;
-                                        final lng = tapPosition.latitude;
-                                        // set kinh độ
-                                        _controllerKinhDo.text = lat.toString();
-                                        // -> kinhDo
-                                        kinhDo = double.parse(
-                                            _controllerKinhDo.text);
-                                        print('Kinh độ: $kinhDo');
-                                        // set vĩ độ
-                                        _controllerViDo.text = lng.toString();
-                                        // -> viDo
-                                        viDo =
-                                            double.parse(_controllerViDo.text);
-                                        print('Vĩ độ: $viDo');
-                                      }
-                                    },
-                                    center: LatLng(10.952772, 106.807671),
-                                    zoom: 7),
-                                layers: [
-                                  TileLayerOptions(
-                                    urlTemplate:
-                                        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                                    subdomains: ['a', 'b', 'c'],
-                                  ),
-                                  MarkerLayerOptions(markers: [
-                                    Marker(
-                                      width: 80.0,
-                                      height: 80.0,
-                                      point: LatLng(
-                                          double.parse(_controllerKinhDo.text),
-                                          double.parse(_controllerViDo.text)),
-                                      builder: (ctx) => Container(
-                                        child: IconButton(
-                                            icon: Image.network(
-                                              'https://i.imgur.com/x94d3tp.png',
-                                              width: 50,
-                                              height: 50,
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerTenCayCau.text =
+                                            //       newValue;
+                                            // });
+                                            print('tên cầu: ' +
+                                                _controllerTenCayCau.text);
+                                          },
+                                          controller: _controllerTenCayCau,
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            hintText: _controllerTenCayCau.text,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
                                             ),
-                                            color: Colors.red,
-                                            iconSize: 30.0,
-                                            onPressed: () {}),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Loại cầu'),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerLoaiCau.text =
+                                            //       newValue;
+                                            // });
+                                            print('tên cầu: ' +
+                                                _controllerLoaiCau.text);
+                                          },
+                                          controller: _controllerLoaiCau,
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            hintText: _controllerLoaiCau
+                                                .text, //'Nhập loại cầu...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Cấp'),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerCap,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerCap.text = newValue;
+                                            // });
+                                            print(
+                                                'Cấp :' + _controllerCap.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: _controllerCap.text,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Lý trình'),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerLyTrinh,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerLyTrinh.text =
+                                            //       newValue;
+                                            // });
+                                            print('Lý trình: ' +
+                                                _controllerLyTrinh.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: _controllerLyTrinh.text,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Tải trọng'),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerTaiTrong,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerTaiTrong.text =
+                                            //       newValue;
+                                            // });
+                                            print('Tải trọng: ' +
+                                                _controllerTaiTrong.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: _controllerTaiTrong.text,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Chiều dài cầu (m)'),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerChieuDai,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerChieuDai.text =
+                                            //       newValue;
+                                            // });
+                                            print('Chiều dài: ' +
+                                                _controllerChieuDai.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: _controllerChieuDai.text,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 120,
+                                        child: Text('Chiều rộng cầu (m)'),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                180,
+                                        margin: EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerChieuRong,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   _controllerChieuRong.text =
+                                            //       newValue;
+                                            // });
+                                            print('Chiều rộng: ' +
+                                                _controllerChieuRong.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding: EdgeInsets.only(
+                                                top: 0,
+                                                bottom: 0,
+                                                left: 5,
+                                                right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: _controllerChieuRong.text,
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: BorderSide(),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                // hết nội dung thông tin chung
+                              ]),
+                        ),
+                      ),
+                      Center(
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'VỊ TRÍ CẦU',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          margin: EdgeInsets.only(top: 7),
+                          width: 180,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9ECEF),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Column(children: [
+                          Container(
+                            child: Row(children: [
+                              const SizedBox(
+                                width: 70,
+                                child: Text('Địa điểm'),
+                              ),
+                              Container(
+                                width: 260,
+                                margin: const EdgeInsets.all(7),
+                                child: TextField(
+                                  controller: _controllerDiaDiem,
+                                  onChanged: (newValue) {
+                                    // setState(() {
+                                    //   _controllerDiaDiem.text = newValue;
+                                    // });
+                                    print(
+                                        'Địa điểm: ' + _controllerDiaDiem.text);
+                                  },
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.only(
+                                        top: 0, bottom: 0, left: 5, right: 5),
+                                    // labelText: 'Tên cầu',
+                                    hintText: _controllerDiaDiem.text,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                      borderSide: const BorderSide(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            child: Row(children: [
+                              const SizedBox(
+                                width: 70,
+                                child: Text('Kinh độ'),
+                              ),
+                              Container(
+                                width: 260,
+                                margin: const EdgeInsets.all(7),
+                                child: TextField(
+                                  enabled: false,
+                                  onChanged: (newValue) {
+                                    // setState(() {
+                                    //   if (newValue.trim() == "") {
+                                    //     _controllerKinhDo.text = '0.00';
+                                    //   } else {
+                                    //     _controllerKinhDo.text = newValue;
+                                    //   }
+                                    // });
+                                    print('Kinh độ: ' + _controllerKinhDo.text);
+                                  },
+                                  controller: _controllerKinhDo,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.only(
+                                        top: 0, bottom: 0, left: 5, right: 5),
+                                    // labelText: 'Tên cầu',
+                                    hintText: _controllerKinhDo.text,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                      borderSide: const BorderSide(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            child: Row(children: [
+                              const SizedBox(
+                                width: 70,
+                                child: Text('Vĩ độ'),
+                              ),
+                              Container(
+                                width: 260,
+                                margin: const EdgeInsets.all(7),
+                                child: TextField(
+                                  enabled: false,
+                                  onChanged: (newValue) {
+                                    // setState(() {
+                                    //   if (newValue.trim() == "") {
+                                    //     _controllerViDo.text = '0.00';
+                                    //   } else {
+                                    //     _controllerViDo.text = newValue;
+                                    //   }
+                                    // });
+                                    print('Vĩ độ: ' + _controllerViDo.text);
+                                  },
+                                  controller: _controllerViDo,
+                                  decoration: InputDecoration(
+                                    contentPadding: const EdgeInsets.only(
+                                        top: 0, bottom: 0, left: 5, right: 5),
+                                    hintText: _controllerViDo.text,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(7),
+                                      borderSide: const BorderSide(),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
+                          Container(
+                            height: 200,
+                            margin: const EdgeInsets.all(5),
+                            child: FlutterMap(
+                              mapController: mapController,
+                              options: MapOptions(
+                                  onTap: (LatLng? tapPosition) {
+                                    if (tapPosition != null) {
+                                      double kinhDo = 0.00;
+                                      double viDo = 0.00;
+                                      final lat = tapPosition.latitude;
+                                      final lng = tapPosition.latitude;
+                                      // set kinh độ
+                                      _controllerKinhDo.text = lat.toString();
+                                      // -> kinhDo
+                                      kinhDo =
+                                          double.parse(_controllerKinhDo.text);
+                                      print('Kinh độ: $kinhDo');
+                                      // set vĩ độ
+                                      _controllerViDo.text = lng.toString();
+                                      // -> viDo
+                                      viDo = double.parse(_controllerViDo.text);
+                                      print('Vĩ độ: $viDo');
+                                    }
+                                  },
+                                  center: LatLng(
+                                      double.parse(_controllerKinhDo.text),
+                                      double.parse(_controllerViDo.text)),
+                                  zoom: 15),
+                              layers: [
+                                TileLayerOptions(
+                                  urlTemplate:
+                                      'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                                  subdomains: ['a', 'b', 'c'],
+                                ),
+                                MarkerLayerOptions(markers: [
+                                  Marker(
+                                    width: 80.0,
+                                    height: 80.0,
+                                    point: LatLng(
+                                        double.parse(_controllerKinhDo.text),
+                                        double.parse(_controllerViDo.text)),
+                                    builder: (ctx) => Container(
+                                      child: IconButton(
+                                          icon: Image.network(
+                                            'https://i.imgur.com/x94d3tp.png',
+                                            width: 50,
+                                            height: 50,
+                                          ),
+                                          color: Colors.red,
+                                          iconSize: 30.0,
+                                          onPressed: () {}),
+                                    ),
+                                  ),
+                                ])
+                              ],
+                            ),
+                          )
+                        ]),
+                      ),
+                      Center(
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'THI CÔNG CẦU',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          margin: EdgeInsets.only(top: 7),
+                          width: 180,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9ECEF),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(7),
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                topRight: Radius.circular(7),
+                                bottomLeft: Radius.circular(7),
+                                bottomRight: Radius.circular(7),
+                              ),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
+                          child: Column(children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Ngày khởi công'),
+                                  ),
+                                  Container(
+                                    width: 145,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      enabled: false,
+                                      onChanged: (newValue) {},
+                                      controller: _controllerNgayKhoiCong,
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        //hintText: ngayKhoiCong,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
-                                  ])
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      // Future<void> _selectDate(BuildContext context) async {
+                                      final DateTime? picked =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: NKhoiCong,
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2101),
+                                      );
+                                      if (picked != null &&
+                                          picked != NKhoiCong) {
+                                        setState(() {
+                                          NKhoiCong = DateTime(picked.year,
+                                              picked.month, picked.day);
+                                          _controllerNgayKhoiCong.text =
+                                              ('${NKhoiCong.year.toString()}/${NKhoiCong.month.toString()}/${NKhoiCong.day.toString()}');
+
+                                          print('Ngày khởi công: ' +
+                                              _controllerNgayKhoiCong.text);
+                                        });
+                                      }
+                                      // }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      // độ lớn của nút
+                                      backgroundColor:
+                                          Colors.white, // màu nền của nút
+                                    ),
+                                    child: const Icon(Icons.calendar_today,
+                                        color: Colors.black),
+                                  ),
                                 ],
                               ),
-                            )
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Ngày hoàn thành'),
+                                  ),
+                                  Container(
+                                    width: 145,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      enabled: false,
+                                      onChanged: (newValue) {},
+                                      controller: _controllerNgayHoanThanh,
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        //hintText: ngayHoanThanh,
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      // Future<void> _selectDate(BuildContext context) async {
+                                      final DateTime? picked =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: NHoanThanh,
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2101),
+                                      );
+                                      if (picked != null &&
+                                          picked != NKhoiCong) {
+                                        setState(() {
+                                          NHoanThanh = DateTime(picked.year,
+                                              picked.month, picked.day);
+                                          _controllerNgayHoanThanh.text =
+                                              ('${NHoanThanh.year.toString()}/${NHoanThanh.month.toString()}/${NHoanThanh.day.toString()}');
+
+                                          print('Ngày hoàn thành: ' +
+                                              _controllerNgayHoanThanh.text);
+                                        });
+                                      }
+                                      // }
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      // độ lớn của nút
+                                      backgroundColor:
+                                          Colors.white, // màu nền của nút
+                                    ),
+                                    child: const Icon(Icons.calendar_today,
+                                        color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Chi phí xây dựng'),
+                                  ),
+                                  Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      //controller: _controllerChiPhiXayDung,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        setState(() {
+                                          if (newValue.trim() == "") {
+                                            chiPhiXayDung = null;
+                                          } else {
+                                            //Set chi phí đúng
+                                            chiPhiXayDung = int.parse(newValue);
+                                            chiPhiXayDung =
+                                                null; // tạo chi phí null
+                                          }
+                                        });
+                                        print(
+                                            'Chi phí xây dưng: $chiPhiXayDung');
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: chiPhiXayDung.toString(),
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Chủ đầu tư'),
+                                  ),
+                                  Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerChuDauTu,
+                                      onChanged: (newValue) {
+                                        print('Chủ đầu tư: ' +
+                                            _controllerChuDauTu.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập ...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Đơn vị thiết kế'),
+                                  ),
+                                  Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerDonViThietKe,
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   _controllerDonViThietKe.text = newValue;
+                                        // });
+                                        print('Đơn vị thiết kế: ' +
+                                            _controllerDonViThietKe.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: "Nhập ...",
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Đơn vị thi công'),
+                                  ),
+                                  Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerDonViThiCong,
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   _controllerDonViThiCong.text =
+                                        //       newValue;
+                                        // });
+                                        print('Đơn vị thi công: ' +
+                                            _controllerDonViThiCong.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập ...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 120,
+                                    child: Text('Đơn vị giám sát'),
+                                  ),
+                                  Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerDonViGiamSat,
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   _controllerDonViGiamSat.text =
+                                        //       newValue;
+                                        // });
+                                        print('Đơn vị giám sát: ' +
+                                            _controllerDonViGiamSat.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập ...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ]),
                         ),
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'THI CÔNG CẦU',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                      ),
+                      Center(
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'CẤU TẠO CẦU',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          margin: EdgeInsets.only(top: 7),
+                          width: 180,
+                          height: 40,
                           decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
+                            color: Colors.blue,
                             borderRadius: BorderRadius.circular(7),
                           ),
-                          child: Row(children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Ngày khởi công'),
-                                    SizedBox(height: 8),
-                                    Text('Ngày hoàn thành'),
-                                    SizedBox(height: 8),
-                                    Text('Chi phí xây dựng'),
-                                    SizedBox(height: 8),
-                                    Text('Chủ đầu tư'),
-                                    SizedBox(height: 8),
-                                    Text('Đơn vị thiết kế'),
-                                    SizedBox(height: 8),
-                                    Text('Đơn vị thi công'),
-                                    SizedBox(height: 8),
-                                    Text('Đơn vị đánh giá'),
-                                  ]),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Text(bridgeList[i].ngayKhoiCong),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].ngayHoanThanh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].cap),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].lyTrinh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].taiTrong),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].chieuDai),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].chieuRong),
-                                  ]),
-                            ),
-                          ]),
                         ),
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'CẤU TẠO CẦU',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(7),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9ECEF),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Column(children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số nhịp'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoNhip,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      // if (newValue.trim() == "") {
+                                      //   _controllerSoNhip.text = '0';
+                                      // }else{
+                                      //   _controllerSoNhip.text = newValue;
+                                      // }
+                                      // });
+                                      print(
+                                          'Số nhịp: ' + _controllerSoNhip.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số mố'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoMo,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      // if (newValue.trim() == "") {
+                                      //   _controllerSoMo.text = '0';
+                                      // }
+                                      // });
+                                      print('Số mố: ' + _controllerSoMo.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số trụ'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoTru,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     _controllerSoTru.text = '0';
+                                      //   }
+                                      // });
+                                      print('Số trụ: ' + _controllerSoTru.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số dầm ngang'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoDamNgang,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     _controllerSoDamNgang.text = '0';
+                                      //   }
+                                      // });
+                                      print('Số dầm ngang: ' +
+                                          _controllerSoDamNgang.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số dầm chính'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoDamChinh,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     _controllerSoDamChinh.text = '0';
+                                      //   }
+                                      // });
+                                      print('Số dầm chính: ' +
+                                          _controllerSoDamChinh.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số lan can'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoLanCan,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     _controllerSoLanCan.text = '0';
+                                      //   }
+                                      // });
+                                      print('Số lan can: ' +
+                                          _controllerSoLanCan.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 110,
+                                  child: Text('Số dải phân cách'),
+                                ),
+                                Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerSoDaiPhanCach,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     _controllerSoDaiPhanCach.text = '0';
+                                      //   }
+                                      // });
+                                      print('Số dải phân cách: ' +
+                                          _controllerSoDaiPhanCach.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
+                      Center(
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'VẬT LIỆU CẦU',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          margin: EdgeInsets.only(top: 7),
+                          width: 180,
+                          height: 40,
                           decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
+                            color: Colors.blue,
                             borderRadius: BorderRadius.circular(7),
                           ),
-                          child: Row(children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Số nhịp'),
-                                    SizedBox(height: 8),
-                                    Text('Số mố'),
-                                    SizedBox(height: 8),
-                                    Text('Số trụ'),
-                                    SizedBox(height: 8),
-                                    Text('Số dầm ngang'),
-                                    SizedBox(height: 8),
-                                    Text('Số dầm chính'),
-                                    SizedBox(height: 8),
-                                    Text('Số lan can'),
-                                    SizedBox(height: 8),
-                                    Text('Số dải phân cách'),
-                                  ]),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                        bridgeList[i].chiPhiXayDung.toString()),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].loaiCau),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].cap),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].lyTrinh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].taiTrong),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].chieuDai),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].chieuRong),
-                                  ]),
-                            ),
-                          ]),
                         ),
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'VẬT LIỆU CẦU',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(7),
-                            ),
-                          ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9ECEF),
+                          borderRadius: BorderRadius.circular(7),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        child: Column(
+                            // crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text('Dầm chính'),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      margin: const EdgeInsets.all(7),
+                                      child: TextField(
+                                        controller: _controllerVlDamChinh,
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   vlDamChinh = newValue;
+                                          // });
+                                          print('Vật liệu dầm chính: ' +
+                                              _controllerVlDamChinh.text);
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 5,
+                                              right: 5),
+                                          // labelText: 'Tên cầu',
+                                          hintText: 'Nhập...',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            borderSide: const BorderSide(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text('Dầm ngang'),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      margin: const EdgeInsets.all(7),
+                                      child: TextField(
+                                        controller: _controllerVlDamNgang,
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   vlDamNgang = newValue;
+                                          // });
+                                          print('Vật liệu dầm ngang: ' +
+                                              _controllerVlDamNgang.text);
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 5,
+                                              right: 5),
+                                          // labelText: 'Tên cầu',
+                                          hintText: 'Nhập...',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            borderSide: const BorderSide(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text('Bán mặt cầu'),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      margin: const EdgeInsets.all(7),
+                                      child: TextField(
+                                        controller: _controllerVlBanMatCau,
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   vlBanMatCau = newValue;
+                                          // });
+                                          print('Vật liệu bán mặt cầu: ' +
+                                              _controllerVlBanMatCau.text);
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 5,
+                                              right: 5),
+                                          // labelText: 'Tên cầu',
+                                          hintText: 'Nhập...',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            borderSide: const BorderSide(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text('Lan can'),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      margin: const EdgeInsets.all(7),
+                                      child: TextField(
+                                        controller: _controllerVlLanCan,
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   vlLanCan = newValue;
+                                          // });
+                                          print('Vật liệu lan can: ' +
+                                              _controllerVlLanCan.text);
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 5,
+                                              right: 5),
+                                          // labelText: 'Tên cầu',
+                                          hintText: 'Nhập...',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            borderSide: const BorderSide(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text('Mố'),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      margin: const EdgeInsets.all(7),
+                                      child: TextField(
+                                        controller: _controllerVlMo,
+                                        onChanged: (newValue) {
+                                          // setState(() {
+                                          //   vlMo = newValue;
+                                          // });
+                                          print('Vật liệu mố: ' +
+                                              _controllerVlMo.text);
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 5,
+                                              right: 5),
+                                          // labelText: 'Tên cầu',
+                                          hintText: 'Nhập...',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            borderSide: const BorderSide(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    const SizedBox(
+                                      width: 100,
+                                      child: Text('Trụ'),
+                                    ),
+                                    Container(
+                                      width: 220,
+                                      margin: const EdgeInsets.all(7),
+                                      child: TextField(
+                                        controller: _controllerVlTru,
+                                        onChanged: (newValue) {
+                                          //setState(() {
+                                          //   vlTru = newValue;
+                                          // });
+                                          print('Vật liệu trụ: ' +
+                                              _controllerVlTru.text);
+                                        },
+                                        decoration: InputDecoration(
+                                          contentPadding: const EdgeInsets.only(
+                                              top: 0,
+                                              bottom: 0,
+                                              left: 5,
+                                              right: 5),
+                                          // labelText: 'Tên cầu',
+                                          hintText: 'Nhập...',
+                                          border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(7),
+                                            borderSide: const BorderSide(),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                      ),
+                      Center(
+                        child: Container(
+                          child: Center(
+                              child: Text(
+                            'KÍCH THƯỚC CẦU',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                          margin: EdgeInsets.only(top: 7),
+                          width: 180,
+                          height: 40,
                           decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
+                            color: Colors.blue,
                             borderRadius: BorderRadius.circular(7),
                           ),
-                          child: Row(children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Dầm chính'),
-                                    SizedBox(height: 8),
-                                    Text('Dầm ngang'),
-                                    SizedBox(height: 8),
-                                    Text('Bán mặt cầu'),
-                                    SizedBox(height: 8),
-                                    Text('Lan can'),
-                                    SizedBox(height: 8),
-                                    Text('Mố '),
-                                    SizedBox(height: 8),
-                                    Text('Trụ'),
-                                  ]),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Text(bridgeList[i].tenCayCau),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].loaiCau),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].cap),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].lyTrinh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].taiTrong),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].chieuRong),
-                                  ]),
-                            ),
-                          ]),
                         ),
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'KÍCH THƯỚC CẦU',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.circular(7),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFE9ECEF),
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                        child: Column(children: [
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text('Chiều dài nhịp'),
+                                ),
+                                Container(
+                                  width: 210,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerChieuDaiNhip,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*$'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     chieuDaiNhip = 0.0;
+                                      //   } else {
+                                      //     chieuDaiNhip = double.parse(newValue);
+                                      //   }
+                                      // });
+                                      print('Chiều dài nhịp: ' +
+                                          _controllerChieuDaiNhip.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Row(children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Text('Chiều dài nhịp'),
-                                    // SizedBox(height: 8),
-                                    // Text('Bề rộng xe chạy (m)'),
-                                    // SizedBox(height: 8),
-                                    // Text('Khoảng cách dầm chính (m)'),
-                                    // SizedBox(height: 8),
-                                    // Text('Khoảng cách dầm ngang (m)'),
-                                    // SizedBox(height: 8),
-                                    // Text('Bề rộng lề bộ hành (m)'),
-                                    // SizedBox(height: 8),
-                                    // Text('Bề rộng lan can (m)'),
-                                  ]),
-                            ),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    // Text(bridgeList[i].tenCayCau),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].loaiCau),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].cap),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].lyTrinh),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].taiTrong),
-                                    // SizedBox(height: 8),
-                                    // Text(bridgeList[i].chieuDai),
-                                  ]),
-                            ),
-                          ]),
-                        ),
-                        Center(
-                          child: Container(
-                            child: Center(
-                                child: Text(
-                              'SỬA CHỮA/ KIỂM TRA',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                            margin: EdgeInsets.only(top: 7),
-                            width: 180,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFfb8500),
-                              borderRadius: BorderRadius.circular(7),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text('Bề rộng xe chạy (m)'),
+                                ),
+                                Container(
+                                  width: 210,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerBeRongXeChay,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*$'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     beRongXeChay = 0.0;
+                                      //   } else {
+                                      //     beRongXeChay = double.parse(newValue);
+                                      //   }
+                                      // });
+                                      print('Bề rộng xe chạy: ' +
+                                          _controllerBeRongXeChay.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: 7, right: 7, bottom: 7),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE9ECEF),
-                            borderRadius: BorderRadius.circular(7),
-                          ),
-                          child: Row(children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              margin: EdgeInsets.only(left: 5),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Ngày kiểm tra'),
-                                    SizedBox(height: 8),
-                                    Text('Loại hư hỏng'),
-                                    SizedBox(height: 8),
-                                    Text('Ngày sửa chữa'),
-                                    SizedBox(height: 8),
-                                    Text('Chi phí sửa chữa'),
-                                  ]),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text('Khoảng cách dầm chính'),
+                                ),
+                                Container(
+                                  width: 210,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerKhoangCachDamChinh,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*$'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     khoangCachDamChinh = 0.0;
+                                      //   } else {
+                                      //     khoangCachDamChinh = double.parse(newValue);
+                                      //   }
+                                      // });
+                                      print('Khoảng cách dầm chính: ' +
+                                          _controllerKhoangCachDamChinh.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ]),
-                        )
-                      ],
-                    );
-                  }
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text('Khoảng cách dầm ngang'),
+                                ),
+                                Container(
+                                  width: 210,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerKhoangCachDamNgang,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*$'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     khoangCachDamNgang = 0.0;
+                                      //   } else {
+                                      //     khoangCachDamNgang = double.parse(newValue);
+                                      //   }
+                                      // });
+                                      print('Khoảng cách dầm ngang: ' +
+                                          _controllerKhoangCachDamNgang.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text('Chiều cao bản mặt cầu (m)'),
+                                ),
+                                Container(
+                                  width: 210,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerChieuCaoBanMatCau,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*$'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     chieuCaoBanMatCau = 0.0;
+                                      //   } else {
+                                      //     chieuCaoBanMatCau = double.parse(newValue);
+                                      //   }
+                                      // });
+                                      print('Chiều cao bán mặt cầu: ' +
+                                          _controllerChieuCaoBanMatCau.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 120,
+                                  child: Text('Bề rộng lan can (m)'),
+                                ),
+                                Container(
+                                  width: 210,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerBeRongLanCan,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'^\d*\.?\d*$'))
+                                    ],
+                                    onChanged: (newValue) {
+                                      // setState(() {
+                                      //   if (newValue.trim() == "") {
+                                      //     beRongLanCan = 0.0;
+                                      //   } else {
+                                      //     beRongLanCan = double.parse(newValue);
+                                      //   }
+                                      // });
+                                      print('Bề rộng lan can: ' +
+                                          _controllerBeRongLanCan.text);
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  );
                 }
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
