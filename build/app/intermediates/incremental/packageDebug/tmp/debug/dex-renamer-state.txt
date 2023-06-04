@@ -1,4 +1,4 @@
-#Sat Jun 03 20:02:50 ICT 2023
+#Sun Jun 04 14:39:30 ICT 2023
 base.0=C\:\\Users\\NguyenQuocKhanh\\Desktop\\app_thuc_tap\\New folder\\app_cau_dong_nai\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex
