@@ -1,26 +1,19 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
 import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
 import 'package:flutter_application_4/services/controllers/imageController.dart';
-import 'package:flutter_application_4/services/controllers/repairController.dart';
+//import 'package:flutter_application_4/services/controllers/repairController.dart';
 import 'package:flutter_application_4/services/models/detailBridgeModel.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../services/models/bridgeModel.dart';
-import '../../services/controllers/bridgeController.dart';
-import '../../services/models/repairModel.dart';
-import '../../services/controllers/bridgeController.dart';
-import '../homeScreen/menu.dart';
 
 class DetailAndUpdate extends StatefulWidget {
   final detailBridgeController dBC = detailBridgeController();
-  final RepairController repairController = RepairController();
+  //final repairController _repairController = repairController();
   final int idBridge;
   DetailAndUpdate({Key? key, required this.idBridge}) : super(key: key);
 
@@ -232,7 +225,7 @@ class _DetailState extends State<DetailAndUpdate> {
       setState(() {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  infoBridgeScreen()),
+          MaterialPageRoute(builder: (context) => infoBridgeScreen()),
         );
       });
     } else {
@@ -249,6 +242,7 @@ class _DetailState extends State<DetailAndUpdate> {
     _controllerLoaiCau.text = detaiTemp.loaiCau as String;
     _controllerCap.text = detaiTemp.cap as String;
     _controllerLyTrinh.text = detaiTemp.lyTrinh as String;
+    _controllerTaiTrong.text = detaiTemp.taiTrong as String;
     _controllerChieuDai.text = detaiTemp.chieuDai as String;
     _controllerChieuRong.text = detaiTemp.chieuRong as String;
     _controllerDiaDiem.text = detaiTemp.diaDiem as String;
@@ -312,7 +306,6 @@ class _DetailState extends State<DetailAndUpdate> {
   void setDataStart(detailBridgeModel temp) {}
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
         appBar: AppBar(
           title: Text('Chi tiết / cập nhật'),

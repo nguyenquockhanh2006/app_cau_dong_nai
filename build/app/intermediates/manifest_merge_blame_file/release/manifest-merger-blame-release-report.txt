@@ -10,162 +10,193 @@
 9        android:targetSdkVersion="33" />
 9-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml
 10
-11    <permission
-11-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
-12        android:name="com.example.flutter_application_4.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-12-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
-13        android:protectionLevel="signature" />
-13-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
-14
-15    <uses-permission android:name="com.example.flutter_application_4.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-15-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
-15-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+11    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+11-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:9:5-77
+11-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:9:22-74
+12
+13    <permission
+13-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+14        android:name="com.example.flutter_application_4.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+14-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+15        android:protectionLevel="signature" />
+15-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
 16
-17    <application
-18        android:name="android.app.Application"
-18-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:5:9-42
-19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-19-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
-20        android:icon="@mipmap/launcher_icon"
-20-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:6:9-45
-21        android:label="Cầu Đồng Nai" >
-21-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:4:9-37
-22        <activity
-22-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:7:9-27:20
-23            android:name="com.example.flutter_application_4.MainActivity"
-23-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:8:13-41
-24            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-24-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:12:13-163
-25            android:exported="true"
-25-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:9:13-36
-26            android:hardwareAccelerated="true"
-26-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:13:13-47
-27            android:launchMode="singleTop"
-27-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:10:13-43
-28            android:theme="@style/LaunchTheme"
-28-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:11:13-47
-29            android:windowSoftInputMode="adjustResize" >
-29-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:14:13-55
-30
-31            <!--
-32                 Specifies an Android theme to apply to this Activity as soon as
-33                 the Android process has started. This theme is visible to the user
-34                 while the Flutter UI initializes. After that, this theme continues
-35                 to determine the Window background behind the Flutter UI.
-36            -->
-37            <meta-data
-37-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:19:13-22:17
-38                android:name="io.flutter.embedding.android.NormalTheme"
-38-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:20:15-70
-39                android:resource="@style/NormalTheme" />
-39-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:21:15-52
-40
-41            <intent-filter>
-41-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:23:13-26:29
-42                <action android:name="android.intent.action.MAIN" />
-42-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:24:17-68
-42-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:24:25-66
-43
-44                <category android:name="android.intent.category.LAUNCHER" />
-44-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:25:17-76
-44-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:25:27-74
-45            </intent-filter>
-46        </activity>
-47        <!--
-48             Don't delete the meta-data below.
-49             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-50        -->
-51        <meta-data
-51-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:30:9-32:33
-52            android:name="flutterEmbedding"
-52-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:31:13-44
-53            android:value="2" />
-53-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:32:13-30
-54
-55        <provider
-55-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:9-18:20
-56            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-56-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-82
-57            android:authorities="com.example.flutter_application_4.flutter.image_provider"
-57-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-74
-58            android:exported="false"
-58-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-37
-59            android:grantUriPermissions="true" >
-59-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-47
-60            <meta-data
-60-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-17:75
-61                android:name="android.support.FILE_PROVIDER_PATHS"
-61-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:17-67
-62                android:resource="@xml/flutter_image_picker_file_paths" />
-62-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:17:17-72
-63        </provider>
-64
-65        <uses-library
-65-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
-66            android:name="androidx.window.extensions"
-66-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
-67            android:required="false" />
-67-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
-68        <uses-library
-68-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
-69            android:name="androidx.window.sidecar"
-69-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
-70            android:required="false" />
-70-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
-71
-72        <provider
-72-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
-73            android:name="androidx.startup.InitializationProvider"
-73-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
-74            android:authorities="com.example.flutter_application_4.androidx-startup"
-74-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
-75            android:exported="false" >
-75-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
-76            <meta-data
-76-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
-77                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-77-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
-78                android:value="androidx.startup" />
-78-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
-79        </provider>
-80
-81        <receiver
-81-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
-82            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-82-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
-83            android:directBootAware="false"
-83-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
-84            android:enabled="true"
-84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
-85            android:exported="true"
-85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
-86            android:permission="android.permission.DUMP" >
-86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
-87            <intent-filter>
-87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
-88                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
-89            </intent-filter>
-90            <intent-filter>
-90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
-91                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
-91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
-92            </intent-filter>
-93            <intent-filter>
-93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
-94                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
-94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
-95            </intent-filter>
-96            <intent-filter>
-96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
-97                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
-97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
-98            </intent-filter>
-99        </receiver>
-100    </application>
-101
-102</manifest>
+17    <uses-permission android:name="com.example.flutter_application_4.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+17-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+17-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+18
+19    <application
+20        android:name="android.app.Application"
+20-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:5:9-42
+21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+21-->[androidx.core:core:1.9.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\5f80b20db3afa86c72a9766b008d752d\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+22        android:icon="@mipmap/launcher_icon"
+22-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:6:9-45
+23        android:label="Cầu Đồng Nai" >
+23-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:4:9-37
+24        <activity
+24-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:7:9-27:20
+25            android:name="com.example.flutter_application_4.MainActivity"
+25-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:8:13-41
+26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+26-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:12:13-163
+27            android:exported="true"
+27-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:9:13-36
+28            android:hardwareAccelerated="true"
+28-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:13:13-47
+29            android:launchMode="singleTop"
+29-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:10:13-43
+30            android:theme="@style/LaunchTheme"
+30-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:11:13-47
+31            android:windowSoftInputMode="adjustResize" >
+31-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:14:13-55
+32
+33            <!--
+34                 Specifies an Android theme to apply to this Activity as soon as
+35                 the Android process has started. This theme is visible to the user
+36                 while the Flutter UI initializes. After that, this theme continues
+37                 to determine the Window background behind the Flutter UI.
+38            -->
+39            <meta-data
+39-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:19:13-22:17
+40                android:name="io.flutter.embedding.android.NormalTheme"
+40-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:20:15-70
+41                android:resource="@style/NormalTheme" />
+41-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:21:15-52
+42
+43            <intent-filter>
+43-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:23:13-26:29
+44                <action android:name="android.intent.action.MAIN" />
+44-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:24:17-68
+44-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:24:25-66
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:25:17-76
+46-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:25:27-74
+47            </intent-filter>
+48        </activity>
+49        <!--
+50             Don't delete the meta-data below.
+51             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+52        -->
+53        <meta-data
+53-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:30:9-32:33
+54            android:name="flutterEmbedding"
+54-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:31:13-44
+55            android:value="2" />
+55-->C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android\app\src\main\AndroidManifest.xml:32:13-30
+56
+57        <provider
+57-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:9-18:20
+58            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+58-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-82
+59            android:authorities="com.example.flutter_application_4.flutter.image_provider"
+59-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-74
+60            android:exported="false"
+60-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-37
+61            android:grantUriPermissions="true" >
+61-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-47
+62            <meta-data
+62-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-17:75
+63                android:name="android.support.FILE_PROVIDER_PATHS"
+63-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:17-67
+64                android:resource="@xml/flutter_image_picker_file_paths" />
+64-->[:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:17:17-72
+65        </provider>
+66
+67        <service
+67-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:9-16:56
+68            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+68-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-77
+69            android:enabled="true"
+69-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-35
+70            android:exported="false"
+70-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-37
+71            android:foregroundServiceType="location" />
+71-->[:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-53
+72
+73        <activity
+73-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+74            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+74-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+75            android:exported="false"
+75-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+76            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+76-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+77
+78        <meta-data
+78-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\f46b9773282b7a3d38863a46e0e0b5d1\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+79            android:name="com.google.android.gms.version"
+79-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\f46b9773282b7a3d38863a46e0e0b5d1\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+80            android:value="@integer/google_play_services_version" />
+80-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\f46b9773282b7a3d38863a46e0e0b5d1\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+81
+82        <uses-library
+82-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+83            android:name="androidx.window.extensions"
+83-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+84            android:required="false" />
+84-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+85        <uses-library
+85-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+86            android:name="androidx.window.sidecar"
+86-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+87            android:required="false" />
+87-->[androidx.window:window:1.0.0-beta04] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\dee59bb480020f42d53c2ea15e4501f7\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+88
+89        <provider
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
+90            android:name="androidx.startup.InitializationProvider"
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
+91            android:authorities="com.example.flutter_application_4.androidx-startup"
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
+92            android:exported="false" >
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
+93            <meta-data
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+94                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+95                android:value="androidx.startup" />
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+96        </provider>
+97
+98        <receiver
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+99            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+99-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+100            android:directBootAware="false"
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+101            android:enabled="true"
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+102            android:exported="true"
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+103            android:permission="android.permission.DUMP" >
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+104            <intent-filter>
+104-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+105                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+106            </intent-filter>
+107            <intent-filter>
+107-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+108                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+109            </intent-filter>
+110            <intent-filter>
+110-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+111                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+112            </intent-filter>
+113            <intent-filter>
+113-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+114                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+114-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\36aadc6eb473a87ded89a16c724c2dd8\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+115            </intent-filter>
+116        </receiver>
+117    </application>
+118
+119</manifest>

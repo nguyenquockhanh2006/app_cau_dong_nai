@@ -9,7 +9,7 @@ import 'package:latlong2/latlong.dart';
 class Detail extends StatefulWidget {
   final MapController mapController = MapController();
   final bridgeController bC = bridgeController();
-  final RepairController repairController = RepairController();
+  final repairController _repairController = repairController();
   final String text;
   Detail({Key? key, required this.text}) : super(key: key);
 

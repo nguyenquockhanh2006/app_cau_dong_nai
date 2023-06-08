@@ -61,7 +61,7 @@ class _addBridgeState extends State<addBridgeScreen> {
   String ngayHoanThanh = "0001-01-01";
   //final TextEditingController _controllerNgayHoanThanh = TextEditingController(); --> controllerNgayHoanThanh
   // ignore: avoid_init_to_null
-  int? chiPhiXayDung = null;
+  int? chiPhiXayDung;
   final TextEditingController _controllerChiPhiXayDung =
       TextEditingController();
   String chuDauTu = "";
@@ -183,6 +183,12 @@ class _addBridgeState extends State<addBridgeScreen> {
   // hàm thêm
 
   void addBridge() async {
+    int? chiPhiTemp;
+    if (_controllerChiPhiXayDung.text.toString() == '') {
+      chiPhiTemp = null;
+    } else {
+      chiPhiTemp = int.parse(_controllerChiPhiXayDung.text.toString());
+    }
     result = await bC.postMyAPI(
         anhCayCau,
         anhMatCat,
@@ -199,7 +205,7 @@ class _addBridgeState extends State<addBridgeScreen> {
         viDo,
         ngayKhoiCong,
         ngayHoanThanh,
-        chiPhiXayDung,
+        chiPhiTemp,
         chuDauTu,
         donViThietKe,
         donViThiCong,
@@ -224,7 +230,7 @@ class _addBridgeState extends State<addBridgeScreen> {
         chieuCaoBanMatCau,
         beRongLanCan);
     if (result == 200) {
-      print('thành công');
+      print('thành công $chiPhiTemp');
       setState(() {
         Navigator.push(
           context,
@@ -254,8 +260,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text('Thông báo'),
-                      content: Text(
-                          'Bạn cập nhật lại thông tin của   ${_controllerTenCayCau.text}'),
+                      content: Text('Xác nhận thêm cầu ${tenCayCau}'),
                       actions: [
                         TextButton(
                           child: const Text('Huỷ bỏ'),
@@ -264,7 +269,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                           },
                         ),
                         TextButton(
-                          child: const Text('Xác nhận cập nhật'),
+                          child: const Text('Thêm'),
                           onPressed: () {
                             // Xử lý khi người dùng chọn xác nhận
                             addBridge();
@@ -1113,8 +1118,8 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     chiPhiXayDung = null;
                                   } else {
                                     //Set chi phí đúng
-                                    //chiPhiXayDung = int.parse(newValue);
-                                    chiPhiXayDung = null; // tạo chi phí null
+                                    chiPhiXayDung = int.parse(newValue.trim());
+                                    //chiPhiXayDung = null; // tạo chi phí null
                                   }
                                 });
                                 print('Chi phí xây dưng: $chiPhiXayDung');

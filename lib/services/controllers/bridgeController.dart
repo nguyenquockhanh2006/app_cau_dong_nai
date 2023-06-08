@@ -64,7 +64,7 @@ class bridgeController {
 
     final response = await http.post(
       Uri.parse(url),
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json; charset=UTF-8'},
       body: jsonEncode(<String, dynamic>{
         'TenCayCau': tenCayCau,
         'LoaiCau': loaiCau,
@@ -98,7 +98,7 @@ class bridgeController {
         'DonViThietKe': donViThietKe,
         'DonViThiCong': donViThiCong,
         'DonViGiamSat': donViGiamSat,
-        'ChiPhiXayDung': chiPhiXayDung,
+        'ChiPhiXayDung': null, //chiPhiXayDung, //!=null?12:null,
         'ChieuDaiNhip': chieuDaiNhip,
         'BeRongXeChay': beRongXeChay,
         'KhoangCachDamChinh': khoangCachDamChinh,
@@ -118,6 +118,7 @@ class bridgeController {
       return -1;
     }
   }
+
   Future<void> deleteRecord(int id) async {
     final String apiUrl = 'http://171.244.8.103:9003/api/bridge/$id';
     http.Response response = await http.delete(Uri.parse(apiUrl));
@@ -127,6 +128,38 @@ class bridgeController {
     } else {
       // Lỗi xóa bản ghi
       print('Failed to delete record: ${response.reasonPhrase}');
+    }
+  }
+
+  Future<List<String>> getBridgeNameApi() async {
+    const String apiUrl = 'http://171.244.8.103:9003/api/bridge';
+    http.Response response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      var data = jsonResponse["Data"];
+      List<String> repairList = [];
+      for (var jsonModel in data) {
+        repairList.add(bridgeModel.fromJson(jsonModel).TenCayCau);
+      }
+      return repairList;
+    } else {
+      throw Exception('Failed to load bridge data from API');
+    }
+  }
+
+  Future<int> getLength() async {
+    const String apiUrl = 'http://171.244.8.103:9003/api/bridge';
+    http.Response response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      var data = jsonResponse["Data"];
+      List<String> repairList = [];
+      for (var jsonModel in data) {
+        repairList.add(bridgeModel.fromJson(jsonModel).TenCayCau);
+      }
+      return repairList.length;
+    } else {
+      return 0;
     }
   }
 }

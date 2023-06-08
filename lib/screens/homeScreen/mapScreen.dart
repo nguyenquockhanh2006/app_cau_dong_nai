@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:flutter_application_4/screens/homeScreen/detailScreen.dart';
+import 'package:geolocator/geolocator.dart';
+import 'dart:async';
+import 'dart:math' as Math;
 
 class flutter_map_load extends StatefulWidget {
   const flutter_map_load({Key? key}) : super(key: key);
@@ -16,23 +19,152 @@ class flutter_map_load extends StatefulWidget {
 class _MyMapState extends State<flutter_map_load> {
   final MapController mapController = MapController();
   List<Marker> markers = [];
+  bool servicestatus = false;
+  bool haspermission = false;
+  late LocationPermission permission;
+  late Position position;
+  late StreamSubscription<Position> positionStream;
 
   @override
   void initState() {
     super.initState();
     fetchData();
+    checkGps();
     //setJson();
   }
+  checkGps() async {
+      servicestatus = await Geolocator.isLocationServiceEnabled();
+      if(servicestatus){
+            permission = await Geolocator.checkPermission();
+          
+            if (permission == LocationPermission.denied) {
+                permission = await Geolocator.requestPermission();
+                if (permission == LocationPermission.denied) {
+                    print('Location permissions are denied');
+                }else if(permission == LocationPermission.deniedForever){
+                    print("'Location permissions are permanently denied");
+                }else{
+                   haspermission = true;
+                }
+            }else{
+               haspermission = true;
+            }
 
-  Future<void> setJson() async {
-    jsonController jC = jsonController();
-    jC.writeFileJson();
+            if(haspermission){
+                setState(() {
+                  //refresh the UI
+                });
+
+                getLocation();
+            }
+      }else{
+        print("GPS Service is not enabled, turn on GPS location");
+      }
+
+      setState(() {
+         //refresh the UI
+      });
   }
+  Future<List<double>> getLocation() async {
+      position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      double long = position.longitude;
+      double lat = position.latitude;
+      setState(() {
+         //refresh UI
+      });
 
+      LocationSettings locationSettings = LocationSettings(
+            accuracy: LocationAccuracy.high, //accuracy of the location data
+            distanceFilter: 100, //minimum distance (measured in meters) a 
+      );
+
+      StreamSubscription<Position> positionStream = Geolocator.getPositionStream(
+            locationSettings: locationSettings).listen((Position position) {
+            
+            setState(() {
+              //refresh UI on update
+            });
+      });
+      return Future.value([lat,long]);;
+  }
   Future<void> fetchData() async {
     bridgeController bC = bridgeController();
+    List<Container> myContainerList = [];
     List<bridgeModel> listBridgeModel = await bC.getApi();
     for (var bridge in listBridgeModel) {
+      getLocation().then((List<double> values) {
+        final distance = Distance().as(LengthUnit.Meter, LatLng(bridge.KinhDo, bridge.ViDo), LatLng(values[0],values[1]));
+        if(distance <= 2000){
+          print('Khoảng cách vs ${bridge.TenCayCau} là: $distance m');
+          myContainerList.add(
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(7),
+              child: GestureDetector(
+                  onTap: () =>{
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Detail(text:bridge.TenCayCau,)),
+                    )
+                  },
+                  child:  Card(
+                    elevation: 5.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(7.0),
+                    ),
+                    child: ListTile(
+                      title: Text('${bridge.TenCayCau}'),
+                      subtitle: Text('Khoảng cách $distance m'),
+                    ),
+                ),
+                )
+              )
+          );
+        }
+        markers.add(
+              Marker(
+              point: LatLng(values[0],values[1]), 
+              builder: (ctx) => Container(
+                child: IconButton(
+                  icon:Icon(
+                    Icons.accessibility,
+                    color: Color(0xff0077b6),
+                    size: 40,
+                    ) ,
+                  onPressed: ()=> {
+                    showModalBottomSheet<void>(
+                    context: ctx,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 400,
+                        child: 
+                        SingleChildScrollView(
+                        child:
+                        Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 30,
+                          decoration: BoxDecoration(
+                            color: Colors.blue
+                          ),
+                          padding: EdgeInsets.all(7),
+                          child:Text(
+                            'Cầu gần bạn trong khoảng cách 2000 mét',
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                          ),
+                        ),
+                        for (Container container in myContainerList) container,
+                      ],)),);
+                  },)}
+                  ),
+                  )
+                  ),
+            );
+      });
       markers.add(
         Marker(
           width: 80.0,

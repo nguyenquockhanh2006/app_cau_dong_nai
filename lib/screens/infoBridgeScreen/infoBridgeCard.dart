@@ -89,7 +89,8 @@ class _infoBridgeState extends State<infoBridge> {
                                 builder: (BuildContext context) {
                                   return AlertDialog(
                                     title: const Text('Thông báo'),
-                                    content: Text('Bạn muốn xóa ${bridgeModelTemp.TenCayCau}'),
+                                    content: Text(
+                                        'Bạn muốn xóa ${bridgeModelTemp.TenCayCau}'),
                                     actions: [
                                       TextButton(
                                         child: const Text('Huỷ bỏ'),
