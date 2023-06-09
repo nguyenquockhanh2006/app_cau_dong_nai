@@ -1,3 +1,4 @@
+import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 import 'package:flutter_application_4/services/controllers/bridgeController.dart';
 import 'package:flutter_application_4/services/controllers/jsonController.dart';
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
@@ -32,138 +33,146 @@ class _MyMapState extends State<flutter_map_load> {
     checkGps();
     //setJson();
   }
+
   checkGps() async {
-      servicestatus = await Geolocator.isLocationServiceEnabled();
-      if(servicestatus){
-            permission = await Geolocator.checkPermission();
-          
-            if (permission == LocationPermission.denied) {
-                permission = await Geolocator.requestPermission();
-                if (permission == LocationPermission.denied) {
-                    print('Location permissions are denied');
-                }else if(permission == LocationPermission.deniedForever){
-                    print("'Location permissions are permanently denied");
-                }else{
-                   haspermission = true;
-                }
-            }else{
-               haspermission = true;
-            }
+    servicestatus = await Geolocator.isLocationServiceEnabled();
+    if (servicestatus) {
+      permission = await Geolocator.checkPermission();
 
-            if(haspermission){
-                setState(() {
-                  //refresh the UI
-                });
-
-                getLocation();
-            }
-      }else{
-        print("GPS Service is not enabled, turn on GPS location");
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          print('Location permissions are denied');
+        } else if (permission == LocationPermission.deniedForever) {
+          print("'Location permissions are permanently denied");
+        } else {
+          haspermission = true;
+        }
+      } else {
+        haspermission = true;
       }
 
-      setState(() {
-         //refresh the UI
-      });
+      if (haspermission) {
+        setState(() {
+          //refresh the UI
+        });
+
+        getLocation();
+      }
+    } else {
+      print("GPS Service is not enabled, turn on GPS location");
+    }
+
+    setState(() {
+      //refresh the UI
+    });
   }
+
   Future<List<double>> getLocation() async {
-      position = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      double long = position.longitude;
-      double lat = position.latitude;
+    position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    double long = position.longitude;
+    double lat = position.latitude;
+    setState(() {
+      //refresh UI
+    });
+
+    LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high, //accuracy of the location data
+      distanceFilter: 100, //minimum distance (measured in meters) a
+    );
+
+    StreamSubscription<Position> positionStream =
+        Geolocator.getPositionStream(locationSettings: locationSettings)
+            .listen((Position position) {
       setState(() {
-         //refresh UI
+        //refresh UI on update
       });
-
-      LocationSettings locationSettings = LocationSettings(
-            accuracy: LocationAccuracy.high, //accuracy of the location data
-            distanceFilter: 100, //minimum distance (measured in meters) a 
-      );
-
-      StreamSubscription<Position> positionStream = Geolocator.getPositionStream(
-            locationSettings: locationSettings).listen((Position position) {
-            
-            setState(() {
-              //refresh UI on update
-            });
-      });
-      return Future.value([lat,long]);;
+    });
+    return Future.value([lat, long]);
+    ;
   }
+
   Future<void> fetchData() async {
     bridgeController bC = bridgeController();
     List<Container> myContainerList = [];
     List<bridgeModel> listBridgeModel = await bC.getApi();
     for (var bridge in listBridgeModel) {
       getLocation().then((List<double> values) {
-        final distance = Distance().as(LengthUnit.Meter, LatLng(bridge.KinhDo, bridge.ViDo), LatLng(values[0],values[1]));
-        if(distance <= 2000){
+        final distance = Distance().as(LengthUnit.Meter,
+            LatLng(bridge.KinhDo, bridge.ViDo), LatLng(values[0], values[1]));
+        if (distance <= 2000) {
           print('Khoảng cách vs ${bridge.TenCayCau} là: $distance m');
-          myContainerList.add(
-            Container(
+          myContainerList.add(Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(7),
               child: GestureDetector(
-                  onTap: () =>{
-                      Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Detail(text:bridge.TenCayCau,)),
-                    )
-                  },
-                  child:  Card(
-                    elevation: 5.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(7.0),
-                    ),
-                    child: ListTile(
-                      title: Text('${bridge.TenCayCau}'),
-                      subtitle: Text('Khoảng cách $distance m'),
-                    ),
+                onTap: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Detail(
+                              text: bridge.TenCayCau,
+                            )),
+                  )
+                },
+                child: Card(
+                  elevation: 5.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(7.0),
+                  ),
+                  child: ListTile(
+                    title: Text('${bridge.TenCayCau}'),
+                    subtitle: Text('Khoảng cách $distance m'),
+                  ),
                 ),
-                )
-              )
-          );
+              )));
         }
         markers.add(
-              Marker(
-              point: LatLng(values[0],values[1]), 
+          Marker(
+              point: LatLng(values[0], values[1]),
               builder: (ctx) => Container(
-                child: IconButton(
-                  icon:Icon(
-                    Icons.accessibility,
-                    color: Color(0xff0077b6),
-                    size: 40,
-                    ) ,
-                  onPressed: ()=> {
-                    showModalBottomSheet<void>(
-                    context: ctx,
-                    builder: (BuildContext context) {
-                      return Container(
-                        height: 400,
-                        child: 
-                        SingleChildScrollView(
-                        child:
-                        Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 30,
-                          decoration: BoxDecoration(
-                            color: Colors.blue
-                          ),
-                          padding: EdgeInsets.all(7),
-                          child:Text(
-                            'Cầu gần bạn trong khoảng cách 2000 mét',
-                            style: TextStyle(
-                              color: Colors.white
-                            ),
-                          ),
+                    child: IconButton(
+                        icon: Icon(
+                          Icons.accessibility,
+                          color: Color(0xff0077b6),
+                          size: 40,
                         ),
-                        for (Container container in myContainerList) container,
-                      ],)),);
-                  },)}
-                  ),
-                  )
-                  ),
-            );
+                        onPressed: () => {
+                              showModalBottomSheet<void>(
+                                context: ctx,
+                                builder: (BuildContext context) {
+                                  return Container(
+                                    height: 400,
+                                    child: SingleChildScrollView(
+                                        child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          height: 30,
+                                          decoration:
+                                              BoxDecoration(color: Colors.blue),
+                                          padding: EdgeInsets.all(7),
+                                          child: Text(
+                                            'Cầu gần bạn trong khoảng cách 2000 mét',
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        for (Container container
+                                            in myContainerList)
+                                          container,
+                                      ],
+                                    )),
+                                  );
+                                },
+                              )
+                            }),
+                  )),
+        );
       });
       markers.add(
         Marker(
@@ -183,136 +192,134 @@ class _MyMapState extends State<flutter_map_load> {
                 showModalBottomSheet<void>(
                   context: ctx,
                   builder: (BuildContext context) {
-                    return Column(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(top: 15, bottom: 7),
-                          child: Text(
-                            bridge.TenCayCau.toUpperCase(),
-                            style: const TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.bold),
+                    return SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(top: 15, bottom: 7),
+                            child: Text(
+                              bridge.TenCayCau.toUpperCase(),
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin:
-                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
-                          height: 180,
-                          child: Image.network(
-                            bridge.HinhAnhCau != ""
-                                ? 'http://171.244.8.103:9003/${bridge.HinhAnhCau}'
-                                : 'http://171.244.8.103:9003//placeholder.jpg',
-                            width: MediaQuery.of(context).size.width,
+                          Container(
+                            margin: const EdgeInsets.only(
+                                right: 10, left: 10, bottom: 7),
                             height: 180,
-                            fit: BoxFit.cover,
+                            child: Image.network(
+                              bridge.HinhAnhCau != ""
+                                  ? 'http://171.244.8.103:9003/${bridge.HinhAnhCau}'
+                                  : 'http://171.244.8.103:9003//placeholder.jpg',
+                              width: MediaQuery.of(context).size.width,
+                              height: 180,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin:
-                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 0.7 / 4,
-                                child: const Text(
-                                  'Địa điểm:',
+                          Container(
+                            margin: const EdgeInsets.only(
+                                right: 10, left: 10, bottom: 7),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width *
+                                      0.7 /
+                                      4,
+                                  child: const Text(
+                                    'Địa điểm:',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 3 / 4,
+                                  child: Text(bridge.DiaDiem),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                right: 10, left: 10, bottom: 7),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  'Chiều dài: ',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
+                                Text(bridge.ChieuDai),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(
+                                right: 10, left: 10, bottom: 7),
+                            child: Row(
+                              children: [
+                                const Text(
+                                  'Chiều rộng: ',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(bridge.ChieuRong),
+                              ],
+                            ),
+                          ),
+                          Center(
+                              // width: MediaQuery.of(context).size.width,
+                              // margin: const EdgeInsets.all(7),
+                              child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Detail(
+                                              text: bridge.TenCayCau,
+                                            )),
+                                  );
+                                },
+                                icon: const Icon(Icons.info),
+                                label: const Text('Chi tiết'),
+                                style: TextButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    elevation: 2,
+                                    backgroundColor: Colors.blue),
                               ),
                               SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width * 3 / 4,
-                                child: Text(bridge.DiaDiem),
+                                width: 20,
+                              ),
+                              OutlinedButton.icon(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Color(0xffe5383b),
+                                ),
+                                onPressed: () => {
+                                  Navigator.of(context).pop("Done"),
+                                },
+                                label: const Text(
+                                  'Đóng',
+                                  style: TextStyle(color: Color(0xffe5383b)),
+                                ),
+                                style: OutlinedButton.styleFrom(
+                                  side: const BorderSide(
+                                      color: Color(0xffe5383b)),
+                                ),
                               ),
                             ],
+                          )),
+                          SizedBox(
+                            height: 20,
                           ),
-                        ),
-                        Container(
-                          margin:
-                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Chiều dài: ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(bridge.ChieuDai),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin:
-                              const EdgeInsets.only(right: 10, left: 10, bottom: 7),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Chiều rộng: ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(bridge.ChieuRong),
-                            ],
-                          ),
-                        ),
-                        Container(
-                            width: 400,
-                            margin: const EdgeInsets.all(7),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  height: 35,
-                                  width: 180,
-                                  padding: const EdgeInsets.only(left: 30, right: 10),
-                                  child: TextButton.icon(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Detail(
-                                                  text: bridge.TenCayCau,
-                                                )),
-                                      );
-                                    },
-                                    icon: const Icon(Icons.info),
-                                    label: const Text('Chi tiết'),
-                                    style: TextButton.styleFrom(
-                                        foregroundColor: Colors.white,
-                                        elevation: 2,
-                                        backgroundColor: Colors.blue),
-                                  ),
-                                ),
-                                Container(
-                                  height: 35,
-                                  width: 180,
-                                  padding: const EdgeInsets.only(left: 10, right: 30),
-                                  child: OutlinedButton.icon(
-                                    icon: const Icon(
-                                      Icons.close,
-                                      color: Color(0xffe5383b),
-                                    ),
-                                    onPressed: () => {
-                                      Navigator.of(context).pop("Done"),
-                                    },
-                                    label: const Text(
-                                      'Đóng',
-                                      style:
-                                          TextStyle(color: Color(0xffe5383b)),
-                                    ),
-                                    style: OutlinedButton.styleFrom(
-                                      side:
-                                          const BorderSide(color: Color(0xffe5383b)),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )),
-                      ],
+                        ],
+                      ),
                     );
                   },
                 );

@@ -24,13 +24,15 @@ class _MyWidgetState extends State<list_info_bridge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Danh sách cầu'),
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: const Text('Danh sách cầu'),
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.5 / 10,
+              height: MediaQuery.of(context).size.height * 0.5/10,
               margin: const EdgeInsets.all(13),
               child: TextField(
                 onChanged: (newValue) {
@@ -54,7 +56,7 @@ class _MyWidgetState extends State<list_info_bridge> {
               scrollDirection: Axis.vertical,
               child: Column(children: [
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.95,
                   child: FutureBuilder<List<bridgeModel>>(
                     future: _futureBridgeList,
                     builder: (context, snapshot) {
@@ -164,6 +166,8 @@ class _MyWidgetState extends State<list_info_bridge> {
               ]),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
