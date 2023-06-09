@@ -48,8 +48,8 @@ class _DetailState extends State<DetailAndUpdate> {
   final TextEditingController _controllerNgayKhoiCong = TextEditingController();
   final TextEditingController _controllerNgayHoanThanh =
       TextEditingController();
-  String ngayKhoiCong = '';
-  String ngayHoanThanh = '';
+  late String ngayKhoiCong = '';
+  late String ngayHoanThanh = '';
   int? chiPhiXayDung = null;
   final TextEditingController _controllerChiPhiXayDung =
       TextEditingController();
@@ -195,8 +195,8 @@ class _DetailState extends State<DetailAndUpdate> {
         _controllerDiaDiem.text,
         KD,
         VD,
-        ngayKhoiCong,
-        ngayHoanThanh,
+        _controllerNgayKhoiCong.text,
+        _controllerNgayHoanThanh.text,
         null,
         _controllerChuDauTu.text,
         _controllerDonViThietKe.text,
@@ -253,7 +253,9 @@ class _DetailState extends State<DetailAndUpdate> {
     chiPhiXayDung = detaiTemp.chiPhiXayDung as int;
     _controllerChiPhiXayDung.text = chiPhiXayDung.toString();
     _controllerNgayKhoiCong.text = detaiTemp.ngayKhoiCong as String;
+    ngayKhoiCong = detaiTemp.ngayKhoiCong as String;
     _controllerNgayHoanThanh.text = detaiTemp.ngayHoanThanh as String;
+    ngayHoanThanh = detaiTemp.ngayHoanThanh as String;
     chiPhiXayDung = detaiTemp.chiPhiXayDung;
     _controllerChuDauTu.text = detaiTemp.chuDauTu as String;
     _controllerDonViThietKe.text = detaiTemp.donViThietKe as String;
@@ -1039,7 +1041,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             bottom: 0,
                                             left: 5,
                                             right: 5),
-                                        //hintText: ngayKhoiCong,
+                                        // hintText: ngayKhoiCong,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(7),
@@ -1064,7 +1066,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                           NKhoiCong = DateTime(picked.year,
                                               picked.month, picked.day);
                                           _controllerNgayKhoiCong.text =
-                                              ('${NKhoiCong.year.toString()}/${NKhoiCong.month.toString()}/${NKhoiCong.day.toString()}');
+                                              ('${NKhoiCong.year.toString()}-${NKhoiCong.month.toString()}-${NKhoiCong.day.toString()}');
 
                                           print('Ngày khởi công: ' +
                                               _controllerNgayKhoiCong.text);
@@ -1105,7 +1107,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             left: 5,
                                             right: 5),
                                         // labelText: 'Tên cầu',
-                                        //hintText: ngayHoanThanh,
+                                        // hintText: ngayHoanThanh,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(7),
@@ -1130,7 +1132,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                           NHoanThanh = DateTime(picked.year,
                                               picked.month, picked.day);
                                           _controllerNgayHoanThanh.text =
-                                              ('${NHoanThanh.year.toString()}/${NHoanThanh.month.toString()}/${NHoanThanh.day.toString()}');
+                                              ('${NHoanThanh.year.toString()}-${NHoanThanh.month.toString()}-${NHoanThanh.day.toString()}');
 
                                           print('Ngày hoàn thành: ' +
                                               _controllerNgayHoanThanh.text);

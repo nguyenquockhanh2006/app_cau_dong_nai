@@ -56,9 +56,9 @@ class _addBridgeState extends State<addBridgeScreen> {
   double viDo = 10.96701421956938;
   //final TextEditingController _controllerViDo = TextEditingController(); --> controllerlng
   // thông tin thi công
-  String ngayKhoiCong = "0001-01-01";
+  late String ngayKhoiCong = "0001-01-01";
   //final TextEditingController _controllerNgayKhoiCong = TextEditingController(); --> controllerNgayKhoiCong
-  String ngayHoanThanh = "0001-01-01";
+  late String ngayHoanThanh = "0001-01-01";
   //final TextEditingController _controllerNgayHoanThanh = TextEditingController(); --> controllerNgayHoanThanh
   // ignore: avoid_init_to_null
   int? chiPhiXayDung;
@@ -1015,7 +1015,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                   NKhoiCong = DateTime(
                                       picked.year, picked.month, picked.day);
                                   _ngaykhoicong.text =
-                                      ('${NKhoiCong.year.toString()}/${NKhoiCong.month.toString()}/${NKhoiCong.day.toString()}');
+                                      ('${NKhoiCong.year.toString()}-${NKhoiCong.month.toString()}-${NKhoiCong.day.toString()}');
                                   ngayKhoiCong = _ngaykhoicong.text;
                                   print('Ngày khởi công: $ngayKhoiCong');
                                 });
@@ -1078,7 +1078,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                   NHoanThanh = DateTime(
                                       picked.year, picked.month, picked.day);
                                   _ngayhoanthanh.text =
-                                      ('${NHoanThanh.year.toString()}/${NHoanThanh.month.toString()}/${NHoanThanh.day.toString()}');
+                                      ('${NHoanThanh.year.toString()}-${NHoanThanh.month.toString()}-${NHoanThanh.day.toString()}');
                                   ngayHoanThanh = _ngayhoanthanh.text;
                                   print('Ngày hoàn thành: $ngayHoanThanh');
                                 });

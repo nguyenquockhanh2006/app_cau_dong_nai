@@ -147,6 +147,25 @@ class bridgeController {
     }
   }
 
+  Future<List<String>> getTypeNameApi() async {
+    const String apiUrl = 'http://171.244.8.103:9003/api/bridge';
+    http.Response response = await http.get(Uri.parse(apiUrl));
+    if (response.statusCode == 200) {
+      var jsonResponse = json.decode(response.body);
+      var data = jsonResponse["Data"];
+      List<String> repairList = [];
+      repairList.add('Chưa xác định');
+      for (var jsonModel in data) {
+        if (bridgeModel.fromJson(jsonModel).LoaiCau.toString() != '') {
+          repairList.add(bridgeModel.fromJson(jsonModel).LoaiCau);
+        }
+      }
+      return repairList;
+    } else {
+      throw Exception('Failed to load bridge data from API');
+    }
+  }
+
   Future<int> getLength() async {
     const String apiUrl = 'http://171.244.8.103:9003/api/bridge';
     http.Response response = await http.get(Uri.parse(apiUrl));
