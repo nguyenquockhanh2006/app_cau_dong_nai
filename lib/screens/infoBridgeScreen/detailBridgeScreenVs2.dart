@@ -510,7 +510,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Tên cây cầu'),
                                       ),
-                                      Container(
+                                      Expanded(child: Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -539,7 +539,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -551,7 +551,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Loại cầu'),
                                       ),
-                                      Container(
+                                      Expanded(child: Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -581,7 +581,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -593,7 +593,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Cấp'),
                                       ),
-                                      Container(
+                                      Expanded(child: Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -622,7 +622,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -634,7 +634,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Lý trình'),
                                       ),
-                                      Container(
+                                      Expanded(child: Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -664,7 +664,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -676,7 +676,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Tải trọng'),
                                       ),
-                                      Container(
+                                      Expanded(child: Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -706,7 +706,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -718,7 +718,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Chiều dài cầu (m)'),
                                       ),
-                                      Container(
+                                      Expanded(child: Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -748,7 +748,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -760,7 +760,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         width: 120,
                                         child: Text('Chiều rộng cầu (m)'),
                                       ),
-                                      Container(
+                                      Expanded(child:  Container(
                                         width:
                                             MediaQuery.of(context).size.width -
                                                 180,
@@ -790,7 +790,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ),),
                                     ],
                                   ),
                                 ),
@@ -827,7 +827,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                 width: 70,
                                 child: Text('Địa điểm'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 260,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -850,7 +850,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ]),
                           ),
                           Container(
@@ -859,7 +859,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                 width: 70,
                                 child: Text('Kinh độ'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 260,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -886,7 +886,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ]),
                           ),
                           Container(
@@ -895,7 +895,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                 width: 70,
                                 child: Text('Vĩ độ'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 260,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -921,7 +921,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ]),
                           ),
                           Container(
@@ -1026,7 +1026,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Ngày khởi công'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 145,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1047,7 +1047,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),),
                                   ElevatedButton(
                                     onPressed: () async {
                                       // Future<void> _selectDate(BuildContext context) async {
@@ -1091,7 +1091,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Ngày hoàn thành'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 145,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1113,7 +1113,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),),
                                   ElevatedButton(
                                     onPressed: () async {
                                       // Future<void> _selectDate(BuildContext context) async {
@@ -1157,7 +1157,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Chi phí xây dựng'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 210,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1195,7 +1195,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),),
                                 ],
                               ),
                             ),
@@ -1207,7 +1207,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Chủ đầu tư'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 210,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1231,7 +1231,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),),
                                 ],
                               ),
                             ),
@@ -1243,7 +1243,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Đơn vị thiết kế'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 210,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1270,7 +1270,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),),
                                 ],
                               ),
                             ),
@@ -1282,7 +1282,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Đơn vị thi công'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 210,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1310,7 +1310,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),),
                                 ],
                               ),
                             ),
@@ -1322,7 +1322,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                     width: 120,
                                     child: Text('Đơn vị giám sát'),
                                   ),
-                                  Container(
+                                  Expanded(child: Container(
                                     width: 210,
                                     margin: const EdgeInsets.all(7),
                                     child: TextField(
@@ -1350,7 +1350,7 @@ class _DetailState extends State<DetailAndUpdate> {
                                         ),
                                       ),
                                     ),
-                                  ),
+                                  ),)
                                 ],
                               ),
                             ),

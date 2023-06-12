@@ -63,24 +63,26 @@ class _MyWidgetState extends State<listInfoBridge> {
           children: [
             Row(
               children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 3 / 4,
-                  margin: const EdgeInsets.all(13),
-                  child: TextField(
-                    onChanged: (newValue) {
-                      setState(() {
-                        nameBridge = newValue;
-                      });
-                      print(nameBridge);
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'Tìm kiếm',
-                      hintText: 'Nhập...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: const BorderSide(),
+                Expanded(
+                  child: Container(
+                    //width: MediaQuery.of(context).size.width * 4 / 5,
+                    margin: const EdgeInsets.all(13),
+                    child: TextField(
+                      onChanged: (newValue) {
+                        setState(() {
+                          nameBridge = newValue;
+                        });
+                        print(nameBridge);
+                      },
+                      decoration: InputDecoration(
+                        labelText: 'Tìm kiếm',
+                        hintText: 'Nhập...',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          borderSide: const BorderSide(),
+                        ),
+                        suffixIcon: const Icon(Icons.search),
                       ),
-                      suffixIcon: const Icon(Icons.search),
                     ),
                   ),
                 ),
@@ -137,7 +139,7 @@ class _MyWidgetState extends State<listInfoBridge> {
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              1.5 /
+                                              2 /
                                               3,
                                           margin: const EdgeInsets.all(7),
                                           child: TextField(

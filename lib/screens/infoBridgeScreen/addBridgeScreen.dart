@@ -431,7 +431,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                   _imageFile == null
                                       ? 'https://i.imgur.com/bkB4dqc.png'
                                       : 'http://171.244.8.103:9003/$_hinhAnhCauSrc',
-                                )),
+                                ),),
                             TextButton(
                                 onPressed: () => {
                                       _pickImage(ImageSource.gallery),
@@ -524,24 +524,26 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Tên cây cầu'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              onChanged: (newValue) {
-                                setState(() {
-                                  tenCayCau = newValue;
-                                });
-                                print('tên cầu: $tenCayCau');
-                              },
-                              controller: _controllerTenCayCau,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                hintText: 'Nhập tên cầu...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    tenCayCau = newValue;
+                                  });
+                                  print('tên cầu: $tenCayCau');
+                                },
+                                controller: _controllerTenCayCau,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  hintText: 'Nhập tên cầu...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -552,31 +554,32 @@ class _addBridgeState extends State<addBridgeScreen> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const SizedBox(
                             width: 120,
                             child: Text('Loại cầu'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerLoaiCau,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  loaiCau = newValue;
-                                });
-                                print('Loại cầu : $loaiCau');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập loại cầu...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerLoaiCau,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    loaiCau = newValue;
+                                  });
+                                  print('Loại cầu : $loaiCau');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập loại cầu...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -592,25 +595,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Cấp'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerCap,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  cap = newValue;
-                                });
-                                print('Cấp :$cap');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập cấp...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerCap,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    cap = newValue;
+                                  });
+                                  print('Cấp :$cap');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập cấp...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -626,25 +631,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Lý trình'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerLyTrinh,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  lyTrinh = newValue;
-                                });
-                                print('Lý trình: $lyTrinh');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập lý trình...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerLyTrinh,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    lyTrinh = newValue;
+                                  });
+                                  print('Lý trình: $lyTrinh');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập lý trình...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -660,25 +667,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Tải trọng'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerTaiTrong,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  taiTrong = newValue;
-                                });
-                                print('Tải trọng: $taiTrong');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập tải trọng...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerTaiTrong,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    taiTrong = newValue;
+                                  });
+                                  print('Tải trọng: $taiTrong');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập tải trọng...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -694,25 +703,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chiều dài cầu (m)'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerChieuDai,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  chieuDai = newValue;
-                                });
-                                print('Chiều dài: $chieuDai');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập chiều dài',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerChieuDai,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    chieuDai = newValue;
+                                  });
+                                  print('Chiều dài: $chieuDai');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập chiều dài',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -728,25 +739,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chiều rộng cầu (m)'),
                           ),
-                          Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerChieuRong,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  chieuRong = newValue;
-                                });
-                                print('Chiều rộng: $chieuRong');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập chiều rộng...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerChieuRong,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    chieuRong = newValue;
+                                  });
+                                  print('Chiều rộng: $chieuRong');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập chiều rộng...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -794,25 +807,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                           width: 70,
                           child: Text('Địa điểm'),
                         ),
-                        Container(
-                          width: 260,
-                          margin: const EdgeInsets.all(7),
-                          child: TextField(
-                            controller: _controllerDiaDiem,
-                            onChanged: (newValue) {
-                              setState(() {
-                                diaDiem = newValue;
-                              });
-                              print('Địa điểm: $diaDiem');
-                            },
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.only(
-                                  top: 0, bottom: 0, left: 5, right: 5),
-                              // labelText: 'Tên cầu',
-                              hintText: 'Nhập địa điểm...',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(7),
-                                borderSide: const BorderSide(),
+                        Expanded(
+                          child: Container(
+                            width: 260,
+                            margin: const EdgeInsets.all(7),
+                            child: TextField(
+                              controller: _controllerDiaDiem,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  diaDiem = newValue;
+                                });
+                                print('Địa điểm: $diaDiem');
+                              },
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.only(
+                                    top: 0, bottom: 0, left: 5, right: 5),
+                                // labelText: 'Tên cầu',
+                                hintText: 'Nhập địa điểm...',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(7),
+                                  borderSide: const BorderSide(),
+                                ),
                               ),
                             ),
                           ),
@@ -825,30 +840,32 @@ class _addBridgeState extends State<addBridgeScreen> {
                           width: 70,
                           child: Text('Kinh độ'),
                         ),
-                        Container(
-                          width: 260,
-                          margin: const EdgeInsets.all(7),
-                          child: TextField(
-                            enabled: false,
-                            onChanged: (newValue) {
-                              setState(() {
-                                if (newValue.trim() == "") {
-                                  kinhDo = 0.00;
-                                } else {
-                                  kinhDo = double.parse(newValue);
-                                }
-                              });
-                              print('Kinh độ: $kinhDo');
-                            },
-                            controller: _controllerlat,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.only(
-                                  top: 0, bottom: 0, left: 5, right: 5),
-                              // labelText: 'Tên cầu',
-                              hintText: 'Nhập ...',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(7),
-                                borderSide: const BorderSide(),
+                        Expanded(
+                          child: Container(
+                            width: 260,
+                            margin: const EdgeInsets.all(7),
+                            child: TextField(
+                              enabled: false,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  if (newValue.trim() == "") {
+                                    kinhDo = 0.00;
+                                  } else {
+                                    kinhDo = double.parse(newValue);
+                                  }
+                                });
+                                print('Kinh độ: $kinhDo');
+                              },
+                              controller: _controllerlat,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.only(
+                                    top: 0, bottom: 0, left: 5, right: 5),
+                                // labelText: 'Tên cầu',
+                                hintText: 'Nhập ...',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(7),
+                                  borderSide: const BorderSide(),
+                                ),
                               ),
                             ),
                           ),
@@ -861,29 +878,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                           width: 70,
                           child: Text('Vĩ độ'),
                         ),
-                        Container(
-                          width: 260,
-                          margin: const EdgeInsets.all(7),
-                          child: TextField(
-                            enabled: false,
-                            onChanged: (newValue) {
-                              setState(() {
-                                if (newValue.trim() == "") {
-                                  viDo = 0.0;
-                                } else {
-                                  viDo = double.parse(newValue);
-                                }
-                              });
-                              print('Vĩ độ: $viDo');
-                            },
-                            controller: _controllerlng,
-                            decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.only(
-                                  top: 0, bottom: 0, left: 5, right: 5),
-                              hintText: 'Nhập ...',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(7),
-                                borderSide: const BorderSide(),
+                        Expanded(
+                          child: Container(
+                            width: 260,
+                            margin: const EdgeInsets.all(7),
+                            child: TextField(
+                              enabled: false,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  if (newValue.trim() == "") {
+                                    viDo = 0.0;
+                                  } else {
+                                    viDo = double.parse(newValue);
+                                  }
+                                });
+                                print('Vĩ độ: $viDo');
+                              },
+                              controller: _controllerlng,
+                              decoration: InputDecoration(
+                                contentPadding: const EdgeInsets.only(
+                                    top: 0, bottom: 0, left: 5, right: 5),
+                                hintText: 'Nhập ...',
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(7),
+                                  borderSide: const BorderSide(),
+                                ),
                               ),
                             ),
                           ),
@@ -920,17 +939,6 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                             subdomains: ['a', 'b', 'c'],
                           ),
-                          // MarkerLayerOptions(
-                          //   markers: [
-                          //     Marker(
-                          //       point: LatLng(bridgeList[i].KinhDo,bridgeList[i].ViDo),
-                          //       builder: (ctx) => Icon(
-                          //       Icons.location_on,
-                          //       color: Colors.blue,
-                          //       size: 50.0,
-                          //     ),)
-                          //   ]
-                          // )
                         ],
                       ),
                     )
@@ -974,25 +982,27 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Ngày khởi công'),
                           ),
-                          Container(
-                            width: 145,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              enabled: false,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  ngayKhoiCong = newValue;
-                                });
-                                print('Ngày khởi công: $ngayKhoiCong');
-                              },
-                              controller: _ngaykhoicong,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                hintText: 'Nhập ...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 145,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                enabled: false,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    ngayKhoiCong = newValue;
+                                  });
+                                  print('Ngày khởi công: $ngayKhoiCong');
+                                },
+                                controller: _ngaykhoicong,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  hintText: 'Nhập ...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -1036,26 +1046,28 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Ngày hoàn thành'),
                           ),
-                          Container(
-                            width: 145,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              enabled: false,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  ngayHoanThanh = newValue;
-                                });
-                                print('Ngày hoàn thành: $ngayHoanThanh');
-                              },
-                              controller: _ngayhoanthanh,
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 145,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                enabled: false,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    ngayHoanThanh = newValue;
+                                  });
+                                  print('Ngày hoàn thành: $ngayHoanThanh');
+                                },
+                                controller: _ngayhoanthanh,
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
@@ -1099,7 +1111,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chi phí xây dựng'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1131,7 +1143,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1143,7 +1155,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chủ đầu tư'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1165,7 +1177,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1177,7 +1189,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Đơn vị thiết kế'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1199,7 +1211,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1211,7 +1223,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Đơn vị thi công'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1233,7 +1245,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1245,7 +1257,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Đơn vị giám sát'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1267,7 +1279,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1311,7 +1323,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số nhịp'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1341,7 +1353,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1353,7 +1365,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số mố'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1383,7 +1395,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1395,7 +1407,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số trụ'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1425,7 +1437,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1437,7 +1449,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số dầm ngang'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1467,7 +1479,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1479,7 +1491,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số dầm chính'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1509,7 +1521,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1521,7 +1533,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số lan can'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1551,7 +1563,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1563,7 +1575,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số dải phân cách'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 220,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1593,7 +1605,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1639,7 +1651,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Dầm chính'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 220,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -1661,7 +1673,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ],
                           ),
                         ),
@@ -1673,7 +1685,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Dầm ngang'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 220,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -1695,7 +1707,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ],
                           ),
                         ),
@@ -1707,7 +1719,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Bán mặt cầu'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 220,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -1729,7 +1741,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ],
                           ),
                         ),
@@ -1741,7 +1753,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Lan can'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 220,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -1763,7 +1775,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ],
                           ),
                         ),
@@ -1775,7 +1787,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Mố'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 220,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -1797,7 +1809,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ],
                           ),
                         ),
@@ -1809,7 +1821,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Trụ'),
                               ),
-                              Container(
+                              Expanded(child: Container(
                                 width: 220,
                                 margin: const EdgeInsets.all(7),
                                 child: TextField(
@@ -1831,7 +1843,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
+                              ),),
                             ],
                           ),
                         ),
@@ -1875,7 +1887,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chiều dài nhịp'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1905,7 +1917,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1917,7 +1929,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Bề rộng xe chạy (m)'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1947,7 +1959,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -1959,7 +1971,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Khoảng cách dầm chính'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -1990,7 +2002,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -2002,7 +2014,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Khoảng cách dầm ngang'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -2033,7 +2045,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -2045,7 +2057,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chiều cao bản mặt cầu (m)'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -2076,7 +2088,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
@@ -2088,7 +2100,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Bề rộng lan can (m)'),
                           ),
-                          Container(
+                          Expanded(child: Container(
                             width: 210,
                             margin: const EdgeInsets.all(7),
                             child: TextField(
@@ -2118,7 +2130,7 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 ),
                               ),
                             ),
-                          ),
+                          ),),
                         ],
                       ),
                     ),
