@@ -52,14 +52,10 @@ class _addBridgeState extends State<addBridgeScreen> {
   String diaDiem = "";
   final TextEditingController _controllerDiaDiem = TextEditingController();
   double kinhDo = 10.96701421956938;
-  //final TextEditingController _controllerKinhDo = TextEditingController(); --> controllerlat
   double viDo = 10.96701421956938;
-  //final TextEditingController _controllerViDo = TextEditingController(); --> controllerlng
   // thông tin thi công
   late String ngayKhoiCong = "0001-01-01";
-  //final TextEditingController _controllerNgayKhoiCong = TextEditingController(); --> controllerNgayKhoiCong
   late String ngayHoanThanh = "0001-01-01";
-  //final TextEditingController _controllerNgayHoanThanh = TextEditingController(); --> controllerNgayHoanThanh
   // ignore: avoid_init_to_null
   int? chiPhiXayDung;
   final TextEditingController _controllerChiPhiXayDung =

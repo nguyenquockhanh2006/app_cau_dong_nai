@@ -1,23 +1,24 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:core';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_4/screens/repairScreen/detailRepairCard.dart';
 import 'package:flutter_application_4/screens/repairScreen/repairHomeScreen.dart';
-import 'package:flutter_application_4/services/controllers/bridgeController.dart';
 import 'package:flutter_application_4/services/controllers/imageController.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
 import 'package:flutter_application_4/services/models/detailRepairModel.dart';
 import 'package:flutter_application_4/services/models/repairModel.dart';
-import 'package:image_picker/image_picker.dart';
 
 class detailRepairScreen extends StatefulWidget {
   final repairController rpC = repairController();
   //final detailRepairController dRC = detailRepairController();
   final int BridgeHistoryId;
-  detailRepairScreen({Key? key, required this.BridgeHistoryId})
+  final int bridgeId;
+  detailRepairScreen(
+      {Key? key, required this.BridgeHistoryId, required this.bridgeId})
       : super(key: key);
   @override
   State<detailRepairScreen> createState() => _detailRepairScreen();
@@ -50,8 +51,10 @@ class _detailRepairScreen extends State<detailRepairScreen> {
   imageController iC = imageController();
   //
   File? _imageFile;
-  String? _hinhAnhCauSrc ="";
+  String? _hinhAnhCauSrc = '/placeholder.jpg';
   String? anhCayCau = "";
+  int? resultSavedDetail;
+  int? resultSaved;
   Future<void> _pickImage(ImageSource source) async {
     final pickedFile = await ImagePicker().getImage(source: source);
     if (pickedFile != null) {
@@ -76,10 +79,6 @@ class _detailRepairScreen extends State<detailRepairScreen> {
     rM = await widget.rpC.getApiById(widget.BridgeHistoryId);
     _futureDetailRepairList =
         await widget.rpC.getDetailById(widget.BridgeHistoryId);
-
-    // List<String> temp = await widget.bC.getBridgeNameApi();
-    // length = await widget.bC.getLength();
-    // listNameBridge = temp;
     _controllerTenCayCau.text = rM!.TenCayCau.toString();
     _controllerNgayKiemTra.text = rM!.NgayKiemTra.toString();
     _controllerNgaySuaChua.text = rM!.NgaySuaChua.toString();
@@ -100,28 +99,19 @@ class _detailRepairScreen extends State<detailRepairScreen> {
     return tra;
   }
 
-  void addRepair() async {
-    // int? chiPhi;
-    // //String chiPhiText = _controller5.text.toString();
-    // if (_controllerChiPhiSuaChua.text.toString().trim() == '') {
-    //   chiPhi = null;
-    // } else {
-    //   chiPhi = int.parse(_controllerChiPhiSuaChua.text.toString().trim());
-    // }
-    // result = await widget.rpC.postAPI(
-    //     bridgeId,
-    //     selectedNameBridge,
-    //     _ngaykiemtra.text.toString(),
-    //     _controller2.text.toString(),
-    //     _controller3.text.toString(),
-    //     _ngaysuachua.text.toString(),
-    //     _controller4.text.toString(),
-    //     chiPhi);
-    // if (result == 200) {
-    //   print('Thành công');
-    // } else {
-    //   print('Thất bại');
-    // }
+  void saveChange() async {
+    resultSaved = await widget.rpC.putRepair(
+      widget.BridgeHistoryId,
+      widget.bridgeId,
+      _controllerNgayKiemTra.text,
+      _controllerDonViKiemTra.text,
+      _controllerNoiDungHuHong.text,
+      _controllerNgaySuaChua.text,
+      _controllerDonViSuaChua.text,
+      int.parse(_controllerChiPhiSuaChua.text),
+      //_futureDetailRepairList as List<detailRepairModel>
+    );
+    setState(() {});
   }
 
   @override
@@ -129,7 +119,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
     //final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('thêm kiểm tra/ sửa chữa'),
+        title: Text('Thêm kiểm tra/ sửa chữa'),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {
@@ -149,9 +139,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                   Container(
                     //width: MediaQuery.of(context).size.width * 1 / 3,
                     child: Image.network(
-                      _hinhAnhCauSrc != null
-                          ? 'http://171.244.8.103:9003/${_hinhAnhCauSrc}'
-                          : 'http://171.244.8.103:9003//placeholder.jpg',
+                      'http://171.244.8.103:9003/${_hinhAnhCauSrc as String}',
                       height: 150,
                       fit: BoxFit.cover,
                     ),
@@ -207,7 +195,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                               ThoiGian = DateTime(
                                   picked.year, picked.month, picked.day);
                               _controllerThemChiTietNgay.text =
-                                  ('${ThoiGian.year.toString()}/${ThoiGian.month.toString()}/${ThoiGian.day.toString()}');
+                                  ('${ThoiGian.year.toString()}-${ThoiGian.month.toString()}-${ThoiGian.day.toString()}T${ThoiGian.hour.toString()}:${ThoiGian.minute.toString()}:${ThoiGian.second.toString()}.${ThoiGian.millisecond.toString()}');
 
                               print(
                                   'Ngày : ' + _controllerThemChiTietNgay.text);
@@ -235,7 +223,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                     height: 10,
                   ),
                   TextField(
-                    enabled: false,
+                    //enabled: false,
                     onChanged: (newValue) {},
                     controller: _controllerThemChiTietNoiDung,
                     decoration: InputDecoration(
@@ -256,7 +244,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                     height: 10,
                   ),
                   TextField(
-                    enabled: false,
+                    //enabled: false,
                     onChanged: (newValue) {},
                     controller: _controllerThemChiTietGhiChu,
                     decoration: InputDecoration(
@@ -274,6 +262,22 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
+                      detailRepairModel addTemp = detailRepairModel(
+                        // repairDetailId: widget.BridgeHistoryId,
+                        // repairHistoryId: 1,
+                        // noiDung: _controllerNoiDungHuHong.text,
+                        // hinhAnh: _hinhAnhCauSrc,
+                        // ghiChu: _controllerThemChiTietGhiChu.text,
+                        // thoiGian: _controllerThemChiTietNgay.text,
+                        repairDetailId: widget.BridgeHistoryId,
+                        repairHistoryId: 32,
+                        noiDung: _controllerNoiDungHuHong.text,
+                        hinhAnh: _hinhAnhCauSrc,
+                        ghiChu: _controllerThemChiTietGhiChu.text,
+                        thoiGian: '2023-06-12T11:58:30.464',
+                      );
+                      _futureDetailRepairList?.add(addTemp);
+                      saveChange();
                       Navigator.pop(context);
                     },
                     child: const Text('Thêm'),
@@ -316,8 +320,8 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                           TextButton(
                             child: const Text('Xác nhận'),
                             onPressed: () {
-                              addRepair();
-                              if (result == 200) {
+                              saveChange();
+                              if (resultSaved == 200) {
                                 print('thành công!');
                                 Navigator.push(
                                   context,

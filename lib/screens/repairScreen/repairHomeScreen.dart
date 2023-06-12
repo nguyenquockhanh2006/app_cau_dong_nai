@@ -394,6 +394,8 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                                       BridgeHistoryId:
                                                           repair.RepairHistoryId
                                                               as int,
+                                                      bridgeId: repair.BridgeId
+                                                          as int,
                                                     )),
                                           ),
                                         },

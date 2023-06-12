@@ -38,23 +38,6 @@ class repairController {
     }
   }
 
-  // Future<List<RepairModel>> getApiWithId(int id) async {
-  //   final String apiUrl =
-  //       'http://171.244.8.103:9003/api/bridgeRepair?keyword=&status=0&startSuaChua=&endSuaChua=&bridgeId=$id';
-  //   http.Response response = await http.get(Uri.parse(apiUrl));
-  //   if (response.statusCode == 200) {
-  //     var jsonResponse = json.decode(response.body);
-  //     var data = jsonResponse["Data"];
-  //     List<RepairModel> repairList = [];
-  //     for (var jsonModel in data) {
-  //       repairList.add(RepairModel.fromJson(jsonModel));
-  //     }
-  //     return repairList;
-  //   } else {
-  //     throw Exception('Failed to load bridge data from API');
-  //   }
-  // }
-
   Future<int> postAPI(
     //String? TrangThai,
     //int RepairHistoryId,
@@ -97,10 +80,10 @@ class repairController {
       print(response.body);
       return 200;
     } else {
-      return 0;
-      // xử lý kết quả lỗi
       print(response.statusCode);
       print(response.body);
+      return 0;
+      // xử lý kết quả lỗi
     }
   }
 
@@ -143,6 +126,54 @@ class repairController {
       //return RepairModel.fromJson(data);
     } else {
       throw Exception('Failed to load bridge data from API');
+    }
+  }
+
+  Future<int> putRepair(
+    int id,
+    int bridgeId,
+    String ngayKiemTra,
+    String donviKiemTra,
+    String noiDungHuHong,
+    String ngaySuaChua,
+    String donViSuaChua,
+    int? chiPhiSuaChua,
+    //List<detailRepairModel> detailList
+  ) async {
+    //var detailsJson = detailList.map((detail) => detail.toJson()).toList();
+    final data = {
+      "RepairHistoryId": id,
+      "BridgeId": bridgeId,
+      'NgayKiemTra': ngayKiemTra,
+      'DonViKiemTra': donviKiemTra,
+      'LoaiHuHong': noiDungHuHong,
+      'NgaySuaChua': ngaySuaChua,
+      'TotalProcessTime': null,
+      'DonViSuaChua': donViSuaChua,
+      'ChiPhiSuaChua': chiPhiSuaChua,
+      //'Details': detailsJson,
+    };
+
+    // chuyển đổi đối tượng sang chuỗi JSON
+    final jsonString = jsonEncode(data);
+
+    // gửi yêu cầu PUT
+    final response = await http.put(
+      Uri.parse('http://171.244.8.103:9003/api/bridgeRepair/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonString,
+    );
+    // kiểm tra mã trạng thái của response
+    if (response.statusCode == 200) {
+      // xử lý response khi PUT API thành công
+      print('PUT API thành công. Response: ${response.body}');
+      return 200;
+    } else {
+      // xử lý response khi PUT API thất bại
+      print('PUT API thất bại. StatusCode: ${response.statusCode}');
+      return 0;
     }
   }
 }

@@ -30,4 +30,14 @@ class detailRepairModel {
       thoiGian: json['ThoiGian'] != null ? json['ThoiGian'].toString() : "",
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'RepairDetailId': repairDetailId,
+      //'RepairHistoryId': repairHistoryId,
+      'NoiDung': noiDung,
+      'ImageString': hinhAnh,
+      'GhiChu': ghiChu,
+      'ThoiGian': thoiGian,
+    };
+  }
 }

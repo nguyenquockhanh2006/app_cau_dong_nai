@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
 import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
 import 'package:flutter_application_4/services/controllers/imageController.dart';
-//import 'package:flutter_application_4/services/controllers/repairController.dart';
 import 'package:flutter_application_4/services/models/detailBridgeModel.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -13,7 +12,6 @@ import 'package:image_picker/image_picker.dart';
 
 class DetailAndUpdate extends StatefulWidget {
   final detailBridgeController dBC = detailBridgeController();
-  //final repairController _repairController = repairController();
   final int idBridge;
   DetailAndUpdate({Key? key, required this.idBridge}) : super(key: key);
 

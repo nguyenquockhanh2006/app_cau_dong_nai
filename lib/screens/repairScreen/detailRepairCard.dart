@@ -25,8 +25,6 @@ class _detailRepairCard extends State<detailRepairCard> {
     setState(() {});
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     final detailRepairModel _detailRepairModel = widget.detailRepairModelStart;

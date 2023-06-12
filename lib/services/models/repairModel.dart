@@ -14,6 +14,7 @@ class RepairModel {
   final String? DonViSuaChua;
   final int? ChiPhiSuaChua;
   final String? TotalProcessTime;
+  //final List<detailRepairModel>? details;
   //final List<detailRepairModel>? _detailRepairModel;
   RepairModel({
     required this.BridgeId,
@@ -28,7 +29,7 @@ class RepairModel {
     required this.DonViSuaChua,
     required this.ChiPhiSuaChua,
     required this.TotalProcessTime,
-    //required this._detailRepairModel,
+    //required this.details,
   });
   factory RepairModel.fromJson(Map<String, dynamic> json ){ //, List<detailRepairModel> listDetail) {
     return RepairModel(
@@ -58,7 +59,7 @@ class RepairModel {
       TotalProcessTime: json['TotalProcessTime'] != null
           ? json['TotalProcessTime'].toString()
           : "",
-      //_detailRepairModel = listDetail,
+      //details : listDetail,
     );
   }
 }

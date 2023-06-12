@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/screens/repairScreen/repairHomeScreen.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
-//import 'package:flutter_application_4/screens/infoBridgeScreen/test.dart';
 import 'homeScreen.dart';
 
 class menu extends StatelessWidget {

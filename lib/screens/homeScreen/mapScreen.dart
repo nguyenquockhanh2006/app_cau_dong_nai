@@ -271,8 +271,6 @@ class _MyMapState extends State<flutter_map_load> {
                             ),
                           ),
                           Center(
-                              // width: MediaQuery.of(context).size.width,
-                              // margin: const EdgeInsets.all(7),
                               child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
