@@ -95,24 +95,26 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                       width: 90,
                                       child: Text('Cây cầu'),
                                     ),
-                                    DropdownButton<String>(
-                                      style: TextStyle(
-                                          color: Colors.black, fontSize: 16),
-                                      hint: Text('Chọn cầu'),
-                                      items: listNameBridge
-                                          .map<DropdownMenuItem<String>>(
-                                              (String value) {
-                                        return DropdownMenuItem<String>(
-                                          value: value,
-                                          child: Text(value),
-                                        );
-                                      }).toList(),
-                                      value: selectedNameBridge,
-                                      onChanged: (String? newValue) {
-                                        setState(
-                                          () => selectedNameBridge = newValue,
-                                        );
-                                      },
+                                    Expanded(
+                                      child: DropdownButton<String>(
+                                        style: TextStyle(
+                                            color: Colors.black, fontSize: 16),
+                                        hint: Text('Chọn cầu'),
+                                        items: listNameBridge
+                                            .map<DropdownMenuItem<String>>(
+                                                (String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value),
+                                          );
+                                        }).toList(),
+                                        value: selectedNameBridge,
+                                        onChanged: (String? newValue) {
+                                          setState(
+                                            () => selectedNameBridge = newValue,
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -123,28 +125,31 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                         width: 90,
                                         child: Text('Trạng thái'),
                                       ),
-                                      DropdownButton<String>(
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 16),
-                                        hint: Text('Trạng thái'),
-                                        value: selectedEffect,
-                                        onChanged: (String? newValue) {
-                                          setState(() {
-                                            selectedEffect = newValue;
-                                          });
-                                        },
-                                        items: <String>[
-                                          'đã sửa',
-                                          'chưa sửa',
-                                          'tất cả'
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(value),
-                                          );
-                                        }).toList(),
-                                      )
+                                      Expanded(
+                                        child: DropdownButton<String>(
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16),
+                                          hint: Text('Trạng thái'),
+                                          value: selectedEffect,
+                                          onChanged: (String? newValue) {
+                                            setState(() {
+                                              selectedEffect = newValue;
+                                            });
+                                          },
+                                          items: <String>[
+                                            'đã sửa',
+                                            'chưa sửa',
+                                            'tất cả'
+                                          ].map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                            return DropdownMenuItem<String>(
+                                              value: value,
+                                              child: Text(value),
+                                            );
+                                          }).toList(),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),

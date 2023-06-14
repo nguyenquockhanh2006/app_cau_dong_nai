@@ -113,6 +113,7 @@ class _MyMapState extends State<flutter_map_load> {
                     MaterialPageRoute(
                         builder: (context) => Detail(
                               text: bridge.TenCayCau,
+                              idBridge: bridge.BridgeId,
                             )),
                   )
                 },
@@ -206,13 +207,13 @@ class _MyMapState extends State<flutter_map_load> {
                           Container(
                             margin: const EdgeInsets.only(
                                 right: 10, left: 10, bottom: 7),
-                            height: 180,
+                            height: MediaQuery.of(context).size.height /3,
                             child: Image.network(
                               bridge.HinhAnhCau != ""
                                   ? 'http://171.244.8.103:9003/${bridge.HinhAnhCau}'
                                   : 'http://171.244.8.103:9003//placeholder.jpg',
                               width: MediaQuery.of(context).size.width,
-                              height: 180,
+                              height:  MediaQuery.of(context).size.height /3,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -281,6 +282,7 @@ class _MyMapState extends State<flutter_map_load> {
                                     MaterialPageRoute(
                                         builder: (context) => Detail(
                                               text: bridge.TenCayCau,
+                                              idBridge: bridge.BridgeId,
                                             )),
                                   );
                                 },

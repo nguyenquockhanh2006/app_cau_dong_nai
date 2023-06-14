@@ -173,31 +173,33 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Cây cầu'),
                     ),
-                    Container(
-                      width: 230,
-                      child: DropdownButton<String>(
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                        hint: Text('Chọn cầu'),
-                        items: listNameBridge
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        value: selectedNameBridge,
-                        onChanged: (String? newValue) {
-                          setState(
-                            () => {
-                              selectedNameBridge = newValue,
-                              bridgeId =
-                                  getIdfromName(newValue!, _futureBridgeList!),
-                              print('id đã chọn: $bridgeId'),
-                            },
-                          );
-                        },
+                    Expanded(
+                      child: Container(
+                        width: 230,
+                        child: DropdownButton<String>(
+                          style: TextStyle(color: Colors.black, fontSize: 16),
+                          hint: Text('Chọn cầu'),
+                          items: listNameBridge
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          value: selectedNameBridge,
+                          onChanged: (String? newValue) {
+                            setState(
+                              () => {
+                                selectedNameBridge = newValue,
+                                bridgeId = getIdfromName(
+                                    newValue!, _futureBridgeList!),
+                                print('id đã chọn: $bridgeId'),
+                              },
+                            );
+                          },
+                        ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -210,17 +212,19 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Ngày kiểm tra'),
                     ),
-                    Container(
-                      width: 170,
-                      child: TextField(
-                        controller: _ngaykiemtra,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                              top: 0, bottom: 0, left: 5, right: 5),
-                          hintText: 'Nhập ...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: BorderSide(),
+                    Expanded(
+                      child: Container(
+                        width: 170,
+                        child: TextField(
+                          controller: _ngaykiemtra,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 5, right: 5),
+                            hintText: 'Nhập ...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: BorderSide(),
+                            ),
                           ),
                         ),
                       ),
@@ -260,21 +264,22 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Đơn vị kiểm tra'),
                     ),
-                    Container(
-                      width: 230,
-                      child: TextField(
-                        controller: _controller2,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                              top: 0, bottom: 0, left: 5, right: 5),
-                          hintText: 'Nhập ...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: BorderSide(),
+                    Expanded(
+                      child: Container(
+                        child: TextField(
+                          controller: _controller2,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 5, right: 5),
+                            hintText: 'Nhập ...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: BorderSide(),
+                            ),
                           ),
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -287,7 +292,7 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Nội dung hư hỏng'),
                     ),
-                    Container(
+                    Expanded(child: Container(
                       width: 230,
                       child: TextField(
                         controller: _controller3,
@@ -301,7 +306,7 @@ class _addRepairState extends State<addRepairScreen> {
                           ),
                         ),
                       ),
-                    )
+                    ),),
                   ],
                 ),
               ),
@@ -314,7 +319,7 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Ngày sửa chữa'),
                     ),
-                    Container(
+                    Expanded(child: Container(
                       width: 170,
                       child: TextField(
                         controller: _ngaysuachua,
@@ -328,7 +333,7 @@ class _addRepairState extends State<addRepairScreen> {
                           ),
                         ),
                       ),
-                    ),
+                    ),),
                     ElevatedButton(
                       onPressed: () async {
                         final DateTime? picked = await showDatePicker(
@@ -364,7 +369,7 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Đơn vị sửa chữa'),
                     ),
-                    Container(
+                    Expanded(child: Container(
                       width: 230,
                       child: TextField(
                         controller: _controller4,
@@ -378,7 +383,7 @@ class _addRepairState extends State<addRepairScreen> {
                           ),
                         ),
                       ),
-                    )
+                    ),),
                   ],
                 ),
               ),
@@ -390,7 +395,7 @@ class _addRepairState extends State<addRepairScreen> {
                     width: 120,
                     child: Text('Chi phí sửa chữa'),
                   ),
-                  Container(
+                  Expanded(child: Container(
                     width: 230,
                     child: TextField(
                       controller: _controller5,
@@ -404,7 +409,7 @@ class _addRepairState extends State<addRepairScreen> {
                         ),
                       ),
                     ),
-                  )
+                  ),),
                 ]),
               ),
             ]),

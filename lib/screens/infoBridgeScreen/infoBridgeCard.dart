@@ -32,13 +32,13 @@ class _infoBridgeState extends State<infoBridge> {
         : Card(
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: 190,
+              height: 210,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
                     width: MediaQuery.of(context).size.width * 1.25 / 3,
-                    height: 190,
+                    height: 210,
                     padding: const EdgeInsets.all(0.5),
                     child: SingleChildScrollView(
                       child: Column(
@@ -52,7 +52,7 @@ class _infoBridgeState extends State<infoBridge> {
                             ),
                           ),
                           SizedBox(
-                            height: 120,
+                            height: 150,
                             width: MediaQuery.of(context).size.width * 1.25 / 3,
                             child: Image.network(
                               bridgeModelTemp.HinhAnhCau != ""

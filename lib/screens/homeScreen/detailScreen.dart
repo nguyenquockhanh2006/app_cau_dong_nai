@@ -9,22 +9,23 @@ import 'package:latlong2/latlong.dart';
 class Detail extends StatefulWidget {
   final MapController mapController = MapController();
   final bridgeController bC = bridgeController();
-  final repairController _repairController = repairController();
   final String text;
-  Detail({Key? key, required this.text}) : super(key: key);
-
+  final int idBridge;
+  Detail({Key? key, required this.text, required this.idBridge})
+      : super(key: key);
   @override
   State<Detail> createState() => _DetailState();
 }
 
 class _DetailState extends State<Detail> {
   late Future<List<bridgeModel>> _futureBridgeList;
-  //late Future<List<RepairModel>> _futureRepairList;
+  late Future<List<RepairModel>> _futureRepairList;
+
   @override
   void initState() {
     super.initState();
     _futureBridgeList = widget.bC.getApi();
-   // _futureRepairList = widget.repairController.getApi();
+    _futureRepairList = widget.bC.getApiById(widget.idBridge);
   }
 
   @override
@@ -63,7 +64,8 @@ class _DetailState extends State<Detail> {
                           ),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 210,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -83,14 +85,16 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(
+                              left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: const Color(0xFFadb5bd))),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
                               padding: const EdgeInsets.all(10),
@@ -136,7 +140,8 @@ class _DetailState extends State<Detail> {
                           ]),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 210,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -156,15 +161,16 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                            margin:
-                                const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                            margin: const EdgeInsets.only(
+                                left: 7, right: 7, bottom: 7),
                             decoration: BoxDecoration(
                                 borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(7),
                                   bottomLeft: Radius.circular(7),
                                   bottomRight: Radius.circular(7),
                                 ),
-                                border: Border.all(color: const Color(0xFFadb5bd))),
+                                border:
+                                    Border.all(color: const Color(0xFFadb5bd))),
                             child: Column(
                               children: [
                                 Row(children: [
@@ -230,7 +236,8 @@ class _DetailState extends State<Detail> {
                               ],
                             )),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 210,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -250,14 +257,16 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(
+                              left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: const Color(0xFFadb5bd))),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
                               padding: const EdgeInsets.all(10),
@@ -303,7 +312,8 @@ class _DetailState extends State<Detail> {
                           ]),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 210,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -323,14 +333,16 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(
+                              left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: const Color(0xFFadb5bd))),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
                               padding: const EdgeInsets.all(10),
@@ -376,7 +388,8 @@ class _DetailState extends State<Detail> {
                           ]),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 210,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -396,14 +409,16 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(
+                              left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: const Color(0xFFadb5bd))),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
                               padding: const EdgeInsets.all(10),
@@ -445,7 +460,8 @@ class _DetailState extends State<Detail> {
                           ]),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 215,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -465,14 +481,16 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(
+                              left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: const Color(0xFFadb5bd))),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
                           child: Row(children: [
                             Container(
                               padding: const EdgeInsets.all(10),
@@ -514,7 +532,8 @@ class _DetailState extends State<Detail> {
                           ]),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(top: 7, left: 7, right: 7),
+                          margin:
+                              const EdgeInsets.only(top: 7, left: 7, right: 7),
                           width: 245,
                           height: 45,
                           decoration: const BoxDecoration(
@@ -534,54 +553,184 @@ class _DetailState extends State<Detail> {
                           )),
                         ),
                         Container(
-                          margin: const EdgeInsets.only(left: 7, right: 7, bottom: 7),
+                          margin: const EdgeInsets.only(
+                              left: 7, right: 7, bottom: 7),
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(7),
                                 bottomLeft: Radius.circular(7),
                                 bottomRight: Radius.circular(7),
                               ),
-                              border: Border.all(color: const Color(0xFFadb5bd))),
-                          child: Row(children: [
-                            Container(
-                              padding: const EdgeInsets.all(10),
-                              margin: const EdgeInsets.only(left: 5),
-                              child: const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Ngày kiểm tra'),
-                                    SizedBox(height: 8),
-                                    Text('Loại hư hỏng'),
-                                    SizedBox(height: 8),
-                                    Text('Ngày sửa chữa'),
-                                    SizedBox(height: 8),
-                                    Text('Chi phí sửa chữa'),
-                                  ]),
-                            ),
-                          ]),
+                              border:
+                                  Border.all(color: const Color(0xFFadb5bd))),
+                          child: FutureBuilder<List<RepairModel>>(
+                            future: _futureRepairList,
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                List<RepairModel>? bridgeList = snapshot.data;
+                                return Container(
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: bridgeList!.length,
+                                    itemBuilder: (context, index) {
+                                      //
+                                      return Container(
+                                        margin: const EdgeInsets.only(
+                                            left: 7, right: 7, bottom: 7),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topRight: Radius.circular(7),
+                                              bottomLeft: Radius.circular(7),
+                                              bottomRight: Radius.circular(7),
+                                            ),
+                                            border: Border.all(
+                                                color:
+                                                    const Color(0xFFadb5bd))),
+                                        child: Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 120,
+                                                  child: Text(
+                                                    'Ngày kiểm tra: ',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    bridgeList[index]
+                                                        .NgayKiemTra as String,
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 120,
+                                                  child: Text(
+                                                    'Loại hư hỏng: ',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    bridgeList[index].LoaiHuHong
+                                                        as String,
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 120,
+                                                  child: Text(
+                                                    'Ngày sửa chửa: ',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    bridgeList[index]
+                                                        .NgaySuaChua as String,
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(
+                                              height: 8,
+                                            ),
+                                            Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 120,
+                                                  child: Text(
+                                                    'Chi phí: ',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    (bridgeList[index]
+                                                                .ChiPhiSuaChua
+                                                            as int)
+                                                        .toString(),
+                                                    style:
+                                                        TextStyle(fontSize: 18),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text("${snapshot.error}");
+                              }
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            },
+                          ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          child: Center(
-                              child: Container(
-                                  width: 300,
-                                  decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xff38b000), width: 1.5),
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: const ListTile(
-                                    leading: Icon(
-                                      Icons.add,
-                                      color: Color(0xff38b000),
-                                    ),
-                                    title: Text(
-                                      'THÊM KIỂM TRA/ SỬA CHỮA',
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          color: Color(0xff38b000)),
-                                    ),
-                                  ))),
-                        )
+                        // Container(
+                        //   margin: const EdgeInsets.only(bottom: 10),
+                        //   child: Center(
+                        //     child: InkWell(
+                        //       onTap: () {
+                        //       },
+                        //       child: Container(
+                        //           width: 300,
+                        //           decoration: BoxDecoration(
+                        //               border: Border.all(
+                        //                   color: const Color(0xff38b000),
+                        //                   width: 1.5),
+                        //               borderRadius: BorderRadius.circular(8)),
+                        //           child: const ListTile(
+                        //             leading: Icon(
+                        //               Icons.add,
+                        //               color: Color(0xff38b000),
+                        //             ),
+                        //             title: Text(
+                        //               'THÊM KIỂM TRA/ SỬA CHỮA',
+                        //               style: TextStyle(
+                        //                   fontSize: 16,
+                        //                   color: Color(0xff38b000)),
+                        //             ),
+                        //           )),
+                        //     ),
+                        //   ),
+                        // )
                       ],
                     );
                   }

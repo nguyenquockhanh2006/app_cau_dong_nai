@@ -32,7 +32,7 @@ class _MyWidgetState extends State<list_info_bridge> {
         child: Column(
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.5/10,
+              height: MediaQuery.of(context).size.height * 0.5 / 10,
               margin: const EdgeInsets.all(13),
               child: TextField(
                 onChanged: (newValue) {
@@ -80,6 +80,8 @@ class _MyWidgetState extends State<list_info_bridge> {
                                             builder: (context) => Detail(
                                                   text: bridgeList[index]
                                                       .TenCayCau,
+                                                  idBridge: bridgeList[index]
+                                                      .BridgeId,
                                                 )),
                                       )
                                     },

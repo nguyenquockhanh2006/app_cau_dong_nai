@@ -119,7 +119,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
     //final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Thêm kiểm tra/ sửa chữa'),
+        title: Text('Thêm kiểm tra / sửa chữa'),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => {
@@ -381,7 +381,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Cây cầu'),
                       ),
-                      Container(
+                      Expanded(child: Container(
                         width: 230,
                         child: TextField(
                           enabled: false,
@@ -396,7 +396,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                             ),
                           ),
                         ),
-                      )
+                      ),),
                     ],
                   ),
                 ),
@@ -409,7 +409,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Ngày kiểm tra'),
                       ),
-                      Container(
+                      Expanded(child: Container(
                         width: 170,
                         child: TextField(
                           controller: _controllerNgayKiemTra,
@@ -423,7 +423,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                             ),
                           ),
                         ),
-                      ),
+                      ),),
                       ElevatedButton(
                         onPressed: () async {
                           final DateTime? picked = await showDatePicker(
@@ -459,8 +459,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Đơn vị kiểm tra'),
                       ),
-                      Container(
-                        width: 230,
+                      Expanded(child: Container(
                         child: TextField(
                           controller: _controllerDonViKiemTra,
                           decoration: InputDecoration(
@@ -473,7 +472,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                             ),
                           ),
                         ),
-                      )
+                      ),),
                     ],
                   ),
                 ),
@@ -486,7 +485,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Nội dung hư hỏng'),
                       ),
-                      Container(
+                      Expanded(child: Container(
                         width: 230,
                         child: TextField(
                           controller: _controllerNoiDungHuHong,
@@ -500,7 +499,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                             ),
                           ),
                         ),
-                      )
+                      ),),
                     ],
                   ),
                 ),
@@ -513,7 +512,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Ngày sửa chữa'),
                       ),
-                      Container(
+                      Expanded(child: Container(
                         width: 170,
                         child: TextField(
                           controller: _controllerNgaySuaChua,
@@ -527,7 +526,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                             ),
                           ),
                         ),
-                      ),
+                      ),),
                       ElevatedButton(
                         onPressed: () async {
                           final DateTime? picked = await showDatePicker(
@@ -563,7 +562,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Đơn vị sửa chữa'),
                       ),
-                      Container(
+                      Expanded(child: Container(
                         width: 230,
                         child: TextField(
                           controller: _controllerDonViSuaChua,
@@ -577,7 +576,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                             ),
                           ),
                         ),
-                      )
+                      ),),
                     ],
                   ),
                 ),
@@ -589,7 +588,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                       width: 120,
                       child: Text('Chi phí sửa chữa'),
                     ),
-                    Container(
+                    Expanded(child: Container(
                       width: 230,
                       child: TextField(
                         controller: _controllerChiPhiSuaChua,
@@ -603,7 +602,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                           ),
                         ),
                       ),
-                    )
+                    ),),
                   ]),
                 ),
                 Center(
