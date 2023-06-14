@@ -24,7 +24,7 @@ class _MyWidgetState extends State<listInfoBridge> {
       TextEditingController();
   final TextEditingController _controllerNgayXayDungCuoi =
       TextEditingController();
-  late String? dropdownValue = 'Chưa xác định';
+  String? dropdownValue = 'Chưa xác định';
   late String? nameBridge = '';
   List<String>? listTypeBridge;
   DateTime NKhoiCong = DateTime.now();
@@ -40,8 +40,19 @@ class _MyWidgetState extends State<listInfoBridge> {
   void initState() {
     super.initState();
     _futureBridgeList = widget.bC.getApi();
+
     FetchData();
     //getTypeNameApi
+  }
+
+  Future<List<bridgeModel>> setLoai() async {
+    List<bridgeModel> bridges = await widget.bC.getApi();
+    if (dropdownValue.toString() != 'Chưa xác định') {
+      bridges.removeWhere((bridge) =>
+          bridge.LoaiCau.toString().trim().toUpperCase() !=
+          dropdownValue.toString().trim().toUpperCase());
+    }
+    return bridges;
   }
 
   FetchData() async {
@@ -112,6 +123,12 @@ class _MyWidgetState extends State<listInfoBridge> {
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 16),
                                       hint: Text('Chọn cầu'),
+                                      value: dropdownValue,
+                                      onChanged: (String? newValue) {
+                                        setState(
+                                          () => dropdownValue = newValue,
+                                        );
+                                      },
                                       items: listTypeBridge
                                           ?.map<DropdownMenuItem<String>>(
                                               (String value) {
@@ -120,12 +137,6 @@ class _MyWidgetState extends State<listInfoBridge> {
                                           child: Text(value),
                                         );
                                       }).toList(),
-                                      value: dropdownValue,
-                                      onChanged: (String? newValue) {
-                                        setState(
-                                          () => dropdownValue = newValue,
-                                        );
-                                      },
                                     ),
                                   ),
                                   const Text('>>> Thời gian khởi công'),
@@ -553,7 +564,7 @@ class _MyWidgetState extends State<listInfoBridge> {
             ),
             Container(
               child: FutureBuilder<List<bridgeModel>>(
-                future: _futureBridgeList,
+                future: setLoai(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     List<bridgeModel>? bridgeList = snapshot.data;
@@ -561,37 +572,9 @@ class _MyWidgetState extends State<listInfoBridge> {
                       child: ListView.builder(
                         itemCount: bridgeList!.length,
                         itemBuilder: (context, index) {
-                          //
                           return Center(
-                            child: bridgeList[index] == null
-                                ? SizedBox.shrink()
-                                : dropdownValue == 'Chưa xác định'
-                                    ? bridgeList[index]
-                                                .TenCayCau
-                                                .toString()
-                                                .toUpperCase()
-                                                .contains(nameBridge
-                                                    .toString()
-                                                    .toUpperCase()) ==
-                                            true
-                                        ? infoBridge(
-                                            bridgeModelTemp: bridgeList[index])
-                                        : SizedBox.shrink()
-                                    : dropdownValue ==
-                                            bridgeList[index].LoaiCau.toString()
-                                        ? bridgeList[index]
-                                                    .TenCayCau
-                                                    .toString()
-                                                    .toUpperCase()
-                                                    .contains(nameBridge
-                                                        .toString()
-                                                        .toUpperCase()) ==
-                                                true
-                                            ? infoBridge(
-                                                bridgeModelTemp:
-                                                    bridgeList[index])
-                                            : SizedBox.shrink()
-                                        : SizedBox.shrink(),
+                            child:
+                                infoBridge(bridgeModelTemp: bridgeList[index]),
                           );
                         },
                       ),
