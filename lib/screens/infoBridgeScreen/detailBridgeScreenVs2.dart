@@ -23,6 +23,7 @@ class _DetailState extends State<DetailAndUpdate> {
   imageController iC = imageController();
   final MapController mapController = MapController();
   late Future<detailBridgeModel> _futureBridgeList;
+
   // biến kết quả thêm trả về của hàm putApi
   int? result;
   // late Future<List<RepairModel>> _futureRepairList;
@@ -1577,36 +1578,42 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 110,
                                   child: Text('Số dầm ngang'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 220,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerSoDamNgang,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'[0-9]'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     _controllerSoDamNgang.text = '0';
-                                      //   }
-                                      // });
-                                      print('Số dầm ngang: ' +
-                                          _controllerSoDamNgang.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 220,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerSoDamNgang,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     _controllerSoDamNgang.text = '0';
+                                        //   }
+                                        // });
+                                        print('Số dầm ngang: ' +
+                                            _controllerSoDamNgang.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -1618,36 +1625,42 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 110,
                                   child: Text('Số dầm chính'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 220,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerSoDamChinh,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'[0-9]'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     _controllerSoDamChinh.text = '0';
-                                      //   }
-                                      // });
-                                      print('Số dầm chính: ' +
-                                          _controllerSoDamChinh.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 220,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerSoDamChinh,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     _controllerSoDamChinh.text = '0';
+                                        //   }
+                                        // });
+                                        print('Số dầm chính: ' +
+                                            _controllerSoDamChinh.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -1659,36 +1672,42 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 110,
                                   child: Text('Số lan can'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 220,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerSoLanCan,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'[0-9]'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     _controllerSoLanCan.text = '0';
-                                      //   }
-                                      // });
-                                      print('Số lan can: ' +
-                                          _controllerSoLanCan.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 220,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerSoLanCan,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     _controllerSoLanCan.text = '0';
+                                        //   }
+                                        // });
+                                        print('Số lan can: ' +
+                                            _controllerSoLanCan.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -1700,36 +1719,42 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 110,
                                   child: Text('Số dải phân cách'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 220,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerSoDaiPhanCach,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'[0-9]'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     _controllerSoDaiPhanCach.text = '0';
-                                      //   }
-                                      // });
-                                      print('Số dải phân cách: ' +
-                                          _controllerSoDaiPhanCach.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 220,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerSoDaiPhanCach,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     _controllerSoDaiPhanCach.text = '0';
+                                        //   }
+                                        // });
+                                        print('Số dải phân cách: ' +
+                                            _controllerSoDaiPhanCach.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -1768,34 +1793,37 @@ class _DetailState extends State<DetailAndUpdate> {
                                       width: 100,
                                       child: Text('Dầm chính'),
                                     ),
-                                    Expanded(child: Container(
-                                      width: 220,
-                                      margin: const EdgeInsets.all(7),
-                                      child: TextField(
-                                        controller: _controllerVlDamChinh,
-                                        onChanged: (newValue) {
-                                          // setState(() {
-                                          //   vlDamChinh = newValue;
-                                          // });
-                                          print('Vật liệu dầm chính: ' +
-                                              _controllerVlDamChinh.text);
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
-                                          // labelText: 'Tên cầu',
-                                          hintText: 'Nhập...',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
+                                    Expanded(
+                                      child: Container(
+                                        width: 220,
+                                        margin: const EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerVlDamChinh,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   vlDamChinh = newValue;
+                                            // });
+                                            print('Vật liệu dầm chính: ' +
+                                                _controllerVlDamChinh.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 5,
+                                                    right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: 'Nhập...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: const BorderSide(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1807,34 +1835,37 @@ class _DetailState extends State<DetailAndUpdate> {
                                       width: 100,
                                       child: Text('Dầm ngang'),
                                     ),
-                                    Expanded(child: Container(
-                                      width: 220,
-                                      margin: const EdgeInsets.all(7),
-                                      child: TextField(
-                                        controller: _controllerVlDamNgang,
-                                        onChanged: (newValue) {
-                                          // setState(() {
-                                          //   vlDamNgang = newValue;
-                                          // });
-                                          print('Vật liệu dầm ngang: ' +
-                                              _controllerVlDamNgang.text);
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
-                                          // labelText: 'Tên cầu',
-                                          hintText: 'Nhập...',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
+                                    Expanded(
+                                      child: Container(
+                                        width: 220,
+                                        margin: const EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerVlDamNgang,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   vlDamNgang = newValue;
+                                            // });
+                                            print('Vật liệu dầm ngang: ' +
+                                                _controllerVlDamNgang.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 5,
+                                                    right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: 'Nhập...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: const BorderSide(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1846,34 +1877,37 @@ class _DetailState extends State<DetailAndUpdate> {
                                       width: 100,
                                       child: Text('Bán mặt cầu'),
                                     ),
-                                    Expanded(child: Container(
-                                      width: 220,
-                                      margin: const EdgeInsets.all(7),
-                                      child: TextField(
-                                        controller: _controllerVlBanMatCau,
-                                        onChanged: (newValue) {
-                                          // setState(() {
-                                          //   vlBanMatCau = newValue;
-                                          // });
-                                          print('Vật liệu bán mặt cầu: ' +
-                                              _controllerVlBanMatCau.text);
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
-                                          // labelText: 'Tên cầu',
-                                          hintText: 'Nhập...',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
+                                    Expanded(
+                                      child: Container(
+                                        width: 220,
+                                        margin: const EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerVlBanMatCau,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   vlBanMatCau = newValue;
+                                            // });
+                                            print('Vật liệu bán mặt cầu: ' +
+                                                _controllerVlBanMatCau.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 5,
+                                                    right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: 'Nhập...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: const BorderSide(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1885,34 +1919,37 @@ class _DetailState extends State<DetailAndUpdate> {
                                       width: 100,
                                       child: Text('Lan can'),
                                     ),
-                                    Expanded(child: Container(
-                                      width: 220,
-                                      margin: const EdgeInsets.all(7),
-                                      child: TextField(
-                                        controller: _controllerVlLanCan,
-                                        onChanged: (newValue) {
-                                          // setState(() {
-                                          //   vlLanCan = newValue;
-                                          // });
-                                          print('Vật liệu lan can: ' +
-                                              _controllerVlLanCan.text);
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
-                                          // labelText: 'Tên cầu',
-                                          hintText: 'Nhập...',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
+                                    Expanded(
+                                      child: Container(
+                                        width: 220,
+                                        margin: const EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerVlLanCan,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   vlLanCan = newValue;
+                                            // });
+                                            print('Vật liệu lan can: ' +
+                                                _controllerVlLanCan.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 5,
+                                                    right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: 'Nhập...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: const BorderSide(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1924,34 +1961,37 @@ class _DetailState extends State<DetailAndUpdate> {
                                       width: 100,
                                       child: Text('Mố'),
                                     ),
-                                    Expanded(child: Container(
-                                      width: 220,
-                                      margin: const EdgeInsets.all(7),
-                                      child: TextField(
-                                        controller: _controllerVlMo,
-                                        onChanged: (newValue) {
-                                          // setState(() {
-                                          //   vlMo = newValue;
-                                          // });
-                                          print('Vật liệu mố: ' +
-                                              _controllerVlMo.text);
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
-                                          // labelText: 'Tên cầu',
-                                          hintText: 'Nhập...',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
+                                    Expanded(
+                                      child: Container(
+                                        width: 220,
+                                        margin: const EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerVlMo,
+                                          onChanged: (newValue) {
+                                            // setState(() {
+                                            //   vlMo = newValue;
+                                            // });
+                                            print('Vật liệu mố: ' +
+                                                _controllerVlMo.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 5,
+                                                    right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: 'Nhập...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: const BorderSide(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -1963,34 +2003,37 @@ class _DetailState extends State<DetailAndUpdate> {
                                       width: 100,
                                       child: Text('Trụ'),
                                     ),
-                                    Expanded(child: Container(
-                                      width: 220,
-                                      margin: const EdgeInsets.all(7),
-                                      child: TextField(
-                                        controller: _controllerVlTru,
-                                        onChanged: (newValue) {
-                                          //setState(() {
-                                          //   vlTru = newValue;
-                                          // });
-                                          print('Vật liệu trụ: ' +
-                                              _controllerVlTru.text);
-                                        },
-                                        decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
-                                          // labelText: 'Tên cầu',
-                                          hintText: 'Nhập...',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
+                                    Expanded(
+                                      child: Container(
+                                        width: 220,
+                                        margin: const EdgeInsets.all(7),
+                                        child: TextField(
+                                          controller: _controllerVlTru,
+                                          onChanged: (newValue) {
+                                            //setState(() {
+                                            //   vlTru = newValue;
+                                            // });
+                                            print('Vật liệu trụ: ' +
+                                                _controllerVlTru.text);
+                                          },
+                                          decoration: InputDecoration(
+                                            contentPadding:
+                                                const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 5,
+                                                    right: 5),
+                                            // labelText: 'Tên cầu',
+                                            hintText: 'Nhập...',
+                                            border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(7),
+                                              borderSide: const BorderSide(),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -2027,38 +2070,44 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 120,
                                   child: Text('Chiều dài nhịp'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 210,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerChieuDaiNhip,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'^\d*\.?\d*$'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     chieuDaiNhip = 0.0;
-                                      //   } else {
-                                      //     chieuDaiNhip = double.parse(newValue);
-                                      //   }
-                                      // });
-                                      print('Chiều dài nhịp: ' +
-                                          _controllerChieuDaiNhip.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerChieuDaiNhip,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d*\.?\d*$'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     chieuDaiNhip = 0.0;
+                                        //   } else {
+                                        //     chieuDaiNhip = double.parse(newValue);
+                                        //   }
+                                        // });
+                                        print('Chiều dài nhịp: ' +
+                                            _controllerChieuDaiNhip.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -2070,38 +2119,44 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 120,
                                   child: Text('Bề rộng xe chạy (m)'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 210,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerBeRongXeChay,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'^\d*\.?\d*$'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     beRongXeChay = 0.0;
-                                      //   } else {
-                                      //     beRongXeChay = double.parse(newValue);
-                                      //   }
-                                      // });
-                                      print('Bề rộng xe chạy: ' +
-                                          _controllerBeRongXeChay.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerBeRongXeChay,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d*\.?\d*$'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     beRongXeChay = 0.0;
+                                        //   } else {
+                                        //     beRongXeChay = double.parse(newValue);
+                                        //   }
+                                        // });
+                                        print('Bề rộng xe chạy: ' +
+                                            _controllerBeRongXeChay.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -2113,38 +2168,44 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 120,
                                   child: Text('Khoảng cách dầm chính'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 210,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerKhoangCachDamChinh,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'^\d*\.?\d*$'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     khoangCachDamChinh = 0.0;
-                                      //   } else {
-                                      //     khoangCachDamChinh = double.parse(newValue);
-                                      //   }
-                                      // });
-                                      print('Khoảng cách dầm chính: ' +
-                                          _controllerKhoangCachDamChinh.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerKhoangCachDamChinh,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d*\.?\d*$'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     khoangCachDamChinh = 0.0;
+                                        //   } else {
+                                        //     khoangCachDamChinh = double.parse(newValue);
+                                        //   }
+                                        // });
+                                        print('Khoảng cách dầm chính: ' +
+                                            _controllerKhoangCachDamChinh.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -2156,38 +2217,44 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 120,
                                   child: Text('Khoảng cách dầm ngang'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 210,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerKhoangCachDamNgang,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'^\d*\.?\d*$'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     khoangCachDamNgang = 0.0;
-                                      //   } else {
-                                      //     khoangCachDamNgang = double.parse(newValue);
-                                      //   }
-                                      // });
-                                      print('Khoảng cách dầm ngang: ' +
-                                          _controllerKhoangCachDamNgang.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerKhoangCachDamNgang,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d*\.?\d*$'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     khoangCachDamNgang = 0.0;
+                                        //   } else {
+                                        //     khoangCachDamNgang = double.parse(newValue);
+                                        //   }
+                                        // });
+                                        print('Khoảng cách dầm ngang: ' +
+                                            _controllerKhoangCachDamNgang.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -2199,38 +2266,44 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 120,
                                   child: Text('Chiều cao bản mặt cầu (m)'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 210,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerChieuCaoBanMatCau,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'^\d*\.?\d*$'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     chieuCaoBanMatCau = 0.0;
-                                      //   } else {
-                                      //     chieuCaoBanMatCau = double.parse(newValue);
-                                      //   }
-                                      // });
-                                      print('Chiều cao bán mặt cầu: ' +
-                                          _controllerChieuCaoBanMatCau.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerChieuCaoBanMatCau,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d*\.?\d*$'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     chieuCaoBanMatCau = 0.0;
+                                        //   } else {
+                                        //     chieuCaoBanMatCau = double.parse(newValue);
+                                        //   }
+                                        // });
+                                        print('Chiều cao bán mặt cầu: ' +
+                                            _controllerChieuCaoBanMatCau.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),
@@ -2242,38 +2315,44 @@ class _DetailState extends State<DetailAndUpdate> {
                                   width: 120,
                                   child: Text('Bề rộng lan can (m)'),
                                 ),
-                                Expanded(child: Container(
-                                  width: 210,
-                                  margin: const EdgeInsets.all(7),
-                                  child: TextField(
-                                    controller: _controllerBeRongLanCan,
-                                    inputFormatters: [
-                                      FilteringTextInputFormatter.allow(
-                                          RegExp(r'^\d*\.?\d*$'))
-                                    ],
-                                    onChanged: (newValue) {
-                                      // setState(() {
-                                      //   if (newValue.trim() == "") {
-                                      //     beRongLanCan = 0.0;
-                                      //   } else {
-                                      //     beRongLanCan = double.parse(newValue);
-                                      //   }
-                                      // });
-                                      print('Bề rộng lan can: ' +
-                                          _controllerBeRongLanCan.text);
-                                    },
-                                    decoration: InputDecoration(
-                                      contentPadding: const EdgeInsets.only(
-                                          top: 0, bottom: 0, left: 5, right: 5),
-                                      // labelText: 'Tên cầu',
-                                      hintText: 'Nhập...',
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(7),
-                                        borderSide: const BorderSide(),
+                                Expanded(
+                                  child: Container(
+                                    width: 210,
+                                    margin: const EdgeInsets.all(7),
+                                    child: TextField(
+                                      controller: _controllerBeRongLanCan,
+                                      inputFormatters: [
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'^\d*\.?\d*$'))
+                                      ],
+                                      onChanged: (newValue) {
+                                        // setState(() {
+                                        //   if (newValue.trim() == "") {
+                                        //     beRongLanCan = 0.0;
+                                        //   } else {
+                                        //     beRongLanCan = double.parse(newValue);
+                                        //   }
+                                        // });
+                                        print('Bề rộng lan can: ' +
+                                            _controllerBeRongLanCan.text);
+                                      },
+                                      decoration: InputDecoration(
+                                        contentPadding: const EdgeInsets.only(
+                                            top: 0,
+                                            bottom: 0,
+                                            left: 5,
+                                            right: 5),
+                                        // labelText: 'Tên cầu',
+                                        hintText: 'Nhập...',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(7),
+                                          borderSide: const BorderSide(),
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),),
+                                ),
                               ],
                             ),
                           ),

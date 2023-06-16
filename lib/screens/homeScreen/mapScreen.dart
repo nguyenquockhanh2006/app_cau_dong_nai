@@ -1,6 +1,4 @@
-import 'package:flutter_application_4/screens/homeScreen/menu.dart';
 import 'package:flutter_application_4/services/controllers/bridgeController.dart';
-import 'package:flutter_application_4/services/controllers/jsonController.dart';
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -207,13 +205,13 @@ class _MyMapState extends State<flutter_map_load> {
                           Container(
                             margin: const EdgeInsets.only(
                                 right: 10, left: 10, bottom: 7),
-                            height: MediaQuery.of(context).size.height /3,
+                            height: MediaQuery.of(context).size.height / 3,
                             child: Image.network(
                               bridge.HinhAnhCau != ""
                                   ? 'http://171.244.8.103:9003/${bridge.HinhAnhCau}'
                                   : 'http://171.244.8.103:9003//placeholder.jpg',
                               width: MediaQuery.of(context).size.width,
-                              height:  MediaQuery.of(context).size.height /3,
+                              height: MediaQuery.of(context).size.height / 3,
                               fit: BoxFit.cover,
                             ),
                           ),

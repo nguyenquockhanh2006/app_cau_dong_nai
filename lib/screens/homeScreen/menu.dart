@@ -26,11 +26,6 @@ class menu extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (context) => home()),
               );
-              
-              //  Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => flutter_map_load()),
-              // );
             },
           ),
           ListTile(
@@ -39,7 +34,7 @@ class menu extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  infoBridgeScreen()),
+                MaterialPageRoute(builder: (context) => infoBridgeScreen()),
               );
             },
           ),

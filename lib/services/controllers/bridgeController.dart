@@ -163,7 +163,7 @@ class bridgeController {
       throw Exception('Failed to load bridge data from API');
     }
   }
-
+  
   Future<List<String>> getTypeNameApi() async {
     const String apiUrl = 'http://171.244.8.103:9003/api/bridge';
     http.Response response = await http.get(Uri.parse(apiUrl));
@@ -173,11 +173,11 @@ class bridgeController {
       List<String> repairList = [];
       repairList.add('Chưa xác định');
       for (var jsonModel in data) {
-        if (bridgeModel.fromJson(jsonModel).LoaiCau.toString() != '') {
+        if (bridgeModel.fromJson(jsonModel).LoaiCau.toString() != '' && repairList.contains(bridgeModel.fromJson(jsonModel).LoaiCau.toString()) == false ) {
           repairList.add(bridgeModel.fromJson(jsonModel).LoaiCau);
         }
       }
-      return repairList;
+      return repairList ;
     } else {
       throw Exception('Failed to load bridge data from API');
     }

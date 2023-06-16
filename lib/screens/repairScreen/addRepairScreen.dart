@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_application_4/screens/repairScreen/repairHomeScreen.dart';
 import 'package:flutter_application_4/services/controllers/bridgeController.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
-import 'package:flutter_application_4/services/models/repairModel.dart';
 
 class addRepairScreen extends StatefulWidget {
   final repairController rpC = repairController();
@@ -18,7 +16,7 @@ class addRepairScreen extends StatefulWidget {
 class _addRepairState extends State<addRepairScreen> {
   String? selectedNameBridge;
   List<String> listNameBridge = [];
-  List<RepairModel>? _futureRepairList;
+
   List<bridgeModel>? _futureBridgeList;
   String selectedRepair = '';
   int? length;
@@ -41,7 +39,7 @@ class _addRepairState extends State<addRepairScreen> {
   }
 
   Future<void> fetchData() async {
-    _futureRepairList = await widget.rpC.getApi();
+
     _futureBridgeList = await widget.bC.getApi();
     List<String> temp = await widget.bC.getBridgeNameApi();
     length = await widget.bC.getLength();
