@@ -5538,7 +5538,6 @@ io.flutter.embedding.engine.dart.DartExecutor$DartCallback
 io.flutter.embedding.engine.dart.DartExecutor$DefaultBinaryMessenger:
     public void disableBufferingIncomingMessages()
     public void enableBufferingIncomingMessages()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
 io.flutter.embedding.engine.dart.DartExecutor:
     private static final java.lang.String TAG
     public void disableBufferingIncomingMessages()
@@ -5547,22 +5546,12 @@ io.flutter.embedding.engine.dart.DartExecutor:
     public void executeDartEntrypoint(io.flutter.embedding.engine.dart.DartExecutor$DartEntrypoint)
     public io.flutter.plugin.common.BinaryMessenger getBinaryMessenger()
     public int getPendingChannelResponseCount()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
     public void setIsolateServiceIdListener(io.flutter.embedding.engine.dart.DartExecutor$IsolateServiceIdListener)
-io.flutter.embedding.engine.dart.DartMessenger$1
-io.flutter.embedding.engine.dart.DartMessenger$ConcurrentTaskQueue
-io.flutter.embedding.engine.dart.DartMessenger$DefaultTaskQueueFactory:
-    public io.flutter.embedding.engine.dart.DartMessenger$DartMessengerTaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
-io.flutter.embedding.engine.dart.DartMessenger$SerialTaskQueue
-io.flutter.embedding.engine.dart.DartMessenger$TaskQueueFactory:
-    public abstract io.flutter.embedding.engine.dart.DartMessenger$DartMessengerTaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
-io.flutter.embedding.engine.dart.DartMessenger$TaskQueueToken
 io.flutter.embedding.engine.dart.DartMessenger:
     private static final java.lang.String TAG
     public void disableBufferingIncomingMessages()
     public void enableBufferingIncomingMessages()
     public int getPendingChannelResponseCount()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
 io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager:
     public abstract void loadAssets(int,java.lang.String)
     public abstract void loadDartLibrary(int,java.lang.String)
@@ -5751,14 +5740,11 @@ io.flutter.plugin.common.BinaryCodec
 io.flutter.plugin.common.BinaryMessenger$-CC:
     public static void $default$disableBufferingIncomingMessages(io.flutter.plugin.common.BinaryMessenger)
     public static void $default$enableBufferingIncomingMessages(io.flutter.plugin.common.BinaryMessenger)
-    public static io.flutter.plugin.common.BinaryMessenger$TaskQueue $default$makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger)
-    public static io.flutter.plugin.common.BinaryMessenger$TaskQueue $default$makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger,io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
-io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions
+io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions:
+    public io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions setIsSerial(boolean)
 io.flutter.plugin.common.BinaryMessenger:
     public void disableBufferingIncomingMessages()
     public void enableBufferingIncomingMessages()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue()
-    public io.flutter.plugin.common.BinaryMessenger$TaskQueue makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
 io.flutter.plugin.common.ErrorLogResult
 io.flutter.plugin.common.EventChannel$EventSink:
     public abstract void endOfStream()
@@ -5867,6 +5853,23 @@ io.flutter.plugin.platform.SingleViewPresentation$WindowManagerHandler:
 io.flutter.plugin.platform.VirtualDisplayController:
     public void dispose()
     void onFlutterViewDetached()
+io.flutter.plugins.connectivity.BuildConfig
+io.flutter.plugins.connectivity.ConnectivityBroadcastReceiver:
+    public static final java.lang.String CONNECTIVITY_ACTION
+    public android.net.ConnectivityManager$NetworkCallback getNetworkCallback()
+io.flutter.plugins.connectivity.ConnectivityPlugin:
+    public static void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
+io.flutter.plugins.connectivity.R$attr
+io.flutter.plugins.connectivity.R$color
+io.flutter.plugins.connectivity.R$dimen
+io.flutter.plugins.connectivity.R$drawable
+io.flutter.plugins.connectivity.R$id
+io.flutter.plugins.connectivity.R$integer
+io.flutter.plugins.connectivity.R$layout
+io.flutter.plugins.connectivity.R$string
+io.flutter.plugins.connectivity.R$style
+io.flutter.plugins.connectivity.R$styleable
+io.flutter.plugins.connectivity.R
 io.flutter.plugins.flutter_plugin_android_lifecycle.BuildConfig
 io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin:
     public static void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
@@ -5940,6 +5943,26 @@ io.flutter.plugins.imagepicker.R$style
 io.flutter.plugins.imagepicker.R$styleable
 io.flutter.plugins.imagepicker.R$xml
 io.flutter.plugins.imagepicker.R
+io.flutter.plugins.pathprovider.BuildConfig
+io.flutter.plugins.pathprovider.Messages$FlutterError:
+    public void <init>(java.lang.String,java.lang.String,java.lang.Object)
+io.flutter.plugins.pathprovider.Messages:
+    public void <init>()
+io.flutter.plugins.pathprovider.PathProviderPlugin:
+    static final java.lang.String TAG
+    public static void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
+io.flutter.plugins.pathprovider.R$attr
+io.flutter.plugins.pathprovider.R$color
+io.flutter.plugins.pathprovider.R$dimen
+io.flutter.plugins.pathprovider.R$drawable
+io.flutter.plugins.pathprovider.R$id
+io.flutter.plugins.pathprovider.R$integer
+io.flutter.plugins.pathprovider.R$layout
+io.flutter.plugins.pathprovider.R$string
+io.flutter.plugins.pathprovider.R$style
+io.flutter.plugins.pathprovider.R$styleable
+io.flutter.plugins.pathprovider.R
+io.flutter.plugins.pathprovider.StorageDirectoryMapper
 io.flutter.util.HandlerCompat:
     public void <init>()
 io.flutter.util.PathUtils:
@@ -12520,10 +12543,14 @@ io.flutter.embedding.engine.FlutterEngineConnectionRegistry:
     private io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineServicePluginBinding servicePluginBinding
 io.flutter.embedding.engine.loader.ResourceExtractor:
     void waitForCompletion()
-io.flutter.plugin.common.BinaryMessenger$-CC
+io.flutter.plugin.common.BinaryMessenger$-CC:
+    public static io.flutter.plugin.common.BinaryMessenger$TaskQueue $default$makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger,io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
+    public static void $default$setMessageHandler(io.flutter.plugin.common.BinaryMessenger,java.lang.String,io.flutter.plugin.common.BinaryMessenger$BinaryMessageHandler,io.flutter.plugin.common.BinaryMessenger$TaskQueue)
 io.flutter.plugin.platform.PlatformView$-CC
 io.flutter.plugin.platform.VirtualDisplayController:
     private static java.lang.String TAG
+io.flutter.plugins.connectivity.ConnectivityMethodChannelHandler:
+    static final synthetic boolean $assertionsDisabled
 io.flutter.view.TextureRegistry$SurfaceTextureEntry$-CC
 kotlin.collections.ArraysKt:
     public static synthetic bridge java.util.List sortedWith(java.lang.Object[],java.util.Comparator)

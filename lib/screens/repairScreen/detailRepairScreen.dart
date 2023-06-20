@@ -11,10 +11,10 @@ import 'package:flutter_application_4/services/controllers/repairController.dart
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
 import 'package:flutter_application_4/services/models/detailRepairModel.dart';
 import 'package:flutter_application_4/services/models/repairModel.dart';
+import 'package:intl/intl.dart';
 
 class detailRepairScreen extends StatefulWidget {
   final repairController rpC = repairController();
-  //final detailRepairController dRC = detailRepairController();
   final int BridgeHistoryId;
   final int bridgeId;
   detailRepairScreen(
@@ -28,7 +28,9 @@ class _detailRepairScreen extends State<detailRepairScreen> {
   String? selectedNameBridge;
   List<String> listNameBridge = [];
   RepairModel? rM;
+
   List<detailRepairModel>? _futureDetailRepairList;
+  List<detailRepairModel> listDetailRepair = [];
   String selectedRepair = '';
   int? length;
   int? bridgeId;
@@ -44,10 +46,10 @@ class _detailRepairScreen extends State<detailRepairScreen> {
   TextEditingController _controllerDonViSuaChua = TextEditingController();
   TextEditingController _controllerChiPhiSuaChua = TextEditingController();
   //
+  TextEditingController _controllerThemChiTietAnh = TextEditingController();
   TextEditingController _controllerThemChiTietNgay = TextEditingController();
   TextEditingController _controllerThemChiTietNoiDung = TextEditingController();
   TextEditingController _controllerThemChiTietGhiChu = TextEditingController();
-  // List<TextEditingController> controllers = [];
   imageController iC = imageController();
   //
   File? _imageFile;
@@ -62,9 +64,9 @@ class _detailRepairScreen extends State<detailRepairScreen> {
       setState(() {
         _imageFile = File(pickedFile.path);
         _hinhAnhCauSrc = srcTemp;
-        // kiểm tra kết quả trả về
-        anhCayCau = _hinhAnhCauSrc.toString();
-        print('Hình ảnh cầu SRC: ' + anhCayCau.toString());
+        //anhCayCau = _hinhAnhCauSrc.toString();
+        print('Hình ảnh cầu SRC: ' + _hinhAnhCauSrc.toString());
+        _controllerThemChiTietAnh.text = _hinhAnhCauSrc.toString();
       });
     }
   }
@@ -79,6 +81,9 @@ class _detailRepairScreen extends State<detailRepairScreen> {
     rM = await widget.rpC.getApiById(widget.BridgeHistoryId);
     _futureDetailRepairList =
         await widget.rpC.getDetailById(widget.BridgeHistoryId);
+    _futureDetailRepairList?.forEach((element) {
+      listDetailRepair.add(element);
+    });
     _controllerTenCayCau.text = rM!.TenCayCau.toString();
     _controllerNgayKiemTra.text = rM!.NgayKiemTra.toString();
     _controllerNgaySuaChua.text = rM!.NgaySuaChua.toString();
@@ -100,23 +105,23 @@ class _detailRepairScreen extends State<detailRepairScreen> {
   }
 
   void saveChange() async {
-    resultSaved = await widget.rpC.putRepair(
-      widget.BridgeHistoryId,
-      widget.bridgeId,
-      _controllerNgayKiemTra.text,
-      _controllerDonViKiemTra.text,
-      _controllerNoiDungHuHong.text,
-      _controllerNgaySuaChua.text,
-      _controllerDonViSuaChua.text,
-      int.parse(_controllerChiPhiSuaChua.text),
-      //_futureDetailRepairList as List<detailRepairModel>
-    );
-    setState(() {});
+    int ketQuaSave = await widget.rpC.putRepair(
+        widget.BridgeHistoryId,
+        widget.bridgeId,
+        _controllerNgayKiemTra.text,
+        _controllerDonViKiemTra.text,
+        _controllerNoiDungHuHong.text,
+        _controllerNgaySuaChua.text,
+        _controllerDonViSuaChua.text,
+        int.parse(_controllerChiPhiSuaChua.text),
+        listDetailRepair);
+    setState(() {
+      resultSaved = ketQuaSave;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    //final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
     return Scaffold(
       appBar: AppBar(
         title: Text('Thêm kiểm tra / sửa chữa'),
@@ -136,12 +141,17 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    //width: MediaQuery.of(context).size.width * 1 / 3,
-                    child: Image.network(
-                      'http://171.244.8.103:9003/${_hinhAnhCauSrc as String}',
-                      height: 150,
-                      fit: BoxFit.cover,
+                  TextField(
+                    enabled: false,
+                    onChanged: (newValue) {},
+                    controller: _controllerThemChiTietAnh,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.only(
+                          top: 0, bottom: 0, left: 5, right: 5),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(7),
+                        borderSide: const BorderSide(),
+                      ),
                     ),
                   ),
                   InkWell(
@@ -174,7 +184,6 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.only(
                               top: 0, bottom: 0, left: 5, right: 5),
-                          //hintText: ngayKhoiCong,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(7),
                             borderSide: const BorderSide(),
@@ -183,7 +192,6 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          // Future<void> _selectDate(BuildContext context) async {
                           final DateTime? picked = await showDatePicker(
                             context: context,
                             initialDate: ThoiGian,
@@ -195,17 +203,16 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                               ThoiGian = DateTime(
                                   picked.year, picked.month, picked.day);
                               _controllerThemChiTietNgay.text =
-                                  ('${ThoiGian.year.toString()}-${ThoiGian.month.toString()}-${ThoiGian.day.toString()}T${ThoiGian.hour.toString()}:${ThoiGian.minute.toString()}:${ThoiGian.second.toString()}.${ThoiGian.millisecond.toString()}');
-
+                                  DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                                      .format(ThoiGian);
+                              ;
                               print(
                                   'Ngày : ' + _controllerThemChiTietNgay.text);
                             });
                           }
-                          // }
                         },
                         style: ElevatedButton.styleFrom(
-                          // độ lớn của nút
-                          backgroundColor: Colors.white, // màu nền của nút
+                          backgroundColor: Colors.white,
                         ),
                         child: const Icon(Icons.calendar_today,
                             color: Colors.black),
@@ -263,20 +270,15 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                   ElevatedButton(
                     onPressed: () {
                       detailRepairModel addTemp = detailRepairModel(
-                        // repairDetailId: widget.BridgeHistoryId,
-                        // repairHistoryId: 1,
-                        // noiDung: _controllerNoiDungHuHong.text,
-                        // hinhAnh: _hinhAnhCauSrc,
-                        // ghiChu: _controllerThemChiTietGhiChu.text,
-                        // thoiGian: _controllerThemChiTietNgay.text,
                         repairDetailId: widget.BridgeHistoryId,
-                        repairHistoryId: 32,
-                        noiDung: _controllerNoiDungHuHong.text,
-                        hinhAnh: _hinhAnhCauSrc,
+                        repairHistoryId: 0,
+                        noiDung: _controllerThemChiTietNoiDung.text,
+                        hinhAnh: _controllerThemChiTietAnh.text,
                         ghiChu: _controllerThemChiTietGhiChu.text,
-                        thoiGian: '2023-06-12T11:58:30.464',
+                        thoiGian: _controllerThemChiTietNgay.text,
                       );
-                      _futureDetailRepairList?.add(addTemp);
+                      listDetailRepair.add(addTemp);
+                      print(listDetailRepair);
                       saveChange();
                       Navigator.pop(context);
                     },
@@ -381,22 +383,24 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Cây cầu'),
                       ),
-                      Expanded(child: Container(
-                        width: 230,
-                        child: TextField(
-                          enabled: false,
-                          controller: _controllerTenCayCau,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: 0, bottom: 0, left: 5, right: 5),
-                            hintText: 'Nhập ...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7),
-                              borderSide: BorderSide(),
+                      Expanded(
+                        child: Container(
+                          width: 230,
+                          child: TextField(
+                            enabled: false,
+                            controller: _controllerTenCayCau,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 5, right: 5),
+                              hintText: 'Nhập ...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                           ),
                         ),
-                      ),),
+                      ),
                     ],
                   ),
                 ),
@@ -409,21 +413,23 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Ngày kiểm tra'),
                       ),
-                      Expanded(child: Container(
-                        width: 170,
-                        child: TextField(
-                          controller: _controllerNgayKiemTra,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: 0, bottom: 0, left: 5, right: 5),
-                            hintText: 'Nhập ...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7),
-                              borderSide: BorderSide(),
+                      Expanded(
+                        child: Container(
+                          width: 170,
+                          child: TextField(
+                            controller: _controllerNgayKiemTra,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 5, right: 5),
+                              hintText: 'Nhập ...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                           ),
                         ),
-                      ),),
+                      ),
                       ElevatedButton(
                         onPressed: () async {
                           final DateTime? picked = await showDatePicker(
@@ -437,14 +443,13 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                               Nkiemtra = DateTime(
                                   picked.year, picked.month, picked.day);
                               _controllerNgayKiemTra.text =
-                                  ('${Nkiemtra.year.toString()}/${Nkiemtra.month.toString()}/${Nkiemtra.day.toString()}');
+                                  ('${Nkiemtra.year.toString()}-${Nkiemtra.month.toString()}-${Nkiemtra.day.toString()}');
                             });
                           }
                         },
                         child: Icon(Icons.calendar_today, color: Colors.black),
                         style: ElevatedButton.styleFrom(
-                          // độ lớn của nút
-                          primary: Colors.white, // màu nền của nút
+                          primary: Colors.white,
                         ),
                       ),
                     ],
@@ -459,20 +464,22 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Đơn vị kiểm tra'),
                       ),
-                      Expanded(child: Container(
-                        child: TextField(
-                          controller: _controllerDonViKiemTra,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: 0, bottom: 0, left: 5, right: 5),
-                            hintText: 'Nhập ...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7),
-                              borderSide: BorderSide(),
+                      Expanded(
+                        child: Container(
+                          child: TextField(
+                            controller: _controllerDonViKiemTra,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 5, right: 5),
+                              hintText: 'Nhập ...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                           ),
                         ),
-                      ),),
+                      ),
                     ],
                   ),
                 ),
@@ -485,21 +492,23 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Nội dung hư hỏng'),
                       ),
-                      Expanded(child: Container(
-                        width: 230,
-                        child: TextField(
-                          controller: _controllerNoiDungHuHong,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: 0, bottom: 0, left: 5, right: 5),
-                            hintText: 'Nhập ...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7),
-                              borderSide: BorderSide(),
+                      Expanded(
+                        child: Container(
+                          width: 230,
+                          child: TextField(
+                            controller: _controllerNoiDungHuHong,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 5, right: 5),
+                              hintText: 'Nhập ...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                           ),
                         ),
-                      ),),
+                      ),
                     ],
                   ),
                 ),
@@ -512,21 +521,23 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Ngày sửa chữa'),
                       ),
-                      Expanded(child: Container(
-                        width: 170,
-                        child: TextField(
-                          controller: _controllerNgaySuaChua,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: 0, bottom: 0, left: 5, right: 5),
-                            hintText: 'Nhập ...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7),
-                              borderSide: BorderSide(),
+                      Expanded(
+                        child: Container(
+                          width: 170,
+                          child: TextField(
+                            controller: _controllerNgaySuaChua,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 5, right: 5),
+                              hintText: 'Nhập ...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                           ),
                         ),
-                      ),),
+                      ),
                       ElevatedButton(
                         onPressed: () async {
                           final DateTime? picked = await showDatePicker(
@@ -540,13 +551,12 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                               NSua = DateTime(
                                   picked.year, picked.month, picked.day);
                               _controllerNgaySuaChua.text =
-                                  ('${NSua.year.toString()}/${NSua.month.toString()}/${NSua.day.toString()}');
+                                  ('${NSua.year.toString()}-${NSua.month.toString()}-${NSua.day.toString()}');
                             });
                           }
                         },
                         child: Icon(Icons.calendar_today, color: Colors.black),
                         style: ElevatedButton.styleFrom(
-                          // độ lớn của nút
                           primary: Colors.white, // màu nền của nút
                         ),
                       ),
@@ -562,21 +572,23 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         width: 120,
                         child: Text('Đơn vị sửa chữa'),
                       ),
-                      Expanded(child: Container(
-                        width: 230,
-                        child: TextField(
-                          controller: _controllerDonViSuaChua,
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.only(
-                                top: 0, bottom: 0, left: 5, right: 5),
-                            hintText: 'Nhập ...',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(7),
-                              borderSide: BorderSide(),
+                      Expanded(
+                        child: Container(
+                          width: 230,
+                          child: TextField(
+                            controller: _controllerDonViSuaChua,
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: 0, bottom: 0, left: 5, right: 5),
+                              hintText: 'Nhập ...',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(7),
+                                borderSide: BorderSide(),
+                              ),
                             ),
                           ),
                         ),
-                      ),),
+                      ),
                     ],
                   ),
                 ),
@@ -588,21 +600,23 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                       width: 120,
                       child: Text('Chi phí sửa chữa'),
                     ),
-                    Expanded(child: Container(
-                      width: 230,
-                      child: TextField(
-                        controller: _controllerChiPhiSuaChua,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                              top: 0, bottom: 0, left: 5, right: 5),
-                          hintText: 'Nhập ...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: BorderSide(),
+                    Expanded(
+                      child: Container(
+                        width: 230,
+                        child: TextField(
+                          controller: _controllerChiPhiSuaChua,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 5, right: 5),
+                            hintText: 'Nhập ...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: BorderSide(),
+                            ),
                           ),
                         ),
                       ),
-                    ),),
+                    ),
                   ]),
                 ),
                 Center(
@@ -629,9 +643,10 @@ class _detailRepairScreen extends State<detailRepairScreen> {
                         Container(
                           child: detailRepairCard(
                             detailRepairModelStart: temp,
+                            rM: rM as RepairModel,
+                            listDetailRepair: listDetailRepair,
                           ),
                         ),
-                    //Text(temp.noiDung as String),
                   ],
                 ),
               ],

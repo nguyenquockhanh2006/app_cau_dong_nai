@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_4/screens/repairScreen/repairHomeScreen.dart';
+import 'package:flutter_application_4/screens/repairScreen/repairHomeScreenShow.dart';
 import 'package:flutter_application_4/screens/infoBridgeScreen/infoBridgeScreen.dart';
 import 'homeScreen.dart';
 
@@ -44,7 +44,7 @@ class menu extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => repairHomeScreen()),
+                MaterialPageRoute(builder: (context) => repairHomeScreenShow()),
               );
             },
           ),

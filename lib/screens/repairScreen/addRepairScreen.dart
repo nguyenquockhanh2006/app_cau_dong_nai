@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_application_4/screens/repairScreen/repairHomeScreen.dart';
+import 'package:flutter_application_4/screens/repairScreen/repairHomeScreenShow.dart';
+import 'package:flutter_application_4/screens/repairScreen/resultAdd.dart';
 import 'package:flutter_application_4/services/controllers/bridgeController.dart';
 import 'package:flutter_application_4/services/controllers/repairController.dart';
 import 'package:flutter_application_4/services/models/bridgeModel.dart';
@@ -21,7 +22,7 @@ class _addRepairState extends State<addRepairScreen> {
   String selectedRepair = '';
   int? length;
   int? bridgeId;
-  int? result;
+  late int? result;
   final TextEditingController _ngaykiemtra = TextEditingController();
   DateTime Nkiemtra = DateTime.now();
   final TextEditingController _ngaysuachua = TextEditingController();
@@ -39,11 +40,11 @@ class _addRepairState extends State<addRepairScreen> {
   }
 
   Future<void> fetchData() async {
-
     _futureBridgeList = await widget.bC.getApi();
     List<String> temp = await widget.bC.getBridgeNameApi();
     length = await widget.bC.getLength();
     listNameBridge = temp;
+    selectedNameBridge = listNameBridge.first;
     setState(() {});
   }
 
@@ -65,6 +66,8 @@ class _addRepairState extends State<addRepairScreen> {
     } else {
       chiPhi = int.parse(_controller5.text.toString().trim());
     }
+    // ignore: await_only_futures
+    // setState(() async {
     result = await widget.rpC.postAPI(
         bridgeId,
         selectedNameBridge,
@@ -74,11 +77,7 @@ class _addRepairState extends State<addRepairScreen> {
         _ngaysuachua.text.toString(),
         _controller4.text.toString(),
         chiPhi);
-    if (result == 200) {
-      print('Thành công');
-    } else {
-      print('Thất bại');
-    }
+    // });
   }
 
   @override
@@ -129,20 +128,31 @@ class _addRepairState extends State<addRepairScreen> {
                           TextButton(
                             child: const Text('Xác nhận'),
                             onPressed: () {
-                              // Xử lý khi người dùng chọn xác nhận
                               addRepair();
-                              if (result == 200) {
-                                print('thành công!');
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => repairHomeScreen()),
-                                );
-                                Navigator.of(context).pop();
-                              } else {
-                                print('thất bại!');
-                                Navigator.of(context).pop();
-                              }
+                              // ignore: unrelated_type_equality_checks
+                              //if (result == 1) {
+                              print('thanh cong them');
+                              Navigator.of(context).pop();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => resultAdd(
+                                    ketqua: 1,
+                                  ),
+                                ),
+                              );
+                              // } else {
+                              //   print('them that bai');
+                              //   Navigator.of(context).pop();
+                              //   Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => resultAdd(
+                              //         ketqua: 0,
+                              //       ),
+                              //     ),
+                              //   );
+                              // }
                             },
                           ),
                         ],
@@ -290,21 +300,23 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Nội dung hư hỏng'),
                     ),
-                    Expanded(child: Container(
-                      width: 230,
-                      child: TextField(
-                        controller: _controller3,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                              top: 0, bottom: 0, left: 5, right: 5),
-                          hintText: 'Nhập ...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: BorderSide(),
+                    Expanded(
+                      child: Container(
+                        width: 230,
+                        child: TextField(
+                          controller: _controller3,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 5, right: 5),
+                            hintText: 'Nhập ...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: BorderSide(),
+                            ),
                           ),
                         ),
                       ),
-                    ),),
+                    ),
                   ],
                 ),
               ),
@@ -317,21 +329,23 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Ngày sửa chữa'),
                     ),
-                    Expanded(child: Container(
-                      width: 170,
-                      child: TextField(
-                        controller: _ngaysuachua,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                              top: 0, bottom: 0, left: 5, right: 5),
-                          hintText: 'Nhập ...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: BorderSide(),
+                    Expanded(
+                      child: Container(
+                        width: 170,
+                        child: TextField(
+                          controller: _ngaysuachua,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 5, right: 5),
+                            hintText: 'Nhập ...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: BorderSide(),
+                            ),
                           ),
                         ),
                       ),
-                    ),),
+                    ),
                     ElevatedButton(
                       onPressed: () async {
                         final DateTime? picked = await showDatePicker(
@@ -367,21 +381,23 @@ class _addRepairState extends State<addRepairScreen> {
                       width: 120,
                       child: Text('Đơn vị sửa chữa'),
                     ),
-                    Expanded(child: Container(
-                      width: 230,
-                      child: TextField(
-                        controller: _controller4,
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(
-                              top: 0, bottom: 0, left: 5, right: 5),
-                          hintText: 'Nhập ...',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(7),
-                            borderSide: BorderSide(),
+                    Expanded(
+                      child: Container(
+                        width: 230,
+                        child: TextField(
+                          controller: _controller4,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(
+                                top: 0, bottom: 0, left: 5, right: 5),
+                            hintText: 'Nhập ...',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(7),
+                              borderSide: BorderSide(),
+                            ),
                           ),
                         ),
                       ),
-                    ),),
+                    ),
                   ],
                 ),
               ),
@@ -393,21 +409,23 @@ class _addRepairState extends State<addRepairScreen> {
                     width: 120,
                     child: Text('Chi phí sửa chữa'),
                   ),
-                  Expanded(child: Container(
-                    width: 230,
-                    child: TextField(
-                      controller: _controller5,
-                      decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(
-                            top: 0, bottom: 0, left: 5, right: 5),
-                        hintText: 'Nhập ...',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(7),
-                          borderSide: BorderSide(),
+                  Expanded(
+                    child: Container(
+                      width: 230,
+                      child: TextField(
+                        controller: _controller5,
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(
+                              top: 0, bottom: 0, left: 5, right: 5),
+                          hintText: 'Nhập ...',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(7),
+                            borderSide: BorderSide(),
+                          ),
                         ),
                       ),
                     ),
-                  ),),
+                  ),
                 ]),
               ),
             ]),

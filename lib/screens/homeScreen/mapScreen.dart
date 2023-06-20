@@ -6,7 +6,6 @@ import 'package:latlong2/latlong.dart';
 import 'package:flutter_application_4/screens/homeScreen/detailScreen.dart';
 import 'package:geolocator/geolocator.dart';
 import 'dart:async';
-import 'dart:math' as Math;
 
 class flutter_map_load extends StatefulWidget {
   const flutter_map_load({Key? key}) : super(key: key);
@@ -17,6 +16,8 @@ class flutter_map_load extends StatefulWidget {
 
 class _MyMapState extends State<flutter_map_load> {
   final MapController mapController = MapController();
+  //final jsonController jC = jsonController();
+  //final internet itn = internet();
   List<Marker> markers = [];
   bool servicestatus = false;
   bool haspermission = false;
@@ -29,7 +30,8 @@ class _MyMapState extends State<flutter_map_load> {
     super.initState();
     fetchData();
     checkGps();
-    //setJson();
+
+    //itn.checkInternetConnection();
   }
 
   checkGps() async {

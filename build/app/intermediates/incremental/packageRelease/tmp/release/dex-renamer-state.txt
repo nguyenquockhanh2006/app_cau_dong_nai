@@ -1,4 +1,4 @@
-#Fri Jun 16 15:01:13 ICT 2023
+#Tue Jun 20 11:19:13 ICT 2023
 base.0=C\:\\Users\\NguyenQuocKhanh\\Desktop\\app_thuc_tap\\New folder\\app_cau_dong_nai\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

@@ -30,6 +30,32 @@
       externalAnnotations="annotations.zip"
       proguardRules="proguard.txt"/>
   <library
+      name="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android@@:connectivity::release"
+      jars="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\.transforms\2cccecef74fe2319d11b97bd87a08dbe\transformed\out\jars\classes.jar"
+      resolved="io.flutter.plugins.connectivity:connectivity:unspecified"
+      folder="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\.transforms\2cccecef74fe2319d11b97bd87a08dbe\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
+      name="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android@@:path_provider_android::release"
+      jars="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\path_provider_android\.transforms\025baed2603f8121c16ee46da6d57b8a\transformed\out\jars\classes.jar"
+      resolved="io.flutter.plugins.pathprovider:path_provider_android:unspecified"
+      folder="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\path_provider_android\.transforms\025baed2603f8121c16ee46da6d57b8a\transformed\out"
+      manifest="AndroidManifest.xml"
+      resFolder="res"
+      assetsFolder="assets"
+      lintJar="lint.jar"
+      publicResources="public.txt"
+      symbolFile="R.txt"
+      externalAnnotations="annotations.zip"
+      proguardRules="proguard.txt"/>
+  <library
       name="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\android@@:image_picker_android::release"
       jars="C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\.transforms\65ec6791bf5fe9134881021457d30ce9\transformed\out\jars\classes.jar"
       resolved="io.flutter.plugins.imagepicker:image_picker_android:unspecified"

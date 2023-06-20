@@ -36,6 +36,8 @@ MERGED from C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_don
 MERGED from [:image_picker_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\image_picker_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-19:12
+MERGED from [:connectivity] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:path_provider_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\eb987e8abddf2728baa9eff1d27123e6\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:16:1-24:12
 MERGED from [com.google.android.gms:play-services-tasks:18.0.2] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\02334ee9d093afcbcec94917848728eb\transformed\jetified-play-services-tasks-18.0.2\AndroidManifest.xml:2:1-6:12
@@ -93,6 +95,10 @@ MERGED from [:flutter_plugin_android_lifecycle] C:\Users\NguyenQuocKhanh\Desktop
 MERGED from [:flutter_plugin_android_lifecycle] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\flutter_plugin_android_lifecycle\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:connectivity] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:connectivity] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:path_provider_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\path_provider_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\eb987e8abddf2728baa9eff1d27123e6\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:21.0.1] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\eb987e8abddf2728baa9eff1d27123e6\transformed\jetified-play-services-location-21.0.1\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:18:5-43
@@ -187,6 +193,10 @@ ADDED from [:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\N
 		ADDED from [:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:16:13-53
 	android:name
 		ADDED from [:geolocator_android] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\geolocator_android\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-77
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:connectivity] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
+	android:name
+		ADDED from [:connectivity] C:\Users\NguyenQuocKhanh\Desktop\app_thuc_tap\New folder\app_cau_dong_nai\build\connectivity\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
 activity#com.google.android.gms.common.api.GoogleApiActivity
 ADDED from [com.google.android.gms:play-services-base:18.1.0] C:\Users\NguyenQuocKhanh\.gradle\caches\transforms-3\24bd5ae211488322aa8c48f41a7bee4d\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
 	android:exported
