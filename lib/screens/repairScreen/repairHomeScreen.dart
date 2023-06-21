@@ -362,27 +362,42 @@ class _MyWidgetState extends State<repairHomeScreen> {
                             TableCell(
                                 child: Padding(
                               padding: EdgeInsets.all(5),
-                              child: Text('Tên cây cầu'),
+                              child: Text(
+                                'Tên cây cầu',
+                                textAlign: TextAlign.center,
+                              ),
                             )),
                             TableCell(
                                 child: Padding(
                               padding: EdgeInsets.all(5),
-                              child: Text('Ngày kiểm tra'),
+                              child: Text(
+                                'Ngày kiểm tra',
+                                textAlign: TextAlign.center,
+                              ),
                             )),
                             TableCell(
                                 child: Padding(
                               padding: EdgeInsets.all(5),
-                              child: Text('Trạng thái'),
+                              child: Text(
+                                'Trạng thái',
+                                textAlign: TextAlign.center,
+                              ),
                             )),
                             TableCell(
                                 child: Padding(
                               padding: EdgeInsets.all(5),
-                              child: Text('Chi tiết'),
+                              child: Text(
+                                'Chi tiết',
+                                textAlign: TextAlign.center,
+                              ),
                             )),
                             TableCell(
                                 child: Padding(
                               padding: EdgeInsets.all(5),
-                              child: Text('Xóa'),
+                              child: Text(
+                                'Xóa',
+                                textAlign: TextAlign.center,
+                              ),
                             )),
                           ],
                         ),
@@ -396,6 +411,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
                                   child: Text(
                                 repair.NgayKiemTra as String,
                                 style: TextStyle(fontSize: 15),
+                                textAlign: TextAlign.center,
                               )),
                               TableCell(
                                 child: Column(

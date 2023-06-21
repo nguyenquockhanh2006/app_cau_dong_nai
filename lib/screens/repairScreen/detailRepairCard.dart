@@ -5,6 +5,7 @@ import 'package:flutter_application_4/services/models/detailRepairModel.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_4/services/models/repairModel.dart';
 
+// ignore: camel_case_types, must_be_immutable
 class detailRepairCard extends StatefulWidget {
   final repairController rpC = repairController();
   final detailRepairModel detailRepairModelStart;

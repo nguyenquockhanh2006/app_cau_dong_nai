@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/screens/homeScreen/addRepairScreen.dart';
 import 'package:flutter_application_4/services/controllers/detailBridgeController.dart';
 import 'package:flutter_application_4/services/models/detailBridgeModel.dart';
 import '../../services/controllers/bridgeController.dart';
@@ -712,34 +713,43 @@ class _DetailState extends State<Detail> {
                         },
                       ),
                     ),
-                    // Container(
-                    //   margin: const EdgeInsets.only(bottom: 10),
-                    //   child: Center(
-                    //     child: InkWell(
-                    //       onTap: () {
-                    //       },
-                    //       child: Container(
-                    //           width: 300,
-                    //           decoration: BoxDecoration(
-                    //               border: Border.all(
-                    //                   color: const Color(0xff38b000),
-                    //                   width: 1.5),
-                    //               borderRadius: BorderRadius.circular(8)),
-                    //           child: const ListTile(
-                    //             leading: Icon(
-                    //               Icons.add,
-                    //               color: Color(0xff38b000),
-                    //             ),
-                    //             title: Text(
-                    //               'THÊM KIỂM TRA/ SỬA CHỮA',
-                    //               style: TextStyle(
-                    //                   fontSize: 16,
-                    //                   color: Color(0xff38b000)),
-                    //             ),
-                    //           )),
-                    //     ),
-                    //   ),
-                    // )
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 10),
+                      child: Center(
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => addRepairScreen(
+                                        idBridge: _futureDetailBridge?.bridgeId
+                                            as int,
+                                        TenCayCau: _futureDetailBridge
+                                            ?.tenCayCau as String,
+                                      )),
+                            );
+                          },
+                          child: Container(
+                              width: 300,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: const Color(0xff38b000),
+                                      width: 1.5),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: const ListTile(
+                                leading: Icon(
+                                  Icons.add,
+                                  color: Color(0xff38b000),
+                                ),
+                                title: Text(
+                                  'THÊM KIỂM TRA/ SỬA CHỮA',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Color(0xff38b000)),
+                                ),
+                              )),
+                        ),
+                      ),
+                    )
                   ],
                 );
               } else if (snapshot.hasError) {
