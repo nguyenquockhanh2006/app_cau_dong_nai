@@ -21,7 +21,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
   String? selectedNameBridge = 'Tất cả';
   int? result;
   List<String> listNameBridge = [];
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  //final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   late Future<List<bridgeModel>> _futureBridgeList;
   DateTime selectedDate = DateTime(1900, 01, 01);
   DateTime selectedDate2 = DateTime.now();
@@ -82,10 +82,7 @@ class _MyWidgetState extends State<repairHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: navigatorKey,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromARGB(255, 114, 151, 239),
           foregroundColor: Colors.white,
@@ -517,7 +514,6 @@ class _MyWidgetState extends State<repairHomeScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }

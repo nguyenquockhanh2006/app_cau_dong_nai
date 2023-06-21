@@ -424,14 +424,15 @@ class _addBridgeState extends State<addBridgeScreen> {
                           child: Column(children: [
                             const Text('Hình ảnh cầu'),
                             Image(
-                                height: 150,
-                                width: 320,
-                                fit: BoxFit.cover,
-                                image: NetworkImage(
-                                  _imageFile == null
-                                      ? 'https://i.imgur.com/bkB4dqc.png'
-                                      : 'http://171.244.8.103:9003/$_hinhAnhCauSrc',
-                                ),),
+                              height: 150,
+                              width: 320,
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                _imageFile == null
+                                    ? 'https://i.imgur.com/bkB4dqc.png'
+                                    : 'http://171.244.8.103:9003/$_hinhAnhCauSrc',
+                              ),
+                            ),
                             TextButton(
                                 onPressed: () => {
                                       _pickImage(ImageSource.gallery),
@@ -1111,39 +1112,42 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chi phí xây dựng'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerChiPhiXayDung,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    chiPhiXayDung = null;
-                                  } else {
-                                    //Set chi phí đúng
-                                    chiPhiXayDung = int.parse(newValue.trim());
-                                    //chiPhiXayDung = null; // tạo chi phí null
-                                  }
-                                });
-                                print('Chi phí xây dưng: $chiPhiXayDung');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerChiPhiXayDung,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      chiPhiXayDung = null;
+                                    } else {
+                                      //Set chi phí đúng
+                                      chiPhiXayDung =
+                                          int.parse(newValue.trim());
+                                      //chiPhiXayDung = null; // tạo chi phí null
+                                    }
+                                  });
+                                  print('Chi phí xây dưng: $chiPhiXayDung');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1155,29 +1159,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chủ đầu tư'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerChuDauTu,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  chuDauTu = newValue;
-                                });
-                                print('Chủ đầu tư: $chuDauTu');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerChuDauTu,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    chuDauTu = newValue;
+                                  });
+                                  print('Chủ đầu tư: $chuDauTu');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1189,29 +1195,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Đơn vị thiết kế'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerDonViThietKe,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  donViThietKe = newValue;
-                                });
-                                print('Đơn vị thiết kế: $donViThietKe');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerDonViThietKe,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    donViThietKe = newValue;
+                                  });
+                                  print('Đơn vị thiết kế: $donViThietKe');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1223,29 +1231,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Đơn vị thi công'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerDonViThiCong,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  donViThiCong = newValue;
-                                });
-                                print('Đơn vị thi công: $donViThiCong');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerDonViThiCong,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    donViThiCong = newValue;
+                                  });
+                                  print('Đơn vị thi công: $donViThiCong');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1257,29 +1267,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Đơn vị giám sát'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerDonViGiamSat,
-                              onChanged: (newValue) {
-                                setState(() {
-                                  donViGiamSat = newValue;
-                                });
-                                print('Đơn vị giám sát: $donViGiamSat');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerDonViGiamSat,
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    donViGiamSat = newValue;
+                                  });
+                                  print('Đơn vị giám sát: $donViGiamSat');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1323,37 +1335,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số nhịp'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoNhip,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soNhip = 0;
-                                  } else {
-                                    soNhip = int.parse(newValue);
-                                  }
-                                });
-                                print('Số nhịp: $soNhip');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoNhip,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soNhip = 0;
+                                    } else {
+                                      soNhip = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số nhịp: $soNhip');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1365,37 +1379,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số mố'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoMo,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soMo = 0;
-                                  } else {
-                                    soMo = int.parse(newValue);
-                                  }
-                                });
-                                print('Số mố: $soMo');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoMo,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soMo = 0;
+                                    } else {
+                                      soMo = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số mố: $soMo');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1407,37 +1423,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số trụ'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoTru,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soTru = 0;
-                                  } else {
-                                    soTru = int.parse(newValue);
-                                  }
-                                });
-                                print('Số trụ: $soTru');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoTru,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soTru = 0;
+                                    } else {
+                                      soTru = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số trụ: $soTru');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1449,37 +1467,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số dầm ngang'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoDamNgang,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soDamNgang = 0;
-                                  } else {
-                                    soDamNgang = int.parse(newValue);
-                                  }
-                                });
-                                print('Số dầm ngang: $soDamNgang');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoDamNgang,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soDamNgang = 0;
+                                    } else {
+                                      soDamNgang = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số dầm ngang: $soDamNgang');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1491,37 +1511,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số dầm chính'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoDamChinh,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soDamChinh = 0;
-                                  } else {
-                                    soDamChinh = int.parse(newValue);
-                                  }
-                                });
-                                print('Số dầm chính: $soDamChinh');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoDamChinh,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soDamChinh = 0;
+                                    } else {
+                                      soDamChinh = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số dầm chính: $soDamChinh');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1533,37 +1555,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số lan can'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoLanCan,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soLanCan = 0;
-                                  } else {
-                                    soLanCan = int.parse(newValue);
-                                  }
-                                });
-                                print('Số lan can: $soLanCan');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoLanCan,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soLanCan = 0;
+                                    } else {
+                                      soLanCan = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số lan can: $soLanCan');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1575,37 +1599,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 110,
                             child: Text('Số dải phân cách'),
                           ),
-                          Expanded(child: Container(
-                            width: 220,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerSoDaiPhanCach,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    soDaiPhanCach = 0;
-                                  } else {
-                                    soDaiPhanCach = int.parse(newValue);
-                                  }
-                                });
-                                print('Số dải phân cách: $soDaiPhanCach');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 220,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerSoDaiPhanCach,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      soDaiPhanCach = 0;
+                                    } else {
+                                      soDaiPhanCach = int.parse(newValue);
+                                    }
+                                  });
+                                  print('Số dải phân cách: $soDaiPhanCach');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1651,29 +1677,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Dầm chính'),
                               ),
-                              Expanded(child: Container(
-                                width: 220,
-                                margin: const EdgeInsets.all(7),
-                                child: TextField(
-                                  controller: _controllerVlDamChinh,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      vlDamChinh = newValue;
-                                    });
-                                    print('Vật liệu dầm chính: $vlDamChinh');
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 0, bottom: 0, left: 5, right: 5),
-                                    // labelText: 'Tên cầu',
-                                    hintText: 'Nhập...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                      borderSide: const BorderSide(),
+                              Expanded(
+                                child: Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerVlDamChinh,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        vlDamChinh = newValue;
+                                      });
+                                      print('Vật liệu dầm chính: $vlDamChinh');
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),),
+                              ),
                             ],
                           ),
                         ),
@@ -1685,29 +1713,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Dầm ngang'),
                               ),
-                              Expanded(child: Container(
-                                width: 220,
-                                margin: const EdgeInsets.all(7),
-                                child: TextField(
-                                  controller: _controllerVlDamNgang,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      vlDamNgang = newValue;
-                                    });
-                                    print('Vật liệu dầm ngang: $vlDamNgang');
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 0, bottom: 0, left: 5, right: 5),
-                                    // labelText: 'Tên cầu',
-                                    hintText: 'Nhập...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                      borderSide: const BorderSide(),
+                              Expanded(
+                                child: Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerVlDamNgang,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        vlDamNgang = newValue;
+                                      });
+                                      print('Vật liệu dầm ngang: $vlDamNgang');
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),),
+                              ),
                             ],
                           ),
                         ),
@@ -1719,29 +1749,32 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Bán mặt cầu'),
                               ),
-                              Expanded(child: Container(
-                                width: 220,
-                                margin: const EdgeInsets.all(7),
-                                child: TextField(
-                                  controller: _controllerVlBanMatCau,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      vlBanMatCau = newValue;
-                                    });
-                                    print('Vật liệu bán mặt cầu: $vlBanMatCau');
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 0, bottom: 0, left: 5, right: 5),
-                                    // labelText: 'Tên cầu',
-                                    hintText: 'Nhập...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                      borderSide: const BorderSide(),
+                              Expanded(
+                                child: Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerVlBanMatCau,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        vlBanMatCau = newValue;
+                                      });
+                                      print(
+                                          'Vật liệu bán mặt cầu: $vlBanMatCau');
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),),
+                              ),
                             ],
                           ),
                         ),
@@ -1753,29 +1786,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Lan can'),
                               ),
-                              Expanded(child: Container(
-                                width: 220,
-                                margin: const EdgeInsets.all(7),
-                                child: TextField(
-                                  controller: _controllerVlLanCan,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      vlLanCan = newValue;
-                                    });
-                                    print('Vật liệu lan can: $vlLanCan');
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 0, bottom: 0, left: 5, right: 5),
-                                    // labelText: 'Tên cầu',
-                                    hintText: 'Nhập...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                      borderSide: const BorderSide(),
+                              Expanded(
+                                child: Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerVlLanCan,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        vlLanCan = newValue;
+                                      });
+                                      print('Vật liệu lan can: $vlLanCan');
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),),
+                              ),
                             ],
                           ),
                         ),
@@ -1787,29 +1822,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Mố'),
                               ),
-                              Expanded(child: Container(
-                                width: 220,
-                                margin: const EdgeInsets.all(7),
-                                child: TextField(
-                                  controller: _controllerVlMo,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      vlMo = newValue;
-                                    });
-                                    print('Vật liệu mố: $vlMo');
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 0, bottom: 0, left: 5, right: 5),
-                                    // labelText: 'Tên cầu',
-                                    hintText: 'Nhập...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                      borderSide: const BorderSide(),
+                              Expanded(
+                                child: Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerVlMo,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        vlMo = newValue;
+                                      });
+                                      print('Vật liệu mố: $vlMo');
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),),
+                              ),
                             ],
                           ),
                         ),
@@ -1821,29 +1858,31 @@ class _addBridgeState extends State<addBridgeScreen> {
                                 width: 100,
                                 child: Text('Trụ'),
                               ),
-                              Expanded(child: Container(
-                                width: 220,
-                                margin: const EdgeInsets.all(7),
-                                child: TextField(
-                                  controller: _controllerVlTru,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      vlTru = newValue;
-                                    });
-                                    print('Vật liệu trụ: $vlTru');
-                                  },
-                                  decoration: InputDecoration(
-                                    contentPadding: const EdgeInsets.only(
-                                        top: 0, bottom: 0, left: 5, right: 5),
-                                    // labelText: 'Tên cầu',
-                                    hintText: 'Nhập...',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(7),
-                                      borderSide: const BorderSide(),
+                              Expanded(
+                                child: Container(
+                                  width: 220,
+                                  margin: const EdgeInsets.all(7),
+                                  child: TextField(
+                                    controller: _controllerVlTru,
+                                    onChanged: (newValue) {
+                                      setState(() {
+                                        vlTru = newValue;
+                                      });
+                                      print('Vật liệu trụ: $vlTru');
+                                    },
+                                    decoration: InputDecoration(
+                                      contentPadding: const EdgeInsets.only(
+                                          top: 0, bottom: 0, left: 5, right: 5),
+                                      // labelText: 'Tên cầu',
+                                      hintText: 'Nhập...',
+                                      border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(7),
+                                        borderSide: const BorderSide(),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),),
+                              ),
                             ],
                           ),
                         ),
@@ -1887,37 +1926,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chiều dài nhịp'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerChieuDaiNhip,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d*\.?\d*$'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    chieuDaiNhip = 0.0;
-                                  } else {
-                                    chieuDaiNhip = double.parse(newValue);
-                                  }
-                                });
-                                print('Chiều dài nhịp: $chieuDaiNhip');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerChieuDaiNhip,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*$'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      chieuDaiNhip = 0.0;
+                                    } else {
+                                      chieuDaiNhip = double.parse(newValue);
+                                    }
+                                  });
+                                  print('Chiều dài nhịp: $chieuDaiNhip');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1929,37 +1970,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Bề rộng xe chạy (m)'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerBeRongXeChay,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d*\.?\d*$'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    beRongXeChay = 0.0;
-                                  } else {
-                                    beRongXeChay = double.parse(newValue);
-                                  }
-                                });
-                                print('Bề rộng xe chạy: $beRongXeChay');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerBeRongXeChay,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*$'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      beRongXeChay = 0.0;
+                                    } else {
+                                      beRongXeChay = double.parse(newValue);
+                                    }
+                                  });
+                                  print('Bề rộng xe chạy: $beRongXeChay');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -1971,38 +2014,41 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Khoảng cách dầm chính'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerKhoangCachDamChinh,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d*\.?\d*$'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    khoangCachDamChinh = 0.0;
-                                  } else {
-                                    khoangCachDamChinh = double.parse(newValue);
-                                  }
-                                });
-                                print(
-                                    'Khoảng cách dầm chính: $khoangCachDamChinh');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerKhoangCachDamChinh,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*$'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      khoangCachDamChinh = 0.0;
+                                    } else {
+                                      khoangCachDamChinh =
+                                          double.parse(newValue);
+                                    }
+                                  });
+                                  print(
+                                      'Khoảng cách dầm chính: $khoangCachDamChinh');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -2014,38 +2060,41 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Khoảng cách dầm ngang'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerKhoangCachDamNgang,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d*\.?\d*$'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    khoangCachDamNgang = 0.0;
-                                  } else {
-                                    khoangCachDamNgang = double.parse(newValue);
-                                  }
-                                });
-                                print(
-                                    'Khoảng cách dầm ngang: $khoangCachDamNgang');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerKhoangCachDamNgang,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*$'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      khoangCachDamNgang = 0.0;
+                                    } else {
+                                      khoangCachDamNgang =
+                                          double.parse(newValue);
+                                    }
+                                  });
+                                  print(
+                                      'Khoảng cách dầm ngang: $khoangCachDamNgang');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -2057,38 +2106,41 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Chiều cao bản mặt cầu (m)'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerChieuCaoBanMatCau,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d*\.?\d*$'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    chieuCaoBanMatCau = 0.0;
-                                  } else {
-                                    chieuCaoBanMatCau = double.parse(newValue);
-                                  }
-                                });
-                                print(
-                                    'Chiều cao bán mặt cầu: $chieuCaoBanMatCau');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerChieuCaoBanMatCau,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*$'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      chieuCaoBanMatCau = 0.0;
+                                    } else {
+                                      chieuCaoBanMatCau =
+                                          double.parse(newValue);
+                                    }
+                                  });
+                                  print(
+                                      'Chiều cao bán mặt cầu: $chieuCaoBanMatCau');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),
@@ -2100,37 +2152,39 @@ class _addBridgeState extends State<addBridgeScreen> {
                             width: 120,
                             child: Text('Bề rộng lan can (m)'),
                           ),
-                          Expanded(child: Container(
-                            width: 210,
-                            margin: const EdgeInsets.all(7),
-                            child: TextField(
-                              controller: _controllerBeRongLanCan,
-                              inputFormatters: [
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'^\d*\.?\d*$'))
-                              ],
-                              onChanged: (newValue) {
-                                setState(() {
-                                  if (newValue.trim() == "") {
-                                    beRongLanCan = 0.0;
-                                  } else {
-                                    beRongLanCan = double.parse(newValue);
-                                  }
-                                });
-                                print('Bề rộng lan can: $beRongLanCan');
-                              },
-                              decoration: InputDecoration(
-                                contentPadding: const EdgeInsets.only(
-                                    top: 0, bottom: 0, left: 5, right: 5),
-                                // labelText: 'Tên cầu',
-                                hintText: 'Nhập...',
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(7),
-                                  borderSide: const BorderSide(),
+                          Expanded(
+                            child: Container(
+                              width: 210,
+                              margin: const EdgeInsets.all(7),
+                              child: TextField(
+                                controller: _controllerBeRongLanCan,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*$'))
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    if (newValue.trim() == "") {
+                                      beRongLanCan = 0.0;
+                                    } else {
+                                      beRongLanCan = double.parse(newValue);
+                                    }
+                                  });
+                                  print('Bề rộng lan can: $beRongLanCan');
+                                },
+                                decoration: InputDecoration(
+                                  contentPadding: const EdgeInsets.only(
+                                      top: 0, bottom: 0, left: 5, right: 5),
+                                  // labelText: 'Tên cầu',
+                                  hintText: 'Nhập...',
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(7),
+                                    borderSide: const BorderSide(),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),),
+                          ),
                         ],
                       ),
                     ),

@@ -78,6 +78,22 @@ class _addRepairState extends State<addRepairScreen> {
         _controller4.text.toString(),
         chiPhi);
     // });
+    if (result == 1) {
+      print('thành công');
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => resultAdd(ketqua: 1,)),
+        );
+      });
+    } else {
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => resultAdd(ketqua: 0,)),
+        );
+      });
+    }
   }
 
   @override
@@ -129,30 +145,7 @@ class _addRepairState extends State<addRepairScreen> {
                             child: const Text('Xác nhận'),
                             onPressed: () {
                               addRepair();
-                              // ignore: unrelated_type_equality_checks
-                              //if (result == 1) {
-                              print('thanh cong them');
                               Navigator.of(context).pop();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => resultAdd(
-                                    ketqua: 1,
-                                  ),
-                                ),
-                              );
-                              // } else {
-                              //   print('them that bai');
-                              //   Navigator.of(context).pop();
-                              //   Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => resultAdd(
-                              //         ketqua: 0,
-                              //       ),
-                              //     ),
-                              //   );
-                              // }
                             },
                           ),
                         ],

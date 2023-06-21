@@ -28,7 +28,7 @@ class _detailRepairScreen extends State<detailRepairScreen> {
   String? selectedNameBridge;
   List<String> listNameBridge = [];
   RepairModel? rM;
-
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   List<detailRepairModel>? _futureDetailRepairList;
   List<detailRepairModel> listDetailRepair = [];
   String selectedRepair = '';
@@ -115,9 +115,20 @@ class _detailRepairScreen extends State<detailRepairScreen> {
         _controllerDonViSuaChua.text,
         int.parse(_controllerChiPhiSuaChua.text),
         listDetailRepair);
-    setState(() {
-      resultSaved = ketQuaSave;
-    });
+    if (ketQuaSave == 200) {
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => detailRepairScreen(
+                    bridgeId: widget.bridgeId,
+                    BridgeHistoryId: widget.BridgeHistoryId,
+                  )),
+        );
+      });
+    } else {
+      setState(() {});
+    }
   }
 
   @override

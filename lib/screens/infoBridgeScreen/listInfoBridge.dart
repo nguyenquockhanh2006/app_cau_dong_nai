@@ -21,6 +21,8 @@ class _MyWidgetState extends State<listInfoBridge> {
       TextEditingController();
   final TextEditingController _controllerNgayHoanThanhCuoi =
       TextEditingController();
+      final TextEditingController _controllerNameBridge =
+      TextEditingController();
   // final TextEditingController _controllerNgayXayDungCuoi =
   //     TextEditingController();
   String dropdownValue = 'Chưa xác định';
@@ -44,6 +46,7 @@ class _MyWidgetState extends State<listInfoBridge> {
 
   Future<List<bridgeModel>> setLoai() async {
     List<bridgeModel> bridgesT = await widget.bC.getApi();
+    List<bridgeModel> bridgesTen = [];
     List<bridgeModel> bridges = [];
     List<bridgeModel> bridgesKC = [];
     List<bridgeModel> bridgesKCC = [];
@@ -51,14 +54,24 @@ class _MyWidgetState extends State<listInfoBridge> {
     List<bridgeModel> bridgesHTC = [];
     // List<bridgeModel> bridgesXD = [];
     // List<bridgeModel> bridgesXDC = [];
-    if (dropdownValue != 'Chưa xác định') {
+    if (_controllerNameBridge.text.trim() != '') {
       for (int i = 0; i < bridgesT.length; i++) {
-        if (bridgesT.elementAt(i).LoaiCau == dropdownValue) {
-          bridges.add(bridgesT.elementAt(i));
+        if (bridgesT.elementAt(i).TenCayCau.toString().trim().toUpperCase().contains(nameBridge.toString().trim().toUpperCase())) {
+          bridgesTen.add(bridgesT.elementAt(i));
         }
       }
     } else {
-      bridges = bridgesT;
+      bridgesTen = bridgesT;
+    }
+
+    if (dropdownValue != 'Chưa xác định') {
+      for (int i = 0; i < bridgesTen.length; i++) {
+        if (bridgesTen.elementAt(i).LoaiCau == dropdownValue) {
+          bridges.add(bridgesTen.elementAt(i));
+        }
+      }
+    } else {
+      bridges = bridgesTen;
     }
 //
     if (_controllerNgayKhoiCong.text == '') {
@@ -145,6 +158,7 @@ class _MyWidgetState extends State<listInfoBridge> {
                       });
                       print(nameBridge);
                     },
+                    controller: _controllerNameBridge,
                     decoration: InputDecoration(
                       labelText: 'Tìm kiếm',
                       hintText: 'Nhập...',

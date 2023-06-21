@@ -31,8 +31,8 @@ class _detailRepairCard extends State<detailRepairCard> {
     _controllerThoiGian.text = widget.detailRepairModelStart.thoiGian as String;
     _controllerGhiChu.text = widget.detailRepairModelStart.ghiChu as String;
     super.initState();
-    fetchData();
-    print(widget.detailRepairModelStart.hinhAnh);
+    // fetchData();
+    // print(widget.detailRepairModelStart.hinhAnh);
   }
 
   void saveChange() async {
@@ -47,7 +47,15 @@ class _detailRepairCard extends State<detailRepairCard> {
         widget.rM.ChiPhiSuaChua as int,
         widget.listDetailRepair);
     setState(() {
-      // resultSaved = ketQuaSave;
+      _isDeleted = true;
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => detailRepairScreen(
+                  BridgeHistoryId: widget.rM.RepairHistoryId as int,
+                  bridgeId: widget.rM.BridgeId as int,
+                )),
+      );
     });
   }
 
@@ -85,27 +93,14 @@ class _detailRepairCard extends State<detailRepairCard> {
                               TextButton(
                                 child: const Text('Xác nhận xóa'),
                                 onPressed: () {
-                                  widget.listDetailRepair.remove(widget.detailRepairModelStart);
+                                  widget.listDetailRepair
+                                      .remove(widget.detailRepairModelStart);
                                   widget.listDetailRepair.forEach(
-                                    (element) => print(widget.rM.RepairHistoryId),
+                                    (element) =>
+                                        print(widget.rM.RepairHistoryId),
                                   );
                                   saveChange();
-                                  setState(() {
-                                    _isDeleted = true;
-                                  });
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            detailRepairScreen(
-                                              BridgeHistoryId: widget
-                                                  .rM.RepairHistoryId as int,
-                                              bridgeId:
-                                                  widget.rM.BridgeId as int,
-                                            )),
-                                  );
-
-                                  //Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
                                 },
                               ),
                             ],
