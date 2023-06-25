@@ -19,16 +19,7 @@ class repairHomeScreenShow extends StatelessWidget {
             toolbarHeight: 60,
             leading: Image.asset("lib/assets/images/Logo_Dong_Nai.png")),
         endDrawer: const menu(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => {
-            navigatorKey.currentState?.push(
-              MaterialPageRoute(builder: (context) => addRepairScreen()),
-            ),
-          },
-          backgroundColor: Colors.blue,
-          tooltip: '',
-          child: const Icon(Icons.add),
-        ),
+        
         body: repairHomeScreen(),
       ),
     );

@@ -21,8 +21,7 @@ class _MyWidgetState extends State<listInfoBridge> {
       TextEditingController();
   final TextEditingController _controllerNgayHoanThanhCuoi =
       TextEditingController();
-      final TextEditingController _controllerNameBridge =
-      TextEditingController();
+  final TextEditingController _controllerNameBridge = TextEditingController();
   // final TextEditingController _controllerNgayXayDungCuoi =
   //     TextEditingController();
   String dropdownValue = 'Chưa xác định';
@@ -56,7 +55,13 @@ class _MyWidgetState extends State<listInfoBridge> {
     // List<bridgeModel> bridgesXDC = [];
     if (_controllerNameBridge.text.trim() != '') {
       for (int i = 0; i < bridgesT.length; i++) {
-        if (bridgesT.elementAt(i).TenCayCau.toString().trim().toUpperCase().contains(nameBridge.toString().trim().toUpperCase())) {
+        if (bridgesT
+            .elementAt(i)
+            .TenCayCau
+            .toString()
+            .trim()
+            .toUpperCase()
+            .contains(nameBridge.toString().trim().toUpperCase())) {
           bridgesTen.add(bridgesT.elementAt(i));
         }
       }
@@ -143,13 +148,15 @@ class _MyWidgetState extends State<listInfoBridge> {
         title: const Text('Quản lí thông tin cầu'),
         toolbarHeight: 30,
       ),
-      body: Column(
+      body:
+          // SingleChildScrollView(
+          //   child:
+          Column(
         children: [
           Row(
             children: [
               Expanded(
                 child: Container(
-                  //width: MediaQuery.of(context).size.width * 4 / 5,
                   margin: const EdgeInsets.all(13),
                   child: TextField(
                     onChanged: (newValue) {
@@ -161,7 +168,6 @@ class _MyWidgetState extends State<listInfoBridge> {
                     controller: _controllerNameBridge,
                     decoration: InputDecoration(
                       labelText: 'Tìm kiếm',
-                      hintText: 'Nhập...',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                         borderSide: const BorderSide(),
@@ -177,75 +183,193 @@ class _MyWidgetState extends State<listInfoBridge> {
                     checkAnHien = !checkAnHien!;
                   }),
                 },
-                icon: const Icon(Icons.tornado_rounded),
+                icon: const Icon(Icons.filter_alt),
               ),
             ],
           ),
           checkAnHien == false
               ? const SizedBox.shrink()
               : Container(
+                  margin: EdgeInsets.only(left: 7, right: 7),
                   padding: const EdgeInsets.all(7),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(7),
-                        bottomLeft: Radius.circular(7),
-                        bottomRight: Radius.circular(7),
-                      ),
+                          topRight: Radius.circular(7),
+                          bottomLeft: Radius.circular(7),
+                          bottomRight: Radius.circular(7),
+                          topLeft: Radius.circular(7)),
                       border: Border.all(color: const Color(0xFFadb5bd))),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Lọc danh sách',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Color.fromARGB(255, 100, 100, 241),
-                              fontWeight: FontWeight.bold),
-                        ),
-                        const Divider(
-                          thickness: 1.0,
-                          color: Colors.grey,
-                        ),
+                  // child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Lọc danh sách',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 100, 100, 241),
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const Divider(
+                        thickness: 1.0,
+                        color: Colors.grey,
+                      ),
+                      Row(children: [
                         const Text(
-                          '>>> Loại cầu',
+                          'Loại cầu',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
-                        Row(children: [
-                          Expanded(
-                            child: FutureBuilder(
-                              future: widget.bC.getTypeNameApi(),
-                              builder: (context, snapshot) {
-                                if (snapshot.hasData) {
-                                  return DropdownButton<String>(
-                                    value: dropdownValue,
-                                    items: snapshot.data
-                                        ?.map((item) => DropdownMenuItem(
-                                              value: item,
-                                              child: Text(item),
-                                            ))
-                                        .toList(),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        dropdownValue = value as String;
-                                      });
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Expanded(
+                          child: FutureBuilder(
+                            future: widget.bC.getTypeNameApi(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return DropdownButton<String>(
+                                  isExpanded: true,
+                                  value: dropdownValue,
+                                  items: snapshot.data
+                                      ?.map((item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Text(item),
+                                          ))
+                                      .toList(),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      dropdownValue = value as String;
+                                    });
+                                  },
+                                );
+                              } else if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              } else {
+                                return CircularProgressIndicator();
+                              }
+                            },
+                          ),
+                        ),
+                      ]),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      const Text(
+                        'Thời gian khởi công',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width / 2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(children: [
+                                  Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        4,
+                                    child: TextField(
+                                      enabled: false,
+                                      onChanged: (newValue) {},
+                                      controller: _controllerNgayKhoiCong,
+                                      decoration: InputDecoration(
+                                        hintText: 'Bắt đầu',
+                                      ),
+                                    ),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      final DateTime? picked =
+                                          await showDatePicker(
+                                        context: context,
+                                        initialDate: NKhoiCong,
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2101),
+                                      );
+                                      if (picked != null &&
+                                          picked != NKhoiCong) {
+                                        setState(() {
+                                          NKhoiCong = DateTime(picked.year,
+                                              picked.month, picked.day);
+                                          _controllerNgayKhoiCong.text =
+                                              ('${NKhoiCong.year.toString()}-${NKhoiCong.month.toString()}-${NKhoiCong.day.toString()}');
+
+                                          print('Ngày bắt đầu khởi công: ' +
+                                              _controllerNgayKhoiCong.text);
+                                        });
+                                      }
                                     },
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return Text('Error: ${snapshot.error}');
-                                } else {
-                                  return CircularProgressIndicator();
-                                }
-                              },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    child: const Icon(Icons.calendar_today,
+                                        color: Colors.black),
+                                  ),
+                                ]),
+                              ],
                             ),
                           ),
-                        ]),
-                        const Text(
-                          '>>> Thời gian khởi công',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Row(
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1 / 4,
+                                  child: TextField(
+                                    enabled: false,
+                                    onChanged: (newValue) {},
+                                    controller: _controllerNgayKhoiCongCuoi,
+                                    decoration: InputDecoration(
+                                      hintText: 'Kết thúc',
+                                    ),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () async {
+                                    final DateTime? picked =
+                                        await showDatePicker(
+                                      context: context,
+                                      initialDate: NKhoiCongCuoi,
+                                      firstDate: DateTime(1900),
+                                      lastDate: DateTime(2101),
+                                    );
+                                    if (picked != null &&
+                                        picked != NKhoiCongCuoi) {
+                                      setState(() {
+                                        NKhoiCongCuoi = DateTime(picked.year,
+                                            picked.month, picked.day);
+                                        _controllerNgayKhoiCongCuoi.text =
+                                            ('${NKhoiCongCuoi.year.toString()}-${NKhoiCongCuoi.month.toString()}-${NKhoiCongCuoi.day.toString()}');
+                                        print('Ngày kết thúc khởi công: ' +
+                                            _controllerNgayKhoiCongCuoi.text);
+                                      });
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.white,
+                                  ),
+                                  child: const Icon(Icons.calendar_today,
+                                      color: Colors.black),
+                                ),
+                              ]),
+                            ],
+                          )),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      const Text(
+                        'Thời gian hoàn thành',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
@@ -253,29 +377,17 @@ class _MyWidgetState extends State<listInfoBridge> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Bắt đầu'),
                                   Row(children: [
                                     Container(
                                       width: MediaQuery.of(context).size.width *
                                           1 /
                                           4,
-                                      margin: const EdgeInsets.all(7),
                                       child: TextField(
                                         enabled: false,
                                         onChanged: (newValue) {},
-                                        controller: _controllerNgayKhoiCong,
+                                        controller: _controllerNgayHoanThanh,
                                         decoration: InputDecoration(
-                                          contentPadding: const EdgeInsets.only(
-                                              top: 0,
-                                              bottom: 0,
-                                              left: 5,
-                                              right: 5),
                                           hintText: 'Bắt đầu',
-                                          border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(7),
-                                            borderSide: const BorderSide(),
-                                          ),
                                         ),
                                       ),
                                     ),
@@ -284,20 +396,20 @@ class _MyWidgetState extends State<listInfoBridge> {
                                         final DateTime? picked =
                                             await showDatePicker(
                                           context: context,
-                                          initialDate: NKhoiCong,
+                                          initialDate: NHoanThanh,
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2101),
                                         );
                                         if (picked != null &&
-                                            picked != NKhoiCong) {
+                                            picked != NHoanThanh) {
                                           setState(() {
-                                            NKhoiCong = DateTime(picked.year,
+                                            NHoanThanh = DateTime(picked.year,
                                                 picked.month, picked.day);
-                                            _controllerNgayKhoiCong.text =
-                                                ('${NKhoiCong.year.toString()}-${NKhoiCong.month.toString()}-${NKhoiCong.day.toString()}');
+                                            _controllerNgayHoanThanh.text =
+                                                ('${NHoanThanh.year.toString()}-${NHoanThanh.month.toString()}-${NHoanThanh.day.toString()}');
 
-                                            print('Ngày bắt đầu khởi công: ' +
-                                                _controllerNgayKhoiCong.text);
+                                            print('Ngày hoàn thành đầu: ' +
+                                                _controllerNgayHoanThanh.text);
                                           });
                                         }
                                       },
@@ -312,391 +424,110 @@ class _MyWidgetState extends State<listInfoBridge> {
                               ),
                             ),
                             Expanded(
-                                child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Kết thúc'),
-                                Row(children: [
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        4,
-                                    margin: const EdgeInsets.all(7),
-                                    child: TextField(
-                                      enabled: false,
-                                      onChanged: (newValue) {},
-                                      controller: _controllerNgayKhoiCongCuoi,
-                                      decoration: InputDecoration(
-                                        contentPadding: const EdgeInsets.only(
-                                            top: 0,
-                                            bottom: 0,
-                                            left: 5,
-                                            right: 5),
-                                        hintText: 'Kết thúc',
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(7),
-                                          borderSide: const BorderSide(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          1 /
+                                          4,
+                                      child: TextField(
+                                        enabled: false,
+                                        onChanged: (newValue) {},
+                                        controller:
+                                            _controllerNgayHoanThanhCuoi,
+                                        decoration: InputDecoration(
+                                          hintText: 'Kết thúc',
+                                          // border: OutlineInputBorder(
+                                          //   borderRadius:
+                                          //       BorderRadius.circular(7),
+                                          //   borderSide: const BorderSide(),
+                                          // ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      final DateTime? picked =
-                                          await showDatePicker(
-                                        context: context,
-                                        initialDate: NKhoiCongCuoi,
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2101),
-                                      );
-                                      if (picked != null &&
-                                          picked != NKhoiCongCuoi) {
-                                        setState(() {
-                                          NKhoiCongCuoi = DateTime(picked.year,
-                                              picked.month, picked.day);
-                                          _controllerNgayKhoiCongCuoi.text =
-                                              ('${NKhoiCongCuoi.year.toString()}-${NKhoiCongCuoi.month.toString()}-${NKhoiCongCuoi.day.toString()}');
-                                          print('Ngày kết thúc khởi công: ' +
-                                              _controllerNgayKhoiCongCuoi.text);
-                                        });
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.white,
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        final DateTime? picked =
+                                            await showDatePicker(
+                                          context: context,
+                                          initialDate: NHoanThanhCuoi,
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime(2101),
+                                        );
+                                        if (picked != null &&
+                                            picked != NKhoiCong) {
+                                          setState(() {
+                                            NHoanThanhCuoi = DateTime(
+                                                picked.year,
+                                                picked.month,
+                                                picked.day);
+                                            _controllerNgayHoanThanhCuoi.text =
+                                                ('${NHoanThanhCuoi.year.toString()}-${NHoanThanhCuoi.month.toString()}-${NHoanThanhCuoi.day.toString()}');
+
+                                            print('Ngày hoàn thành cuối: ' +
+                                                _controllerNgayHoanThanhCuoi
+                                                    .text);
+                                          });
+                                        }
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.white,
+                                      ),
+                                      child: const Icon(Icons.calendar_today,
+                                          color: Colors.black),
                                     ),
-                                    child: const Icon(Icons.calendar_today,
-                                        color: Colors.black),
-                                  ),
-                                ]),
-                              ],
-                            )),
+                                  ]),
+                                ],
+                              ),
+                            ),
+                          ]),
+                      Center(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    checkAnHien = !checkAnHien!;
+                                  });
+                                },
+                                child: const Text('Áp dụng'),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  _controllerNgayHoanThanh.clear();
+                                  _controllerNgayHoanThanhCuoi.clear();
+                                  _controllerNgayKhoiCong.clear();
+                                  _controllerNgayKhoiCongCuoi.clear();
+                                  // _controllerNgayXayDung.clear();
+                                  // _controllerNgayXayDungCuoi.clear();
+                                  setState(() {
+                                    reset = !reset!;
+                                  });
+                                },
+                                child: const Text('Làm mới'),
+                              ),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
                           ],
                         ),
-                        const Text(
-                          '>>> Thời gian hoàn thành',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: MediaQuery.of(context).size.width / 2,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Bắt đầu'),
-                                    Row(children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1 /
-                                                4,
-                                        margin: const EdgeInsets.all(7),
-                                        child: TextField(
-                                          enabled: false,
-                                          onChanged: (newValue) {},
-                                          controller: _controllerNgayHoanThanh,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.only(
-                                                    top: 0,
-                                                    bottom: 0,
-                                                    left: 5,
-                                                    right: 5),
-                                            hintText: 'Ngày hoàn thành đầu',
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              borderSide: const BorderSide(),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          final DateTime? picked =
-                                              await showDatePicker(
-                                            context: context,
-                                            initialDate: NHoanThanh,
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2101),
-                                          );
-                                          if (picked != null &&
-                                              picked != NHoanThanh) {
-                                            setState(() {
-                                              NHoanThanh = DateTime(picked.year,
-                                                  picked.month, picked.day);
-                                              _controllerNgayHoanThanh.text =
-                                                  ('${NHoanThanh.year.toString()}-${NHoanThanh.month.toString()}-${NHoanThanh.day.toString()}');
-
-                                              print('Ngày hoàn thành đầu: ' +
-                                                  _controllerNgayHoanThanh
-                                                      .text);
-                                            });
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                        ),
-                                        child: const Icon(Icons.calendar_today,
-                                            color: Colors.black),
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Kết thúc'),
-                                    Row(children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                1 /
-                                                4,
-                                        margin: const EdgeInsets.all(7),
-                                        child: TextField(
-                                          enabled: false,
-                                          onChanged: (newValue) {},
-                                          controller:
-                                              _controllerNgayHoanThanhCuoi,
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.only(
-                                                    top: 0,
-                                                    bottom: 0,
-                                                    left: 5,
-                                                    right: 5),
-                                            hintText: 'Ngày hoàn thành cuối',
-                                            border: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(7),
-                                              borderSide: const BorderSide(),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      ElevatedButton(
-                                        onPressed: () async {
-                                          final DateTime? picked =
-                                              await showDatePicker(
-                                            context: context,
-                                            initialDate: NHoanThanhCuoi,
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2101),
-                                          );
-                                          if (picked != null &&
-                                              picked != NKhoiCong) {
-                                            setState(() {
-                                              NHoanThanhCuoi = DateTime(
-                                                  picked.year,
-                                                  picked.month,
-                                                  picked.day);
-                                              _controllerNgayHoanThanhCuoi
-                                                      .text =
-                                                  ('${NHoanThanhCuoi.year.toString()}-${NHoanThanhCuoi.month.toString()}-${NHoanThanhCuoi.day.toString()}');
-
-                                              print('Ngày hoàn thành cuối: ' +
-                                                  _controllerNgayHoanThanhCuoi
-                                                      .text);
-                                            });
-                                          }
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.white,
-                                        ),
-                                        child: const Icon(Icons.calendar_today,
-                                            color: Colors.black),
-                                      ),
-                                    ]),
-                                  ],
-                                ),
-                              ),
-                            ]),
-                        //
-                        // const Text(
-                        //   '>>> Thời gian xây dựng',
-                        //   style: TextStyle(
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
-                        // Row(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Container(
-                        //       width: MediaQuery.of(context).size.width / 2,
-                        //       child: Column(
-                        //           crossAxisAlignment: CrossAxisAlignment.start,
-                        //           children: [
-                        //             Text('Bắt đầu'),
-                        //             Row(children: [
-                        //               Container(
-                        //                 width:
-                        //                     MediaQuery.of(context).size.width *
-                        //                         1 /
-                        //                         4,
-                        //                 margin: const EdgeInsets.all(7),
-                        //                 child: TextField(
-                        //                   enabled: false,
-                        //                   onChanged: (newValue) {},
-                        //                   controller: _controllerNgayXayDung,
-                        //                   decoration: InputDecoration(
-                        //                     contentPadding:
-                        //                         const EdgeInsets.only(
-                        //                             top: 0,
-                        //                             bottom: 0,
-                        //                             left: 5,
-                        //                             right: 5),
-                        //                     hintText: 'Ngày xây dựng đầu',
-                        //                     border: OutlineInputBorder(
-                        //                       borderRadius:
-                        //                           BorderRadius.circular(7),
-                        //                       borderSide: const BorderSide(),
-                        //                     ),
-                        //                   ),
-                        //                 ),
-                        //               ),
-                        //               ElevatedButton(
-                        //                 onPressed: () async {
-                        //                   final DateTime? picked =
-                        //                       await showDatePicker(
-                        //                     context: context,
-                        //                     initialDate: NXayDung,
-                        //                     firstDate: DateTime(1900),
-                        //                     lastDate: DateTime(2101),
-                        //                   );
-                        //                   if (picked != null &&
-                        //                       picked != NXayDung) {
-                        //                     setState(() {
-                        //                       NXayDung = DateTime(picked.year,
-                        //                           picked.month, picked.day);
-                        //                       _controllerNgayXayDung.text =
-                        //                           ('${NXayDung.year.toString()}-${NXayDung.month.toString()}-${NXayDung.day.toString()}');
-
-                        //                       print('Ngày xây dựng đầu: ' +
-                        //                           _controllerNgayXayDung.text);
-                        //                     });
-                        //                   }
-                        //                 },
-                        //                 style: ElevatedButton.styleFrom(
-                        //                   backgroundColor: Colors.white,
-                        //                 ),
-                        //                 child: const Icon(Icons.calendar_today,
-                        //                     color: Colors.black),
-                        //               ),
-                        //             ]),
-                        //           ]),
-                        //     ),
-                        //     Expanded(
-                        //         child: Column(
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: [
-                        //         Text('Kết thúc'),
-                        //         Row(children: [
-                        //           Container(
-                        //             width: MediaQuery.of(context).size.width *
-                        //                 1 /
-                        //                 4,
-                        //             margin: const EdgeInsets.all(7),
-                        //             child: TextField(
-                        //               enabled: false,
-                        //               onChanged: (newValue) {},
-                        //               controller: _controllerNgayXayDungCuoi,
-                        //               decoration: InputDecoration(
-                        //                 contentPadding: const EdgeInsets.only(
-                        //                     top: 0,
-                        //                     bottom: 0,
-                        //                     left: 5,
-                        //                     right: 5),
-                        //                 hintText: 'Ngày xây dựng cuối',
-                        //                 border: OutlineInputBorder(
-                        //                   borderRadius:
-                        //                       BorderRadius.circular(7),
-                        //                   borderSide: const BorderSide(),
-                        //                 ),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           ElevatedButton(
-                        //             onPressed: () async {
-                        //               final DateTime? picked =
-                        //                   await showDatePicker(
-                        //                 context: context,
-                        //                 initialDate: NXayDungCuoi,
-                        //                 firstDate: DateTime(1900),
-                        //                 lastDate: DateTime(2101),
-                        //               );
-                        //               if (picked != null &&
-                        //                   picked != NXayDungCuoi) {
-                        //                 setState(() {
-                        //                   NXayDungCuoi = DateTime(picked.year,
-                        //                       picked.month, picked.day);
-                        //                   _controllerNgayXayDungCuoi.text =
-                        //                       ('${NXayDungCuoi.year.toString()}-${NXayDungCuoi.month.toString()}-${NXayDungCuoi.day.toString()}');
-                        //                   print('Ngày bắt đầu khởi công: ' +
-                        //                       _controllerNgayXayDungCuoi.text);
-                        //                 });
-                        //               }
-                        //             },
-                        //             style: ElevatedButton.styleFrom(
-                        //               backgroundColor: Colors.white,
-                        //             ),
-                        //             child: const Icon(Icons.calendar_today,
-                        //                 color: Colors.black),
-                        //           ),
-                        //         ]),
-                        //       ],
-                        //     ))
-                        //   ],
-                        // ),
-                        Center(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: SizedBox(),
-                              ),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      checkAnHien = !checkAnHien!;
-                                    });
-                                  },
-                                  child: const Text('Áp dụng'),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    _controllerNgayHoanThanh.clear();
-                                    _controllerNgayHoanThanhCuoi.clear();
-                                    _controllerNgayKhoiCong.clear();
-                                    _controllerNgayKhoiCongCuoi.clear();
-                                    // _controllerNgayXayDung.clear();
-                                    // _controllerNgayXayDungCuoi.clear();
-                                    setState(() {
-                                      reset = !reset!;
-                                    });
-                                  },
-                                  child: const Text('Làm mới'),
-                                ),
-                              ),
-                              Expanded(
-                                child: SizedBox(),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                      )
+                    ],
                   ),
+                  // ),
                 ),
           Expanded(
               child: Container(
@@ -727,6 +558,7 @@ class _MyWidgetState extends State<listInfoBridge> {
           ))
         ],
       ),
+      // )
     );
   }
 }

@@ -12,11 +12,17 @@ class menu extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          const DrawerHeader(
+          DrawerHeader(
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
-            child: Text('app cầu đồng nai'),
+            child: Column(children: [
+              Image.asset('lib/assets/images/Logo_Dong_Nai.png',
+              width: 110,
+              height: 110,),
+              Text('CẦU ĐỒNG NAI',
+              style: TextStyle(fontSize: 17),)
+            ],),
           ),
           ListTile(
             leading: const Icon(Icons.map),
